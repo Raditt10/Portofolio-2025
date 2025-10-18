@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import emailjs from '@emailjs/browser';
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -12,7 +13,65 @@ const Footer = () => {
   const contactSectionRef = useRef(null);
   const socialSectionRef = useRef(null);
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
 
+  // Ganti dengan data ASLI dari EmailJS dashboard Anda
+  const EMAILJS_SERVICE_ID = "service_kkmzp89";
+  const EMAILJS_TEMPLATE_ID = "template_gl1shr7"; 
+  const EMAILJS_PUBLIC_KEY = "-fGuY3Y4MtUYM_Dfc";
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!email.trim()) {
+      setMessage("Please enter your email address");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setMessage("");
+
+    try {
+      // TEMPLATE PARAMS DITEMPATKAN DI SINI
+      const templateParams = {
+        to_email: "iniakuraditt@gmail.com",
+        from_email: email,
+        message: `New collaboration request from: ${email}`,
+        subject: "Collaboration Request - Portfolio Website",
+        reply_to: email,
+        timestamp: new Date().toLocaleString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      };
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setMessage("Message sent successfully! I'll get back to you soon.");
+      setEmail("");
+      
+      // Reset message after 5 seconds
+      setTimeout(() => {
+        setMessage("");
+      }, 5000);
+
+    } catch (error) {
+      console.error("Error sending email:", error);
+      setMessage("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   useEffect(() => {
     const footer = footerRef.current;
     const line = lineRef.current;
@@ -148,18 +207,6 @@ const Footer = () => {
       }
     };
   }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-
-    // Handle form submission logic here
-    console.log("Email submitted:", email);
-    setEmail("");
-
-    // Optional: Show success message
-    // You can add a toast notification here
-  };
 
   return (
     <footer
