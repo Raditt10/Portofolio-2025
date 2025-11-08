@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 
 const FuturisticText = ({ children, className = "" }) => {
@@ -125,29 +125,6 @@ const Opening = () => {
   const containerControls = useAnimation();
   const [showCount, setShowCount] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
-  const [animationComplete, setAnimationComplete] = useState(false);
-
-  // FIX: Prevent scrolling and reset position on mount
-  useLayoutEffect(() => {
-    // Scroll to top immediately when component mounts
-    window.scrollTo(0, 0);
-    
-    // Prevent scrolling
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.height = '100vh';
-    document.documentElement.style.height = '100vh';
-
-    return () => {
-      // Restore scrolling
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      document.body.style.height = '';
-      document.documentElement.style.height = '';
-      // Ensure we're at the top after unmount
-      window.scrollTo(0, 0);
-    };
-  }, []);
 
   useEffect(() => {
     const style = document.createElement("style");
@@ -226,32 +203,12 @@ const Opening = () => {
         transition: { duration: 1, ease: "easeInOut" },
       });
 
-      setAnimationComplete(true);
-      
-      // FIX: Wait for exit animation then unmount and ensure scroll position
-      setTimeout(() => {
-        setIsVisible(false);
-        // Final scroll reset
-        window.scrollTo(0, 0);
-      }, 300);
+      // Unmount component setelah animasi selesai
+      setTimeout(() => setIsVisible(false), 100);
     };
 
     sequence();
   }, [controls1, controls2, controls3, controls4, containerControls]);
-
-  // FIX: Final cleanup effect
-  useEffect(() => {
-    if (animationComplete) {
-      // Final cleanup to ensure scroll position is correct
-      const cleanup = setTimeout(() => {
-        window.scrollTo(0, 0);
-        document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
-      }, 500);
-
-      return () => clearTimeout(cleanup);
-    }
-  }, [animationComplete]);
 
   if (!isVisible) return null;
 
@@ -526,6 +483,7 @@ const Opening = () => {
         />
       ))}
 
+      {/* Vertical Lightning Bolts */}
       {[...Array(4)].map((_, i) => (
         <motion.div
           key={`lightning-${i}`}
