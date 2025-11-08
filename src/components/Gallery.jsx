@@ -133,67 +133,15 @@ const Gallery = () => {
       className={`${aspectClass} bg-gray-800 rounded-lg overflow-hidden relative group cursor-pointer transform transition-all duration-500 hover:scale-105 ${className}`}
       style={{ transformStyle: 'preserve-3d' }}
     >
-      {/* Enhanced Mouse Glow Effect */}
-      <div
-        className="absolute pointer-events-none z-5 transition-all duration-200"
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          width: '600px',
-          height: '600px',
-          transform: 'translate(-50%, -50%)',
-          background: `
-            radial-gradient(
-              circle at center,
-              rgba(139, 92, 246, 0.4) 0%,
-              rgba(59, 130, 246, 0.25) 25%,
-              rgba(0, 255, 249, 0.15) 40%,
-              rgba(255, 0, 222, 0.1) 55%,
-              transparent 70%
-            )
-          `,
-          filter: 'blur(80px)',
-          opacity: mousePosition.x > 0 ? 0.8 : 0,
-          mixBlendMode: 'screen'
-        }}
-      />
+      <div className="relative flex items-center justify-center h-full bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 group-hover:border-cyan-500/50 transition-all duration-300 overflow-hidden">
 
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
-        style={{
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%)',
-          filter: 'blur(20px)',
-          transform: 'scale(1)'
-        }}
-      />
-
-      <div className="relative flex items-center justify-center h-full bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 group-hover:border-purple-500/70 transition-all duration-300 overflow-hidden">
-
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-        <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-600 overflow-hidden">
-          <div
-            className="absolute inset-[-2px] rounded-xl opacity-50"
-            style={{
-              backgroundImage: `
-                linear-gradient(90deg, transparent 95%, #8b5cf6 100%),
-                linear-gradient(180deg, transparent 95%, #06b6d4 100%)
-              `,
-              backgroundSize: '20px 20px',
-              animation: 'gridMove 2s linear infinite'
-            }}
-          />
-
-          <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scan rounded-full" />
-
-          <div className="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-cyan-400 animate-pulse" />
-          <div className="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-purple-400 animate-pulse" style={{animationDelay: '0.3s'}} />
-          <div className="absolute bottom-1 left-1 w-3 h-3 border-l-2 border-b-2 border-purple-400 animate-pulse" style={{animationDelay: '0.6s'}} />
-          <div className="absolute bottom-1 right-1 w-3 h-3 border-r-2 border-b-2 border-cyan-400 animate-pulse" style={{animationDelay: '0.9s'}} />
+        {/* Subtle glow on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10" />
         </div>
 
         <img
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-125 relative z-10"
+          className="h-full w-full object-cover transition-all duration-300 relative z-10"
           src={image.src}
           alt={image.title}
           style={{
@@ -201,15 +149,15 @@ const Gallery = () => {
           }}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
           <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-            <h3 className="text-white font-bold text-lg mb-1 drop-shadow-lg">{image.title}</h3>
-            <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 drop-shadow-md">
+            <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
+            <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
               {image.description}
             </p>
 
-            <div className="mt-3 flex items-center gap-2 text-cyan-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 group-hover:translate-x-1 transition-transform">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="mt-2 flex items-center gap-2 text-cyan-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
