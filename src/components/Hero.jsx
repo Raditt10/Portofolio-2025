@@ -9,8 +9,40 @@ const Hero = () => {
   const glowRef = useRef(null);
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
+  const audioRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [duration, setDuration] = useState('0:00');
+
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  // Load audio metadata to get duration
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      const handleLoadedMetadata = () => {
+        const minutes = Math.floor(audio.duration / 60);
+        const seconds = Math.floor(audio.duration % 60);
+        setDuration(`${minutes}:${seconds.toString().padStart(2, '0')}`);
+      };
+      
+      audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+      
+      return () => {
+        audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      };
+    }
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -335,6 +367,159 @@ const Hero = () => {
           backgroundPosition: 'center center'
         }} />
       </div>
+
+      {/* Music Player Button */}
+      <button
+        onClick={toggleMusic}
+        className="fixed top-6 right-6 z-50 group"
+        aria-label="Toggle music"
+      >
+        <div className="relative">
+          {/* Glow Effect */}
+          <div className="absolute -inset-3 bg-gradient-to-r from-purple-600/50 to-cyan-600/50 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Button Container */}
+          <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-purple-500/30 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-purple-500/60 shadow-xl">
+            {/* Animated Ring */}
+            <div className={`absolute inset-0 rounded-full border-2 ${
+              isPlaying ? 'border-cyan-400/50 animate-ping' : 'border-purple-400/30'
+            }`} style={{ animationDuration: '2s' }} />
+            
+            {/* Secondary Ring when playing */}
+            {isPlaying && (
+              <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-spin" style={{ animationDuration: '8s' }} />
+            )}
+            
+            {/* Icon */}
+            {isPlaying ? (
+              <div className="relative z-10 flex items-center justify-center gap-1">
+                <div className="w-1 h-5 bg-gradient-to-b from-cyan-300 to-cyan-500 rounded-full shadow-lg shadow-cyan-500/50 animate-pulse" style={{ animationDuration: '1s' }} />
+                <div className="w-1 h-5 bg-gradient-to-b from-cyan-300 to-cyan-500 rounded-full shadow-lg shadow-cyan-500/50 animate-pulse" style={{ animationDuration: '1s', animationDelay: '0.15s' }} />
+              </div>
+            ) : (
+              <div className="relative z-10 ml-0.5">
+                <svg className="w-5 h-5 text-purple-400 drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5.14v14l11-7-11-7z" />
+                </svg>
+                {/* Play Icon Glow */}
+                <div className="absolute inset-0 blur-md">
+                  <svg className="w-5 h-5 text-purple-400/50" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5.14v14l11-7-11-7z" />
+                  </svg>
+                </div>
+              </div>
+            )}
+            
+            {/* Pulse Effect when playing */}
+            {isPlaying && (
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 animate-pulse" />
+            )}
+          </div>
+          
+          {/* Enhanced Tooltip with Song Info */}
+          <div className="absolute top-full right-0 mt-3 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none transform group-hover:translate-y-0 translate-y-2">
+            <div className="relative">
+              {/* Arrow */}
+              <div className="absolute -top-2 right-6 w-4 h-4 bg-gray-900/95 backdrop-blur-sm border-l border-t border-purple-500/30 transform rotate-45" />
+              
+              {/* Card */}
+              <div className="relative bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-xl rounded-xl border border-purple-500/30 overflow-hidden shadow-2xl w-64">
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-cyan-600/10 opacity-50" />
+                
+                {/* Album Art */}
+                <div className="relative h-40 overflow-hidden">
+                  <img 
+                    src="/img/cover.jpg" 
+                    alt="Album Cover"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  {/* Fallback gradient if image not found */}
+                  <div className="hidden w-full h-full bg-gradient-to-br from-purple-600 via-pink-500 to-cyan-500 items-center justify-center">
+                    <svg className="w-16 h-16 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                  </div>
+                  
+                  {/* Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent" />
+                  
+                  {/* Play/Pause Status */}
+                  <div className="absolute top-2 right-2 px-2 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-cyan-400/30">
+                    <p className="text-[10px] text-cyan-400 font-semibold flex items-center gap-1">
+                      {isPlaying ? (
+                        <>
+                          <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" />
+                          Now Playing
+                        </>
+                      ) : (
+                        <>
+                          <span className="w-1.5 h-1.5 bg-purple-400 rounded-full" />
+                          Paused
+                        </>
+                      )}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Song Info */}
+                <div className="relative p-4 space-y-2">
+                  {/* Title */}
+                  <div>
+                    <h4 className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-200 leading-tight">
+                      Where Have You Been
+                    </h4>
+                    <p className="text-xs text-purple-300 mt-0.5">
+                      Rihanna
+                    </p>
+                  </div>
+                  
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+                  
+                  {/* Duration & Album */}
+                  <div className="flex items-center justify-between text-[10px]">
+                    <div className="flex items-center gap-1.5 text-gray-400">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>{duration}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-gray-400">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                      </svg>
+                      <span>Talk That Talk</span>
+                    </div>
+                  </div>
+                  
+                  {/* Action Hint */}
+                  <div className="pt-1 flex items-center justify-center gap-1.5 text-[10px] text-cyan-400/70">
+                    <span>Click to {isPlaying ? 'pause' : 'play'}</span>
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                  </div>
+                </div>
+                
+                {/* Animated Border */}
+                <div className="absolute inset-0 rounded-xl opacity-50">
+                  <div className="absolute inset-0 rounded-xl border border-transparent bg-gradient-to-r from-purple-500/20 via-cyan-500/20 to-purple-500/20 bg-clip-border animate-pulse" style={{animationDuration: '3s'}} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </button>
+
+      {/* Audio Element */}
+      <audio ref={audioRef} loop>
+        <source src="/music/where have you been.m4a" type="audio/mp4" />
+      </audio>
 
       {/* Enhanced Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
