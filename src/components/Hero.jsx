@@ -545,7 +545,7 @@ const Hero = () => {
           </div>
           
           <p className="text-base sm:text-lg text-gray-400 mt-6 max-w-2xl mx-auto">
-            Crafting digital experiences with passion and precision
+             "Permata tidak dapat mengkilap tanpa digesekkan, demikian juga seseorang tidak akan sukses tanpa adanya tantangan."
           </p>
         </div>
 
