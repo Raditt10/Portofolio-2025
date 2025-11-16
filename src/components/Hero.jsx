@@ -35,8 +35,21 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Typing effect for role and hobby with looping
+  // Typing effect for role and hobby with looping (desktop only)
   useEffect(() => {
+    // Check if mobile (screen width < 768px)
+    const isMobile = window.innerWidth < 768;
+    
+    // If mobile, show full text immediately without animation
+    if (isMobile) {
+      setTypedRole(roleText);
+      setTypedHobby(hobbyText);
+      setShowRoleCursor(false);
+      setShowHobbyCursor(false);
+      return;
+    }
+
+    // Desktop typing animation
     let roleIndex = 0;
     let hobbyIndex = 0;
     let isDeleting = false;
