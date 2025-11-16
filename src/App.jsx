@@ -13,6 +13,7 @@ import Achievements from './components/Achievements';
 import Footer from './components/Footer';
 import About from './components/About';
 import Opening from './components/Opening';
+import CustomCursor from './components/CustomCursor';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <main className='bg-black overflow-x-hidden'>
+      <CustomCursor />
       {showOpening && <Opening onComplete={() => setShowOpening(false)} />}
       <Navbar />
       <Hero />

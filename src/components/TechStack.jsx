@@ -11,9 +11,7 @@ const TechStack = () => {
   const titleRef = useRef(null);
   const gridRef = useRef(null);
   const itemsRef = useRef([]);
-  const glowRef = useRef(null);
   const [hoveredTech, setHoveredTech] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -99,23 +97,6 @@ const TechStack = () => {
     };
   }, []);
 
-  // Mouse tracking untuk glow effect yang konsisten
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const section = sectionRef.current;
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   // Add items to refs array
   const addToRefs = (el) => {
     if (el && !itemsRef.current.includes(el)) {
@@ -178,33 +159,7 @@ const TechStack = () => {
       className="relative min-h-screen px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-cyan-900/10" 
       style={{ fontFamily: "Sora Variable" }}
     >
-      {/* Enhanced Mouse Glow Effect - SAMA dengan Hero section */}
-      <div 
-        ref={glowRef}
-        className="absolute pointer-events-none z-5 transition-all duration-200"
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          width: '600px',
-          height: '600px',
-          transform: 'translate(-50%, -50%)',
-          background: `
-            radial-gradient(
-              circle at center,
-              rgba(139, 92, 246, 0.4) 0%,
-              rgba(59, 130, 246, 0.25) 25%,
-              rgba(0, 255, 249, 0.15) 40%,
-              rgba(255, 0, 222, 0.1) 55%,
-              transparent 70%
-            )
-          `,
-          filter: 'blur(80px)',
-          opacity: mousePosition.x > 0 ? 0.8 : 0,
-          mixBlendMode: 'screen'
-        }}
-      />
-
-      {/* Animated Grid Background - Enhanced */}
+      {/* Animated Grid Background */}
       <div className="absolute inset-0 opacity-[0.03] z-0">
         <div className="absolute inset-0" style={{
           backgroundImage: `

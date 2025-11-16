@@ -1,27 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import Marquee from "react-fast-marquee";
 import ProfileCard from "./assets/ProfileCard";
 
 const About = () => {
-  const glowRef = useRef(null);
   const sectionRef = useRef(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const section = sectionRef.current;
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const techStack = [
     {
@@ -79,22 +61,6 @@ const About = () => {
       {/* Top Gradient */}
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black via-black/50 to-transparent pointer-events-none z-10"></div>
       
-      {/* Mouse Glow Effect */}
-      <div 
-        ref={glowRef}
-        className="absolute pointer-events-none z-15 transition-opacity duration-300"
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          width: '600px',
-          height: '600px',
-          transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 30%, transparent 70%)',
-          filter: 'blur(40px)',
-          opacity: mousePosition.x > 0 ? 1 : 0
-        }}
-      />
-      
       {/* Profile Card */}
       <div className="flex justify-center items-center pt-32 pb-20 relative z-20">
         <ProfileCard
@@ -104,6 +70,7 @@ const About = () => {
           status="Online"
           contactText="Contact Me"
           avatarUrl="/img/radit2.jpg"
+          miniAvatarUrl="/img/meow.jpg"
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}

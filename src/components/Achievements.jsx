@@ -30,29 +30,10 @@ const Achievements = () => {
   const competitionCardRef = useRef(null);
   const certificationTitleRef = useRef(null);
   const swiperRef = useRef(null);
-  const glowRef = useRef(null);
 
   // States
   const [activeIndex, setActiveIndex] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredCardId, setHoveredCardId] = useState(null);
-
-  // Mouse move effect
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const section = sectionRef.current;
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   // GSAP Animations
   useEffect(() => {
@@ -156,32 +137,6 @@ const Achievements = () => {
       className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-28 bg-black" 
       style={{ fontFamily: "Sora Variable" }}
     >
-      {/* Dynamic Mouse Glow Effect */}
-      <div 
-        ref={glowRef}
-        className="absolute pointer-events-none z-5 transition-all duration-300"
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          width: hoveredCardId !== null ? '900px' : '700px',
-          height: hoveredCardId !== null ? '900px' : '700px',
-          transform: 'translate(-50%, -50%)',
-          background: `
-            radial-gradient(
-              circle at center,
-              rgba(139, 92, 246, ${hoveredCardId !== null ? '0.5' : '0.35'}) 0%,
-              rgba(59, 130, 246, ${hoveredCardId !== null ? '0.3' : '0.2'}) 20%,
-              rgba(0, 255, 249, ${hoveredCardId !== null ? '0.2' : '0.12'}) 40%,
-              rgba(255, 0, 222, ${hoveredCardId !== null ? '0.15' : '0.08'}) 60%,
-              transparent 80%
-            )
-          `,
-          filter: 'blur(90px)',
-          opacity: mousePosition.x > 0 ? 1 : 0,
-          mixBlendMode: 'screen'
-        }}
-      />
-      
       {/* Animated Grid Background */}
       <div className="absolute inset-0 opacity-[0.05] z-0">
         <div className="absolute inset-0" style={{

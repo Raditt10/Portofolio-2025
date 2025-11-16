@@ -13,8 +13,6 @@ const Footer = () => {
   const contactSectionRef = useRef(null);
   const socialSectionRef = useRef(null);
   const formRef = useRef(null);
-  const glowRef = useRef(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [formData, setFormData] = useState({
     email: "",
     message: "", 
@@ -83,23 +81,6 @@ const Footer = () => {
       if (glitchInterval) clearInterval(glitchInterval);
     };
   }, []); 
-
-  // Mouse tracking untuk glow effect
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const footer = footerRef.current;
-      if (footer) {
-        const rect = footer.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   useEffect(() => {
     const footer = footerRef.current;
@@ -340,22 +321,6 @@ const Footer = () => {
           />
         ))}
       </div>
-
-      {/* Mouse Glow Effect */}
-      <div 
-        ref={glowRef}
-        className="absolute pointer-events-none z-10 transition-opacity duration-300"
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          width: '600px',
-          height: '600px',
-          transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 30%, transparent 70%)',
-          filter: 'blur(40px)',
-          opacity: mousePosition.x > 0 ? 1 : 0
-        }}
-      />
 
       {/* Top line dengan efek cyberpunk */}
       <div 

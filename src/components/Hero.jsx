@@ -6,11 +6,9 @@ import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(SplitText);
 
 const Hero = () => {
-  const glowRef = useRef(null);
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const audioRef = useRef(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState('0:00');
@@ -42,22 +40,6 @@ const Hero = () => {
         audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       };
     }
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const section = sectionRef.current;
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   useGSAP(() => {
@@ -330,32 +312,6 @@ const Hero = () => {
       style={{ fontFamily: "Sora Variable" }}
       className="font-sora flex flex-col items-center justify-center relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-cyan-900/10 pt-20" // Added pt-20 for header spacing
     >
-      {/* Enhanced Mouse Glow Effect */}
-      <div 
-        ref={glowRef}
-        className="absolute pointer-events-none z-5 transition-all duration-200"
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-          width: '600px',
-          height: '600px',
-          transform: 'translate(-50%, -50%)',
-          background: `
-            radial-gradient(
-              circle at center,
-              rgba(139, 92, 246, 0.4) 0%,
-              rgba(59, 130, 246, 0.25) 25%,
-              rgba(0, 255, 249, 0.15) 40%,
-              rgba(255, 0, 222, 0.1) 55%,
-              transparent 70%
-            )
-          `,
-          filter: 'blur(80px)',
-          opacity: mousePosition.x > 0 ? 0.8 : 0,
-          mixBlendMode: 'screen'
-        }}
-      />
-
       {/* Animated Grid Background */}
       <div className="absolute inset-0 opacity-[0.03] z-0">
         <div className="absolute inset-0" style={{
