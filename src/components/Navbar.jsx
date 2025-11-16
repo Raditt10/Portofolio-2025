@@ -123,10 +123,10 @@ const Navbar = () => {
           : 'bg-transparent'
       }`}>
         <div className="relative z-10">
-          <h1 className='text-xl font-sora font-semibold text-white glitch-text' data-text="Rafaditya .S">
-            Rafaditya .S
-            <span className="glitch-layer glitch-layer-1">Rafaditya .S</span>
-            <span className="glitch-layer glitch-layer-2">Rafaditya .S</span>
+          <h1 className='text-xl font-sora font-semibold text-white glitch-text' data-text="R'e">
+            R'e
+            <span className="glitch-layer glitch-layer-1">R'e</span>
+            <span className="glitch-layer glitch-layer-2">R'e</span>
           </h1>
         </div>
         
