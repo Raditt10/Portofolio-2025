@@ -7,6 +7,93 @@ import { projectsData } from "../../constant";
 const Projects = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [velocity, setVelocity] = useState(0);
+
+  // Update scroll progress
+  const updateScrollProgress = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      const progress = (scrollLeft / (scrollWidth - clientWidth)) * 100;
+      setScrollProgress(progress || 0);
+    }
+  };
+
+  // Mouse drag handlers with momentum
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
+    setVelocity(0);
+    scrollContainerRef.current.style.cursor = 'grabbing';
+    scrollContainerRef.current.style.scrollBehavior = 'auto';
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.style.cursor = 'grab';
+      scrollContainerRef.current.style.scrollBehavior = 'smooth';
+      
+      // Apply momentum
+      if (Math.abs(velocity) > 5) {
+        const momentumScroll = velocity * 15;
+        scrollContainerRef.current.scrollLeft -= momentumScroll;
+      }
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 2.5; // Increased speed multiplier
+    const newVelocity = walk - (scrollLeft - scrollContainerRef.current.scrollLeft);
+    setVelocity(newVelocity);
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      handleMouseUp();
+    }
+  };
+
+  // Touch handlers for mobile
+  const handleTouchStart = (e) => {
+    setStartX(e.touches[0].pageX);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
+  };
+
+  const handleTouchMove = (e) => {
+    const x = e.touches[0].pageX;
+    const walk = (startX - x) * 2;
+    scrollContainerRef.current.scrollLeft = scrollLeft + walk;
+  };
+
+  // Scroll event listener
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', updateScrollProgress);
+      return () => container.removeEventListener('scroll', updateScrollProgress);
+    }
+  }, []);
+
+  // Navigation buttons
+  const scrollTo = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   // Animation variants
   const containerVariants = {
@@ -134,20 +221,71 @@ const Projects = () => {
           My Projects
         </motion.h1>
         
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12"
-          variants={gridVariants}
-        >
-          {projectsData.map((data, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              whileHover={{ 
-                scale: 1.02, 
-                transition: { duration: 0.2 } 
+        {/* Navigation Buttons */}
+        <div className="relative">
+          <button
+            onClick={() => scrollTo('left')}
+            disabled={scrollProgress === 0}
+            className={`hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-30 w-14 h-14 rounded-full bg-gradient-to-br from-purple-500/20 to-cyan-500/20 backdrop-blur-xl border border-white/10 items-center justify-center transition-all duration-500 hover:scale-110 hover:border-white/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] ${
+              scrollProgress === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
+          >
+            <svg className="w-7 h-7 text-white drop-shadow-[0_0_10px_rgba(139,92,246,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button
+            onClick={() => scrollTo('right')}
+            disabled={scrollProgress >= 99}
+            className={`hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-30 w-14 h-14 rounded-full bg-gradient-to-br from-purple-500/20 to-cyan-500/20 backdrop-blur-xl border border-white/10 items-center justify-center transition-all duration-500 hover:scale-110 hover:border-white/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] ${
+              scrollProgress >= 99 ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
+          >
+            <svg className="w-7 h-7 text-white drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        
+          {/* Scroll Container with Drag */}
+          <div 
+            ref={scrollContainerRef}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            className="overflow-x-auto overflow-y-hidden scrollbar-hide pb-4 relative"
+            style={{
+              cursor: isDragging ? 'grabbing' : 'grab',
+              scrollBehavior: isDragging ? 'auto' : 'smooth',
+              WebkitOverflowScrolling: 'touch',
+            }}
+          >
+            <motion.div 
+              className="flex gap-6 sm:gap-8 md:gap-10 lg:gap-12 min-w-max px-4"
+              variants={gridVariants}
+              style={{
+                userSelect: 'none',
               }}
-              className="relative group"
             >
+              {projectsData.map((data, index) => (
+                <motion.div
+                  key={index}
+                  variants={cardVariants}
+                  whileHover={{ 
+                    y: -12,
+                    scale: 1.03,
+                    rotateY: 2,
+                    transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] } 
+                  }}
+                  className="relative group w-[320px] sm:w-[380px] md:w-[420px] lg:w-[450px] flex-shrink-0"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    perspective: 1000,
+                  }}
+                >
               {/* Cyberpunk Glow Effect */}
               <div 
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
@@ -201,12 +339,71 @@ const Projects = () => {
             </motion.div>
           ))}
         </motion.div>
+        </div>
+        </div>
+
+        {/* Enhanced Progress Bar & Scroll Indicators */}
+        <div className="flex flex-col items-center gap-6 mt-12">
+          {/* Progress Bar */}
+          <div className="w-full max-w-2xl">
+            <div className="relative h-1.5 bg-white/5 rounded-full overflow-hidden backdrop-blur-sm border border-white/10">
+              <div
+                className="h-full bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 rounded-full transition-all duration-300 ease-out relative"
+                style={{ 
+                  width: `${scrollProgress}%`,
+                  boxShadow: '0 0 20px rgba(139, 92, 246, 0.6)'
+                }}
+              >
+                {/* Animated glow at the end of progress bar */}
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full animate-pulse shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
+              </div>
+            </div>
+            
+            {/* Progress percentage indicator */}
+            <div className="flex justify-between items-center mt-2 px-2">
+              <span className="text-xs text-gray-500">Start</span>
+              <span className="text-xs font-medium text-cyan-400 tabular-nums">
+                {Math.round(scrollProgress)}%
+              </span>
+              <span className="text-xs text-gray-500">End</span>
+            </div>
+          </div>
+
+          {/* Scroll Instruction */}
+          <div className="flex items-center gap-4 text-sm text-gray-400">
+            <div className="flex items-center gap-2 animate-pulse">
+              <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+              </svg>
+              <span className="hidden sm:inline">Swipe</span>
+            </div>
+            
+            <div className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-white/10 backdrop-blur-sm">
+              <span className="text-white/80">Drag to explore</span>
+            </div>
+            
+            <div className="flex items-center gap-2 animate-pulse">
+              <span className="hidden sm:inline">or Click</span>
+              <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+          </div>
+        </div>
       </motion.div>
 
       {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none z-10"></div>
 
       <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
         @keyframes gridMove {
           0% { transform: translateY(0); }
           100% { transform: translateY(50px); }

@@ -377,6 +377,27 @@ const projectsData = [
 
   {
     id: 3,
+    gambar: "IrmaVerse.png",
+    judul: "IrmaVerse",
+    parag: "Coming soon",
+    tech: ["Next.js", "Three.js", "Prisma", "Supabase"],
+    linkDemo: "https://rafaditya.vercel.app",
+    linkCode: "#",
+    isComingSoon: true
+  },
+
+  {
+    id: 4,
+    gambar: "birthdayio.png",
+    judul: "Birth-Day.io",
+    parag: "Reminder web application for birthdays, integrated with the Gemini Quiz API to assess user conditions, offering personalized rehabilitation plans and an interactive online forum for peer support and discussion.",
+    tech: ["React", "Node.js", "Gemini API"],
+    linkDemo: "#",
+    linkCode: "https://github.com/Raditt10/Birth-Day.io"
+  },
+
+  {
+    id: 5,
     gambar: "coming-soon.png",
     judul: "Coming Soon",
     parag: "Exciting new project in development! Stay tuned for more innovative web applications and creative solutions.",
