@@ -22,10 +22,56 @@ const Footer = () => {
   });
   const [statusMessage, setStatusMessage] = useState("");
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
+  const [typedText, setTypedText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
 
   const EMAILJS_SERVICE_ID = "service_kkmzp89";
   const EMAILJS_TEMPLATE_ID = "template_gl1shr7"; 
-  const EMAILJS_PUBLIC_KEY = "EG9qC9jkGx6_xS4cu"; 
+  const EMAILJS_PUBLIC_KEY = "EG9qC9jkGx6_xS4cu";
+  
+  const fullText = "Front-End Developer & UI/UX Designer";
+
+  // Typing effect with glitch
+  useEffect(() => {
+    let currentIndex = 0;
+    let typingInterval;
+    let glitchInterval;
+
+    const typeText = () => {
+      if (currentIndex <= fullText.length) {
+        setTypedText(fullText.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        setIsTyping(false);
+        clearInterval(typingInterval);
+        
+        // Random glitch effect after typing
+        glitchInterval = setInterval(() => {
+          const shouldGlitch = Math.random() > 0.7;
+          if (shouldGlitch) {
+            const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
+            const randomPos = Math.floor(Math.random() * fullText.length);
+            const glitchedText = 
+              fullText.substring(0, randomPos) + 
+              glitchChars[Math.floor(Math.random() * glitchChars.length)] + 
+              fullText.substring(randomPos + 1);
+            setTypedText(glitchedText);
+            
+            setTimeout(() => {
+              setTypedText(fullText);
+            }, 50);
+          }
+        }, 3000);
+      }
+    };
+
+    typingInterval = setInterval(typeText, 100);
+
+    return () => {
+      clearInterval(typingInterval);
+      if (glitchInterval) clearInterval(glitchInterval);
+    };
+  }, []); 
 
   // Mouse tracking untuk glow effect
   useEffect(() => {
@@ -409,11 +455,35 @@ const Footer = () => {
         <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl mt-4 sm:mt-5 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent group-hover:animate-pulse transition-all duration-300">
           R'e 
         </h3>
-        <h4 className="text-cyan-300 font-medium text-sm sm:text-base md:text-lg mt-2 sm:mt-3 tracking-wide group-hover:text-cyan-400 group-hover:tracking-wider transition-all duration-300 flex items-center justify-center gap-2">
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-          Front-End Developer & UI/UX Designer
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200"></span>
-        </h4>
+        <div className="relative mt-2 sm:mt-3 min-h-[2rem] sm:min-h-[2.5rem] md:min-h-[3rem]">
+          <h4 className="text-cyan-300 font-medium text-sm sm:text-base md:text-lg tracking-wide transition-all duration-300 flex items-center justify-center gap-2 relative">
+            {/* Main Text with Typing Effect */}
+            <span className="relative inline-block">
+              {typedText}
+              {/* Cursor */}
+              {isTyping && (
+                <span className="inline-block w-0.5 h-4 sm:h-5 md:h-6 bg-cyan-400 ml-1 animate-pulse" />
+              )}
+              
+              {/* Glitch Layers */}
+              <span 
+                className="absolute top-0 left-0 text-purple-500 opacity-0 pointer-events-none animate-glitch-1"
+                style={{ clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)' }}
+              >
+                {typedText}
+              </span>
+              <span 
+                className="absolute top-0 left-0 text-cyan-500 opacity-0 pointer-events-none animate-glitch-2"
+                style={{ clipPath: 'polygon(0 55%, 100% 55%, 100% 100%, 0 100%)' }}
+              >
+                {typedText}
+              </span>
+              
+              {/* Scanline Effect */}
+              <span className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/10 to-transparent animate-scanline pointer-events-none" />
+            </span>
+          </h4>
+        </div>
 
         {/* Additional floating elements */}
         <div className="absolute -top-2 -right-2 w-4 h-4 bg-purple-500 rounded-full opacity-0 group-hover:opacity-100 animate-bounce transition-opacity duration-500 delay-300"></div>
@@ -586,21 +656,21 @@ const Footer = () => {
       {[
         { 
           href: "https://www.instagram.com/rafaa_ndl?igsh=MXVuenhyaHgzeGhjMw==", 
-          src: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", 
+          src: "/img/instagram.png", 
           alt: "Instagram",
           glow: "purple",
           gradient: "from-purple-500 via-pink-500 to-orange-500"
         },
         { 
           href: "https://www.youtube.com/@iniakuraditt", 
-          src: "https://cdn-icons-png.flaticon.com/512/1384/1384060.png", 
+          src: "/img/youtube.png", 
           alt: "YouTube",
           glow: "red",
           gradient: "from-red-500 via-red-600 to-pink-600"
         },
         { 
-          href: "https://github.com/yourusername", 
-          src: "https://cdn-icons-png.flaticon.com/512/25/25231.png", 
+          href: "https://github.com/Raditt10", 
+          src: "/img/github.png", 
           alt: "GitHub", 
           glow: "blue",
           gradient: "from-blue-500 via-cyan-500 to-teal-500"
@@ -625,7 +695,7 @@ const Footer = () => {
             {/* Pulsing Outer Glow - Always Visible */}
             <div className={`absolute -inset-2 rounded-full bg-gradient-to-r ${social.gradient} opacity-15 animate-pulse blur-md`} />
             
-            {/* Background Circle with Gradient */}
+            {/* Background Circle with Gradient - NO BORDER */}
             <div className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full overflow-hidden shadow-xl transition-all duration-300`}>
               {/* Animated Gradient Background - Always Visible */}
               <div className={`absolute inset-0 bg-gradient-to-br ${social.gradient} opacity-25 group-hover/social:opacity-40 transition-opacity duration-300 animate-pulse`} style={{animationDuration: '3s'}} />
@@ -638,19 +708,7 @@ const Footer = () => {
                 <div className={`absolute -inset-[100%] bg-gradient-to-r ${social.gradient} opacity-25 animate-spin`} style={{animationDuration: '4s'}} />
               </div>
               
-              {/* Cyberpunk Grid Pattern - Subtle Always Visible */}
-              <div className="absolute inset-0 opacity-8 rounded-full overflow-hidden">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `
-                    linear-gradient(90deg, transparent 90%, currentColor 100%),
-                    linear-gradient(180deg, transparent 90%, currentColor 100%)
-                  `,
-                  backgroundSize: '8px 8px',
-                  color: social.glow === 'purple' ? '#a855f7' : social.glow === 'red' ? '#ef4444' : '#3b82f6'
-                }} />
-              </div>
-              
-              {/* Icon Image with Enhanced Styling */}
+              {/* Icon Image with Enhanced Styling - NO GRID, NO CORNER ACCENTS, NO INNER RING */}
               <div className="absolute inset-0 p-2.5 sm:p-3 flex items-center justify-center z-10">
                 <div className="relative w-full h-full">
                   {/* Icon Glow Background */}
@@ -668,30 +726,6 @@ const Footer = () => {
                   />
                 </div>
               </div>
-              
-              {/* Inner Ring Highlight - Always Visible with Pulse */}
-              <div className={`absolute inset-1 rounded-full border-2 bg-gradient-to-br ${social.gradient} opacity-25 group-hover/social:opacity-40 transition-opacity duration-300 animate-pulse`} style={{
-                clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 2px 2px, 2px calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 2px, 2px 2px)',
-                animationDuration: '2s'
-              }} />
-              
-              {/* Corner Accents - Always Visible */}
-              <div className={`absolute top-1 left-1 w-2 h-2 border-l-2 border-t-2 rounded-tl-lg opacity-30 animate-pulse`} style={{
-                borderColor: social.glow === 'purple' ? '#a855f7' : social.glow === 'red' ? '#ef4444' : '#3b82f6',
-                animationDelay: '0s'
-              }} />
-              <div className={`absolute top-1 right-1 w-2 h-2 border-r-2 border-t-2 rounded-tr-lg opacity-30 animate-pulse`} style={{
-                borderColor: social.glow === 'purple' ? '#ec4899' : social.glow === 'red' ? '#f97316' : '#06b6d4',
-                animationDelay: '0.5s'
-              }} />
-              <div className={`absolute bottom-1 left-1 w-2 h-2 border-l-2 border-b-2 rounded-bl-lg opacity-30 animate-pulse`} style={{
-                borderColor: social.glow === 'purple' ? '#ec4899' : social.glow === 'red' ? '#f97316' : '#06b6d4',
-                animationDelay: '1s'
-              }} />
-              <div className={`absolute bottom-1 right-1 w-2 h-2 border-r-2 border-b-2 rounded-br-lg opacity-30 animate-pulse`} style={{
-                borderColor: social.glow === 'purple' ? '#f97316' : social.glow === 'red' ? '#ec4899' : '#8b5cf6',
-                animationDelay: '1.5s'
-              }} />
             </div>
             
             {/* Floating Particles - Reduced */}
@@ -801,12 +835,70 @@ const Footer = () => {
           }
         }
 
+        @keyframes glitch-1 {
+          0% {
+            opacity: 0;
+            transform: translate(0);
+          }
+          2% {
+            opacity: 1;
+            transform: translate(-2px, 2px);
+          }
+          4% {
+            opacity: 0;
+            transform: translate(0);
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+
+        @keyframes glitch-2 {
+          0% {
+            opacity: 0;
+            transform: translate(0);
+          }
+          2% {
+            opacity: 1;
+            transform: translate(2px, -2px);
+          }
+          4% {
+            opacity: 0;
+            transform: translate(0);
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+
+        @keyframes scanline {
+          0% {
+            transform: translateY(-100%);
+          }
+          100% {
+            transform: translateY(100%);
+          }
+        }
+
         .animate-float {
           animation: float 15s infinite linear;
         }
 
         .animate-slideInRight {
           animation: slideInRight 0.5s ease-out forwards;
+        }
+
+        .animate-glitch-1 {
+          animation: glitch-1 0.3s infinite;
+        }
+
+        .animate-glitch-2 {
+          animation: glitch-2 0.3s infinite;
+          animation-delay: 0.15s;
+        }
+
+        .animate-scanline {
+          animation: scanline 4s linear infinite;
         }
       `}</style>
     </footer>
