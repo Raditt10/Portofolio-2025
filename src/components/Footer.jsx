@@ -364,22 +364,24 @@ const Footer = () => {
     </div>
 
     {/* Main Image Container */}
-    <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-900/50 to-cyan-900/50 p-1 backdrop-blur-sm">
+    <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-900/50 to-cyan-900/50 backdrop-blur-sm">
       {/* Inner Glow */}
       <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-purple-500/20 to-cyan-500/20 opacity-0 group-hover/img:opacity-100 transition-opacity duration-500"></div>
       
       {/* Holographic Effect Overlay */}
       <div className="absolute inset-0 rounded-lg opacity-0 group-hover/img:opacity-30 transition-opacity duration-500 mix-blend-overlay bg-gradient-to-br from-purple-400 via-transparent to-cyan-400"></div>
       
-      {/* The Image */}
+      {/* The Image - NO PADDING, FULL COVERAGE */}
       <img
         src="/img/meow.jpg"
         loading="lazy"
-        className="relative w-24 sm:w-32 md:w-36 lg:w-[142px] rounded-lg transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-1 filter group-hover/img:brightness-110 group-hover/img:contrast-110 drop-shadow-2xl z-10"
+        className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-lg transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-1 filter group-hover/img:brightness-110 group-hover/img:contrast-110 drop-shadow-2xl z-10 object-cover block"
         alt="LOGO RS"
         style={{
           transformStyle: 'preserve-3d',
-          boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)'
+          boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)',
+          margin: 0,
+          padding: 0
         }}
       />
       
@@ -404,7 +406,7 @@ const Footer = () => {
     <div className="absolute inset-0 rounded-lg border-2 border-transparent opacity-0 group-hover/img:opacity-100 group-hover/img:border-cyan-400/50 transition-all duration-1000 animate-pulse"></div>
         </div>
 
-        <h3 className="text-white font-bold text-2xl sm:text-3xl md:text-4xl mt-4 sm:mt-5 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent group-hover:animate-pulse transition-all duration-300">
+        <h3 className="font-bold text-2xl sm:text-3xl md:text-4xl mt-4 sm:mt-5 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent group-hover:animate-pulse transition-all duration-300">
           R'e 
         </h3>
         <h4 className="text-cyan-300 font-medium text-sm sm:text-base md:text-lg mt-2 sm:mt-3 tracking-wide group-hover:text-cyan-400 group-hover:tracking-wider transition-all duration-300 flex items-center justify-center gap-2">
@@ -426,7 +428,7 @@ const Footer = () => {
         >
           {/* Contact Info */}
           <div className="mb-8 sm:mb-12 md:mb-16 lg:mb-20 text-center">
-            <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 sm:mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 sm:mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Contact
             </h2>
             <div className="flex gap-3 items-center justify-center p-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30">
@@ -577,28 +579,31 @@ const Footer = () => {
 
   {/* Main Content */}
   <div className="relative p-6 rounded-xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-gray-700/50 group-hover:border-purple-500/50 transition-all duration-300">
-    <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 sm:mb-6 text-center lg:text-right bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 sm:mb-6 text-center lg:text-right bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
       Social
     </h2>
-    <div className="flex justify-center gap-4 sm:gap-6 items-center">
+    <div className="flex justify-center gap-5 sm:gap-6 md:gap-8 items-center flex-wrap">
       {[
         { 
           href: "https://www.instagram.com/rafaa_ndl?igsh=MXVuenhyaHgzeGhjMw==", 
           src: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", 
           alt: "Instagram",
-          glow: "purple"
+          glow: "purple",
+          gradient: "from-purple-500 via-pink-500 to-orange-500"
         },
         { 
           href: "https://www.youtube.com/@iniakuraditt", 
           src: "https://cdn-icons-png.flaticon.com/512/1384/1384060.png", 
           alt: "YouTube",
-          glow: "red"
+          glow: "red",
+          gradient: "from-red-500 via-red-600 to-pink-600"
         },
         { 
           href: "https://github.com/yourusername", 
           src: "https://cdn-icons-png.flaticon.com/512/25/25231.png", 
           alt: "GitHub", 
-          glow: "blue"
+          glow: "blue",
+          gradient: "from-blue-500 via-cyan-500 to-teal-500"
         },
       ].map((social, index) => (
         <a
@@ -606,69 +611,123 @@ const Footer = () => {
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block group/social relative"
+          className="block group/social relative touch-manipulation active:scale-95"
           aria-label={social.alt}
         >
-          {/* Hover glow effect */}
-          <div className={`absolute inset-0 rounded-full opacity-0 group-hover/social:opacity-100 transition-opacity duration-300 blur-md ${
-            social.glow === 'purple' ? 'bg-purple-500/40' : 
-            social.glow === 'red' ? 'bg-red-500/40' :
-            social.glow === 'blue' ? 'bg-blue-500/40' : 'bg-cyan-500/40'
-          }`} />
-          
-          {/* Animated border */}
-          <div className="absolute -inset-2 rounded-full opacity-0 group-hover/social:opacity-100 transition-all duration-500">
-            <div className={`absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r ${
-              social.glow === 'purple' ? 'from-cyan-400 to-purple-400' :
-              social.glow === 'red' ? 'from-red-400 to-pink-400' :
-              social.glow === 'blue' ? 'from-blue-400 to-cyan-400' : 'from-cyan-400 to-blue-400'
-            } animate-spin`} style={{animationDuration: '2s'}} />
-          </div>
+          {/* Subtle Glow on Hover */}
+          <div className={`absolute -inset-2 rounded-full opacity-0 group-hover/social:opacity-60 group-active/social:opacity-60 transition-all duration-300 blur-lg bg-gradient-to-r ${social.gradient}`} />
 
-          {/* Icon with enhanced effects */}
-          <div className="relative transform transition-all duration-300 group-hover/social:scale-110 group-hover/social:rotate-12">
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-full p-2 cursor-pointer transition-all duration-300 relative z-10 drop-shadow-lg overflow-hidden">
-              {/* Holographic overlay */}
-              <div className="absolute inset-0 rounded-full opacity-0 group-hover/social:opacity-30 transition-opacity duration-500 mix-blend-overlay bg-gradient-to-br from-white via-transparent to-gray-300" />
+          {/* Main Icon Container */}
+          <div className="relative transform transition-all duration-300 group-hover/social:scale-110 group-active/social:scale-105" style={{transformStyle: 'preserve-3d'}}>
+            {/* Outer Decorative Ring - Always Visible */}
+            <div className={`absolute -inset-1 rounded-full bg-gradient-to-r ${social.gradient} opacity-30 animate-spin-slow blur-sm`} style={{animationDuration: '10s'}} />
+            
+            {/* Pulsing Outer Glow - Always Visible */}
+            <div className={`absolute -inset-2 rounded-full bg-gradient-to-r ${social.gradient} opacity-15 animate-pulse blur-md`} />
+            
+            {/* Background Circle with Gradient */}
+            <div className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full overflow-hidden shadow-xl transition-all duration-300`}>
+              {/* Animated Gradient Background - Always Visible */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${social.gradient} opacity-25 group-hover/social:opacity-40 transition-opacity duration-300 animate-pulse`} style={{animationDuration: '3s'}} />
               
-              <img
-                src={social.src}
-                alt={social.alt}
-                className="w-full h-full object-contain transition-all duration-300 group-hover/social:brightness-110"
-              />
+              {/* Glass Effect with Gradient Tint */}
+              <div className={`absolute inset-0 bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-sm`} />
+              
+              {/* Rotating Border Accent - Always Visible */}
+              <div className="absolute inset-0 rounded-full overflow-hidden">
+                <div className={`absolute -inset-[100%] bg-gradient-to-r ${social.gradient} opacity-25 animate-spin`} style={{animationDuration: '4s'}} />
+              </div>
+              
+              {/* Cyberpunk Grid Pattern - Subtle Always Visible */}
+              <div className="absolute inset-0 opacity-8 rounded-full overflow-hidden">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                    linear-gradient(90deg, transparent 90%, currentColor 100%),
+                    linear-gradient(180deg, transparent 90%, currentColor 100%)
+                  `,
+                  backgroundSize: '8px 8px',
+                  color: social.glow === 'purple' ? '#a855f7' : social.glow === 'red' ? '#ef4444' : '#3b82f6'
+                }} />
+              </div>
+              
+              {/* Icon Image with Enhanced Styling */}
+              <div className="absolute inset-0 p-2.5 sm:p-3 flex items-center justify-center z-10">
+                <div className="relative w-full h-full">
+                  {/* Icon Glow Background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${social.gradient} opacity-15 rounded-lg blur-sm`} />
+                  
+                  <img
+                    src={social.src}
+                    alt={social.alt}
+                    className="relative w-full h-full object-contain transition-all duration-300 group-hover/social:brightness-105 group-hover/social:scale-105"
+                    loading="lazy"
+                    style={{
+                      filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))',
+                      transform: 'translateZ(5px)'
+                    }}
+                  />
+                </div>
+              </div>
+              
+              {/* Inner Ring Highlight - Always Visible with Pulse */}
+              <div className={`absolute inset-1 rounded-full border-2 bg-gradient-to-br ${social.gradient} opacity-25 group-hover/social:opacity-40 transition-opacity duration-300 animate-pulse`} style={{
+                clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 2px 2px, 2px calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 2px, 2px 2px)',
+                animationDuration: '2s'
+              }} />
+              
+              {/* Corner Accents - Always Visible */}
+              <div className={`absolute top-1 left-1 w-2 h-2 border-l-2 border-t-2 rounded-tl-lg opacity-30 animate-pulse`} style={{
+                borderColor: social.glow === 'purple' ? '#a855f7' : social.glow === 'red' ? '#ef4444' : '#3b82f6',
+                animationDelay: '0s'
+              }} />
+              <div className={`absolute top-1 right-1 w-2 h-2 border-r-2 border-t-2 rounded-tr-lg opacity-30 animate-pulse`} style={{
+                borderColor: social.glow === 'purple' ? '#ec4899' : social.glow === 'red' ? '#f97316' : '#06b6d4',
+                animationDelay: '0.5s'
+              }} />
+              <div className={`absolute bottom-1 left-1 w-2 h-2 border-l-2 border-b-2 rounded-bl-lg opacity-30 animate-pulse`} style={{
+                borderColor: social.glow === 'purple' ? '#ec4899' : social.glow === 'red' ? '#f97316' : '#06b6d4',
+                animationDelay: '1s'
+              }} />
+              <div className={`absolute bottom-1 right-1 w-2 h-2 border-r-2 border-b-2 rounded-br-lg opacity-30 animate-pulse`} style={{
+                borderColor: social.glow === 'purple' ? '#f97316' : social.glow === 'red' ? '#ec4899' : '#8b5cf6',
+                animationDelay: '1.5s'
+              }} />
             </div>
             
-            {/* Floating particles */}
-            <div className="absolute -inset-1 pointer-events-none">
+            {/* Floating Particles - Reduced */}
+            <div className="absolute -inset-2 pointer-events-none opacity-0 group-hover/social:opacity-100 transition-opacity duration-300">
               {[...Array(3)].map((_, i) => (
                 <div
                   key={i}
-                  className={`absolute w-1 h-1 rounded-full opacity-0 group-hover/social:opacity-100 animate-float ${
-                    social.glow === 'purple' ? 'bg-purple-400' : 
-                    social.glow === 'red' ? 'bg-red-400' :
-                    social.glow === 'blue' ? 'bg-blue-400' : 'bg-cyan-400'
-                  }`}
+                  className={`absolute w-1 h-1 rounded-full animate-float bg-gradient-to-r ${social.gradient}`}
                   style={{
-                    left: `${30 + (i * 20)}%`,
+                    left: `${25 + (i * 25)}%`,
                     top: `${20 + (i * 20)}%`,
                     animationDelay: `${i * 0.3}s`,
-                    animationDuration: `${2 + i}s`
+                    animationDuration: `${2.5 + i * 0.5}s`
                   }}
                 />
               ))}
             </div>
+            
+            {/* Starfield Effect - Reduced */}
+            <div className="absolute inset-0 opacity-0 group-hover/social:opacity-60 transition-opacity duration-300 overflow-hidden rounded-full pointer-events-none">
+              <div className="absolute top-2 left-3 w-0.5 h-0.5 bg-white rounded-full animate-pulse" />
+              <div className="absolute bottom-2 right-3 w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{animationDelay: '0.5s'}} />
+            </div>
           </div>
 
-          {/* Pulse effect */}
-          <div className={`absolute inset-0 rounded-full border-2 border-transparent opacity-0 group-hover/social:opacity-100 group-hover/social:border-${
-            social.glow === 'purple' ? 'purple' : 
-            social.glow === 'red' ? 'red' :
-            social.glow === 'blue' ? 'blue' : 'cyan'
-          }-400/50 transition-all duration-1000 animate-pulse`}></div>
-
-          {/* Tooltip */}
-          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover/social:opacity-100 transition-opacity duration-300 whitespace-nowrap text-xs text-white bg-black/80 backdrop-blur-sm px-2 py-1 rounded border border-gray-600">
-            {social.alt}
+          {/* Tooltip - Desktop */}
+          <div className="hidden sm:block absolute -bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 group-hover/social:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-30">
+            <div className={`px-3 py-1.5 bg-gradient-to-r ${social.gradient} rounded-lg backdrop-blur-sm shadow-lg`}>
+              <p className="text-white text-xs font-semibold drop-shadow-lg">{social.alt}</p>
+            </div>
+            <div className={`absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r ${social.gradient} rotate-45`} />
+          </div>
+          
+          {/* Mobile Label */}
+          <div className="sm:hidden absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-active/social:opacity-100 transition-opacity duration-200 pointer-events-none z-30">
+            <p className={`text-white text-[10px] font-semibold whitespace-nowrap bg-gradient-to-r ${social.gradient} px-2 py-1 rounded shadow-lg`}>{social.alt}</p>
           </div>
         </a>
       ))}
@@ -694,7 +753,7 @@ const Footer = () => {
       {/* Bottom section dengan copyright */}
       <div className="flex relative justify-center items-center mt-20">
         <div className="absolute -top-10 left-1/2 w-10/12 -translate-x-1/2 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-40" />
-        <h1 className="text-gray-400 font-bold text-sm md:text-base tracking-wide bg-gradient-to-r from-gray-400 to-gray-600 bg-clip-text text-transparent">
+        <h1 className="font-bold text-sm md:text-base tracking-wide bg-gradient-to-r from-gray-400 to-gray-600 bg-clip-text text-transparent">
           R'e • 2025
         </h1>
       </div>
