@@ -175,7 +175,7 @@ const TechStack = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen px-4 md:px-8 lg:px-16 py-20 overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-cyan-900/10" 
+      className="relative min-h-screen px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-cyan-900/10" 
       style={{ fontFamily: "Sora Variable" }}
     >
       {/* Enhanced Mouse Glow Effect - SAMA dengan Hero section */}
@@ -246,10 +246,10 @@ const TechStack = () => {
       </div>
 
       {/* Title Section */}
-      <div className="relative z-20">
+      <div className="relative z-20 px-4">
         <h1 
           ref={titleRef}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent font-bold text-center relative z-30 overflow-hidden mb-12 sm:mb-16 md:mb-20"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent font-bold text-center relative z-30 overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-20"
           style={{
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
@@ -265,7 +265,7 @@ const TechStack = () => {
       {/* Tech Grid */}
       <div 
         ref={gridRef}
-        className="relative z-20 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4 sm:gap-6 md:gap-8 mt-16 sm:mt-20 md:mt-24 items-center justify-center max-w-7xl mx-auto"
+        className="relative z-20 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-9 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 mt-8 sm:mt-12 md:mt-16 lg:mt-20 items-center justify-items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-8"
         style={{ perspective: '1000px' }}
       >
         {techstack.map((tech, index) => (
@@ -274,7 +274,7 @@ const TechStack = () => {
             ref={addToRefs}
             onMouseEnter={(e) => handleTechHover(tech, e, index)}
             onMouseLeave={() => handleTechLeave(index)}
-            className="relative group cursor-pointer"
+            className="relative group cursor-pointer w-full"
             style={{ transformStyle: 'preserve-3d' }}
           >
             {/* Glow Background */}
@@ -287,53 +287,59 @@ const TechStack = () => {
               }}
             />
             
-            {/* Card Container */}
-            <div className="relative flex items-center justify-center p-3 sm:p-4 md:p-5 bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 group-hover:border-purple-500/50 transition-all duration-300 overflow-hidden">
+            {/* Card Container - Mobile Optimized */}
+            <div className="relative flex items-center justify-center aspect-square p-2.5 sm:p-3 md:p-4 lg:p-5 bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm rounded-lg sm:rounded-xl border border-gray-700/50 group-hover:border-purple-500/50 transition-all duration-300 overflow-hidden touch-manipulation active:scale-95">
               
               {/* Hover Shine Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
               {/* Animated Border - Cyberpunk Grid */}
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-600 overflow-hidden">
+              <div className="absolute inset-0 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-600 overflow-hidden">
                 {/* Grid Pattern */}
                 <div 
-                  className="absolute inset-[-2px] rounded-xl opacity-70"
+                  className="absolute inset-[-2px] rounded-lg sm:rounded-xl opacity-70"
                   style={{
                     backgroundImage: `
                       linear-gradient(90deg, transparent 95%, #8b5cf6 100%),
                       linear-gradient(180deg, transparent 95%, #06b6d4 100%)
                     `,
-                    backgroundSize: '20px 20px',
+                    backgroundSize: '15px 15px',
                     animation: 'gridMove 2s linear infinite'
                   }}
                 />
                 
                 {/* Scanning Line */}
-                <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scan rounded-full" />
+                <div className="absolute left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scan rounded-full" />
                 
-                {/* Pulsing Corner Brackets */}
-                <div className="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-cyan-400 animate-pulse" />
-                <div className="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-purple-400 animate-pulse" style={{animationDelay: '0.3s'}} />
-                <div className="absolute bottom-1 left-1 w-3 h-3 border-l-2 border-b-2 border-purple-400 animate-pulse" style={{animationDelay: '0.6s'}} />
-                <div className="absolute bottom-1 right-1 w-3 h-3 border-r-2 border-b-2 border-cyan-400 animate-pulse" style={{animationDelay: '0.9s'}} />
+                {/* Pulsing Corner Brackets - Responsive sizes */}
+                <div className="absolute top-0.5 sm:top-1 left-0.5 sm:left-1 w-2 h-2 sm:w-3 sm:h-3 border-l-2 border-t-2 border-cyan-400 animate-pulse" />
+                <div className="absolute top-0.5 sm:top-1 right-0.5 sm:right-1 w-2 h-2 sm:w-3 sm:h-3 border-r-2 border-t-2 border-purple-400 animate-pulse" style={{animationDelay: '0.3s'}} />
+                <div className="absolute bottom-0.5 sm:bottom-1 left-0.5 sm:left-1 w-2 h-2 sm:w-3 sm:h-3 border-l-2 border-b-2 border-purple-400 animate-pulse" style={{animationDelay: '0.6s'}} />
+                <div className="absolute bottom-0.5 sm:bottom-1 right-0.5 sm:right-1 w-2 h-2 sm:w-3 sm:h-3 border-r-2 border-b-2 border-cyan-400 animate-pulse" style={{animationDelay: '0.9s'}} />
               </div>
 
-              {/* Tech Icon */}
-              <div className="relative z-10 p-2">
+              {/* Tech Icon - Responsive sizing */}
+              <div className="relative z-10 w-full h-full flex items-center justify-center">
                 <img 
                   src={"/img/" + tech.src} 
                   alt={`${tech.name || 'Tech'} Stack`}
-                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain transition-all duration-300 group-hover:brightness-125 group-hover:scale-110"
+                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain transition-all duration-300 group-hover:brightness-125 group-hover:scale-110"
                   style={{
                     filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))'
                   }}
+                  loading="lazy"
                 />
               </div>
 
-              {/* Hover Tooltip */}
-              <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gray-900/90 border border-purple-500/30 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-30 backdrop-blur-sm">
+              {/* Hover Tooltip - Hidden on mobile, visible on desktop */}
+              <div className="hidden sm:block absolute -bottom-10 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gray-900/90 border border-purple-500/30 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-30 backdrop-blur-sm">
                 <p className="text-white text-xs font-medium">{tech.name}</p>
                 <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900/90 border-t border-l border-purple-500/30 rotate-45" />
+              </div>
+              
+              {/* Mobile Label - Visible only on touch devices */}
+              <div className="sm:hidden absolute -bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-active:opacity-100 transition-opacity duration-200 pointer-events-none z-30">
+                <p className="text-white text-[10px] font-medium whitespace-nowrap bg-gray-900/80 px-2 py-0.5 rounded border border-purple-500/30 backdrop-blur-sm">{tech.name}</p>
               </div>
             </div>
           </div>
