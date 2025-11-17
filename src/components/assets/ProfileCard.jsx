@@ -299,25 +299,65 @@ const ProfileCardComponent = ({
   return (
     <div
       ref={wrapRef}
-      className={`pc-card-wrapper ${className}`.trim()}
+      className={`pc-card-wrapper profile-glass-luxury ${className}`.trim()}
       style={cardStyle}
     >
-      <section ref={cardRef} className="pc-card">
+      <section ref={cardRef} className="pc-card profile-glass-luxury-inner">
         <div className="pc-inside">
+          {/* Animated Gradient Border */}
+          <div className="profile-animated-border"></div>
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
-            <img
-              className="avatar"
-              src={avatarUrl}
-              alt={`${name || "User"} avatar`}
-              loading="lazy"
-              onError={(e) => {
-                const target = e.target;
-                target.style.display = "none";
-              }}
-              onClick={(e) => openInfo(e)}
-            />
+            <div
+              className="profile-avatar-wrapper"
+              style={{ position: 'relative', display: 'inline-block' }}
+              onMouseEnter={e => e.currentTarget.classList.add('hovered')}
+              onMouseLeave={e => e.currentTarget.classList.remove('hovered')}
+            >
+              <img
+                className="avatar profile-avatar-luxury"
+                src={avatarUrl}
+                alt={`${name || "User"} avatar`}
+                loading="lazy"
+                onError={(e) => {
+                  const target = e.target;
+                  target.style.display = "none";
+                }}
+                onClick={(e) => openInfo(e)}
+              />
+              {/* Anime Glow & Sparkle Badge */}
+              <span className="profile-glow-badge-anime" style={{
+                position: 'absolute',
+                right: 4,
+                bottom: 4,
+                width: 28,
+                height: 28,
+                zIndex: 2,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                pointerEvents: 'none',
+              }}>
+                {/* Aura Glow */}
+                <span className="profile-anime-aura"></span>
+                {/* Sparkle Stars */}
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className={`profile-anime-sparkle sparkle-${i}`}></span>
+                ))}
+                {/* Inti badge */}
+                <span style={{
+                  position: 'relative',
+                  width: 14,
+                  height: 14,
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #fff 60%, #38bdf8 100%)',
+                  boxShadow: '0 0 8px 2px #fff, 0 0 16px 4px #38bdf8',
+                  opacity: 0.98,
+                  border: '2px solid #a21caf',
+                }}></span>
+              </span>
+            </div>
             {showUserInfo && (
               <div className="pc-user-info">
                 <div className="pc-user-details">
@@ -334,33 +374,32 @@ const ProfileCardComponent = ({
                     />
                   </div>
                   <div className="pc-user-text">
-                    <div className="pc-handle">@{handle}</div>
-                    <div className="pc-status">{status}</div>
+                    <div className="pc-handle font-semibold text-lg text-white/90">@{handle}</div>
+                    <div className="pc-status text-xs text-cyan-300 font-medium">{status}</div>
                   </div>
                 </div>
-               <a href="https://www.instagram.com/rafaa_ndl?igsh=MXVuenhyaHgzeGhjMw==" target="_blank">
-                 <button
-                  className="pc-contact-btn"
-                  onClick={handleContactClick}
-                  style={{ pointerEvents: "auto" }}
-                  type="button"
-                  aria-label={`Contact ${name || "user"}`}
-                >
-                  {contactText}
-                </button>
-               </a>
+                <a href="https://www.instagram.com/rafaa_ndl?igsh=MXVuenhyaHgzeGhjMw==" target="_blank" rel="noopener noreferrer">
+                  <button
+                    className="pc-contact-btn profile-contact-luxury"
+                    onClick={handleContactClick}
+                    style={{ pointerEvents: "auto" }}
+                    type="button"
+                    aria-label={`Contact ${name || "user"}`}
+                  >
+                    {contactText}
+                  </button>
+                </a>
               </div>
             )}
           </div>
           <div className="pc-content">
             <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
+              <h3 className="font-bold text-2xl text-white/95 mb-1 tracking-wide profile-name-luxury">{name}</h3>
+              <p className="text-cyan-200 text-base font-medium mb-2 profile-title-luxury">{title}</p>
             </div>
           </div>
         </div>
       </section>
-
       {/* Info overlay shown when avatar is clicked */}
       {expanded && (
         <div
@@ -376,13 +415,13 @@ const ProfileCardComponent = ({
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-2xl font-bold mb-1">{name}</h2>
-                <p className="text-cyan-300 mb-3">{title}</p>
+                <h2 className="text-2xl font-bold mb-1 profile-name-luxury">{name}</h2>
+                <p className="text-cyan-300 mb-3 profile-title-luxury">{title}</p>
                 <p className="text-sm text-gray-300 mb-4">I&apos;m a front-end developer focusing on building interactive, accessible, and performant user interfaces. I enjoy working with React, Tailwind CSS, and modern animation libraries.</p>
                 <div className="flex gap-3 items-center">
-                  <a href="https://github.com/raditt10" target="_blank" rel="noopener noreferrer" className="text-sm px-3 py-2 bg-white/5 rounded-md hover:bg-white/10">GitHub</a>
-                  <a href="https://www.instagram.com/rafaa_ndl" target="_blank" rel="noopener noreferrer" className="text-sm px-3 py-2 bg-white/5 rounded-md hover:bg-white/10">Instagram</a>
-                  <a href="mailto:example@example.com" className="text-sm px-3 py-2 bg-white/5 rounded-md hover:bg-white/10">Email</a>
+                  <a href="https://github.com/raditt10" target="_blank" rel="noopener noreferrer" className="text-sm px-3 py-2 bg-white/5 rounded-md hover:bg-cyan-500/20 transition">GitHub</a>
+                  <a href="https://www.instagram.com/rafaa_ndl" target="_blank" rel="noopener noreferrer" className="text-sm px-3 py-2 bg-white/5 rounded-md hover:bg-pink-500/20 transition">Instagram</a>
+                  <a href="mailto:example@example.com" className="text-sm px-3 py-2 bg-white/5 rounded-md hover:bg-emerald-500/20 transition">Email</a>
                 </div>
               </div>
               <div className="flex-shrink-0">

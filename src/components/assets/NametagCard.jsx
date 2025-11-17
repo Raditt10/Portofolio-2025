@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { X, GraduationCap, Briefcase, MapPin, Calendar, Award, Code } from 'lucide-react';
 
-const NametagCard = () => {
+const NametagCard = ({
+  name = "Rafaditya Syahputra",
+  role = "Front-end Developer",
+  avatar = "/img/cover.jpg",
+  className = "",
+}) => {
   const [isPulled, setIsPulled] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [pullDistance, setPullDistance] = useState(0);
@@ -134,9 +139,9 @@ const NametagCard = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    Rafaditya Syahputra
+                    {name}
                   </h3>
-                  <p className="text-cyan-400 text-sm font-medium">Front-End Developer</p>
+                  <p className="text-cyan-400 text-sm font-medium">{role}</p>
                   <p className="text-gray-400 text-xs mt-1">@rafaa_ndl</p>
                 </div>
               </div>
