@@ -69,7 +69,7 @@ const About = () => {
           handle="rafaa_ndl"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/img/radit2.jpg"
+          avatarUrl="/img/avatar2.jpg"
           miniAvatarUrl="/img/meow.jpg"
           showUserInfo={true}
           enableTilt={false}
