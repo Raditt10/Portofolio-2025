@@ -47,95 +47,57 @@ const Opening = ({ onComplete }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-black pointer-events-auto"
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#030303] via-[#050608] to-[#0b0d11] pointer-events-auto text-white"
       initial={{ opacity: 1 }}
       animate={{ opacity: stage === 'complete' ? 0 : 1 }}
       transition={{ duration: 0.8 }}
       style={{ pointerEvents: stage === 'complete' ? 'none' : 'auto' }}
     >
-      {/* Animated Space Background */}
+      {/* Soft ambient backdrop */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Starfield */}
-        {[...Array(50)].map((_, i) => (
+        <motion.div
+          className="absolute w-[360px] h-[360px] -left-6 -top-6 rounded-full bg-white/8 blur-2xl"
+          animate={{ opacity: [0.18, 0.28, 0.18], scale: [1, 1.02, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <motion.div
+          className="absolute w-[460px] h-[460px] right-0 bottom-[-70px] rounded-full bg-white/6 blur-2xl"
+          animate={{ opacity: [0.15, 0.25, 0.15], scale: [1, 1.03, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.06),transparent_42%),radial-gradient(circle_at_80%_15%,rgba(255,255,255,0.04),transparent_36%),radial-gradient(circle_at_50%_78%,rgba(255,255,255,0.05),transparent_38%)]" />
+
+        {/* Gentle rings */}
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] md:w-[540px] md:h-[540px] border border-white/15 rounded-full" />
+        </motion.div>
+
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 44, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="w-[380px] h-[380px] sm:w-[500px] sm:h-[500px] md:w-[660px] md:h-[660px] border border-dashed border-white/10 rounded-full" />
+        </motion.div>
+
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full"
+            className="absolute w-1.5 h-1.5 bg-white/50 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
-            animate={{
-              opacity: [0, 1, 0.5, 1, 0],
-              scale: [0, 1, 0.8, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
+            animate={{ opacity: [0.2, 0.6, 0.2], scale: [0.9, 1.1, 0.9] }}
+            transition={{ duration: 4 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 1.5, ease: "easeInOut" }}
           />
         ))}
-
-        {/* Nebula Effect */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-purple-900/20 to-blue-900/20"
-          animate={{
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-          }}
-        />
-
-        {/* Multiple Orbiting Rings */}
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px] border border-cyan-500/20 rounded-full" />
-          {/* Orbiting particle 1 */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(34,211,238,1)]" />
-        </motion.div>
-        
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] md:w-[800px] md:h-[800px] border border-purple-500/15 rounded-full" />
-          {/* Orbiting particle 2 */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-purple-400 rounded-full shadow-[0_0_10px_rgba(168,85,247,1)]" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="w-[350px] h-[350px] sm:w-[480px] sm:h-[480px] md:w-[700px] md:h-[700px] border border-dashed border-blue-500/15 rounded-full" />
-          {/* Orbiting particle 3 */}
-          <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-400 rounded-full shadow-[0_0_10px_rgba(59,130,246,1)]" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] md:w-[500px] md:h-[500px] border border-dotted border-cyan-500/10 rounded-full" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] md:w-[900px] md:h-[900px] border border-purple-500/10 rounded-full" />
-          {/* Orbiting particle 4 */}
-          <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-pink-400 rounded-full shadow-[0_0_8px_rgba(236,72,153,1)]" />
-        </motion.div>
       </div>
 
       {/* Main Content */}
@@ -152,58 +114,37 @@ const Opening = ({ onComplete }) => {
         >
           {/* Planet Core */}
           <div className="relative w-32 h-32 md:w-40 md:h-40">
-            {/* Glow Effect */}
             <motion.div
-              className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-purple-600 blur-2xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 0.8, 0.5],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-              }}
+              className="absolute inset-0 rounded-full bg-gradient-to-br from-white/15 via-white/5 to-white/10 blur-2xl"
+              animate={{ scale: [1, 1.04, 1], opacity: [0.32, 0.5, 0.32] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
-            
-            {/* Planet Surface with Image */}
-            <div className="relative w-full h-full rounded-full shadow-2xl overflow-hidden border-4 border-cyan-400/50">
-              {/* Image */}
+
+            <div className="relative w-full h-full rounded-full shadow-xl overflow-hidden border-4 border-white/15 bg-[#0f1116]">
               <img 
                 src="/img/meow.jpg" 
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
-              
-              {/* Overlay Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 via-transparent to-purple-700/30" />
-              
-              {/* Surface Pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-white/10" />
               <motion.div
                 className="absolute inset-0 opacity-20"
                 style={{
-                  backgroundImage: `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 50%),
-                                   radial-gradient(circle at 70% 70%, rgba(0,0,0,0.3) 0%, transparent 50%)`
+                  backgroundImage: `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35) 0%, transparent 45%),
+                                   radial-gradient(circle at 70% 70%, rgba(0,0,0,0.45) 0%, transparent 45%)`
                 }}
-                animate={{
-                  rotate: 360,
-                }}
-                transition={{
-                  duration: 40,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
               />
             </div>
 
-            {/* Orbital Ring */}
             <motion.div
               className="absolute inset-0 -m-8"
               animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
             >
-              <div className="w-full h-full border-2 border-dashed border-cyan-400/30 rounded-full" />
-              {/* Orbiting Dot */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(34,211,238,1)]" />
+              <div className="w-full h-full border-2 border-dashed border-white/12 rounded-full" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white/60 rounded-full shadow-[0_0_10px_rgba(255,255,255,0.35)]" />
             </motion.div>
           </div>
         </motion.div>
@@ -215,13 +156,13 @@ const Opening = ({ onComplete }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          <h1 className="text-3xl md:text-4xl font-light text-white mb-2 tracking-wider">
-            Hi! 
+          <h1 className="text-3xl md:text-4xl font-light text-white mb-2 tracking-wide">
+            Hi!
           </h1>
-          <div className="text-cyan-400/80 text-sm md:text-base tracking-widest h-6">
+          <div className="text-white/80 text-lg md:text-xl font-semibold tracking-[0.35em] uppercase h-8 flex items-center justify-center bg-gradient-to-r from-white via-slate-100 to-white/70 bg-clip-text text-transparent drop-shadow-[0_4px_24px_rgba(255,255,255,0.35)]">
             <span>{typedText}</span>
             <motion.span
-              className="inline-block w-0.5 h-5 bg-cyan-400 ml-1"
+              className="inline-block w-0.5 h-5 bg-white ml-1"
               animate={{ opacity: [1, 0, 1] }}
               transition={{ duration: 0.8, repeat: Infinity }}
             />
@@ -237,67 +178,51 @@ const Opening = ({ onComplete }) => {
         >
           {/* Progress Label */}
           <div className="flex justify-between items-center mb-3 text-sm">
-            <span className="text-cyan-400/70">Tunggu bentar yaa..</span>
-            <span className="text-cyan-400 font-mono font-bold">
+            <span className="text-white/60">Tunggu bentar yaa..</span>
+            <span className="text-white font-mono font-bold">
               {progress}%
             </span>
           </div>
 
-          {/* Progress Bar Track */}
-          <div className="relative h-2 bg-gray-800/50 rounded-full overflow-hidden backdrop-blur-sm border border-cyan-500/20">
-            {/* Progress Fill */}
+          <div className="relative h-2 bg-white/5 rounded-full overflow-hidden backdrop-blur border border-white/10 shadow-inner">
             <motion.div
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-full"
+              className="absolute inset-y-0 left-0 bg-gradient-to-r from-white/40 via-white/25 to-white/10 rounded-full"
               style={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
             >
-              {/* Shimmer Effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent"
                 animate={{
                   x: ['-100%', '200%'],
                 }}
                 transition={{
-                  duration: 1.5,
+                  duration: 2,
                   repeat: Infinity,
-                  ease: "linear"
+                  ease: "easeInOut"
                 }}
               />
             </motion.div>
-
-            {/* Progress Glow */}
-            <motion.div
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400/50 to-purple-600/50 blur-md"
-              style={{ width: `${progress}%` }}
-            />
           </div>
 
-          {/* Loading Dots */}
           <div className="flex justify-center items-center gap-2 mt-6">
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="w-2 h-2 bg-cyan-400 rounded-full"
+                className="w-2 h-2 bg-white/50 rounded-full"
                 animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.3, 1, 0.3],
+                  scale: [1, 1.35, 1],
+                  opacity: [0.35, 0.9, 0.35],
                 }}
                 transition={{
-                  duration: 1,
+                  duration: 1.4,
                   repeat: Infinity,
                   delay: i * 0.2,
+                  ease: "easeInOut"
                 }}
               />
             ))}
           </div>
         </motion.div>
-      </div>
-
-      {/* Scan Lines Effect */}
-      <div className="absolute inset-0 pointer-events-none opacity-10">
-        <div className="w-full h-full" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34, 211, 238, 0.1) 2px, rgba(34, 211, 238, 0.1) 4px)'
-        }} />
       </div>
     </motion.div>
   );

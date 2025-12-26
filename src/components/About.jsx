@@ -57,9 +57,9 @@ const About = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="about" className="min-h-screen relative overflow-hidden bg-black">
+    <section ref={sectionRef} id="about" className="min-h-screen relative overflow-hidden bg-[#050607]">
       {/* Top Gradient */}
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black via-black/50 to-transparent pointer-events-none z-10"></div>
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none z-10"></div>
       
       {/* Profile Card */}
       <div className="flex justify-center items-center pt-32 pb-20 relative z-20">
@@ -79,10 +79,10 @@ const About = () => {
       </div>
 
       {/* Tech Stack Marquee Background */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="flex flex-col gap-12 rotate-6 transform scale-110 mt-10">
-          {/* Multiple Marquee Rows */}
-          {[40, 50, 45, 55, 50, 60].map((speed, rowIndex) => (
+      <div className="absolute inset-0 opacity-12 pointer-events-none">
+        <div className="flex flex-col gap-10 rotate-2 transform scale-[1.02] mt-6">
+          {/* Multiple Marquee Rows (trimmed for lighter perf) */}
+          {[28, 32, 30, 34].map((speed, rowIndex) => (
             <Marquee 
               key={`row-${rowIndex}`}
               speed={speed} 
@@ -100,17 +100,17 @@ const About = () => {
                 ];
                 
                 return (
-                  <div key={`row${rowIndex}-${index}`} className="mx-10 flex flex-col items-center gap-2">
+                  <div key={`row${rowIndex}-${index}`} className="mx-8 flex flex-col items-center gap-2">
                     <img
                       src={tech.logo}
                       alt={tech.name}
                       loading="lazy"
-                      className="w-28 h-28 drop-shadow-2xl filter brightness-200 transition-transform duration-300 hover:scale-110"
+                      className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-md filter brightness-110 transition-transform duration-300 hover:scale-105"
                       style={{
-                        filter: `drop-shadow(0 0 30px ${colors[rowIndex]})`,
+                        filter: `drop-shadow(0 0 12px ${colors[rowIndex]})`,
                       }}
                     />
-                    <span className="text-white font-bold text-xl tracking-wider drop-shadow-lg">
+                    <span className="text-white font-semibold text-lg tracking-wide drop-shadow">
                       {tech.name}
                     </span>
                   </div>
@@ -122,7 +122,7 @@ const About = () => {
       </div>
 
       {/* Bottom Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none z-10"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-10"></div>
     </section>
   );
 };

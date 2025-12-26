@@ -46,13 +46,13 @@ const Hero = () => {
     gsap.set("#nama", { overflow: "hidden" });
     gsap.set([".hero-subtitle", ".hero-description", ".scroll-text", ".scroll-arrow", ".github-container"], {
       opacity: 0,
-      y: 50
+      y: 36
     });
 
     let mm = gsap.matchMedia();
 
     const createTypewriterLoop = (chars, speed) => {
-      const tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 2.5 });
       
       const cursor = document.createElement('span');
       cursor.className = 'typing-cursor';
@@ -60,21 +60,21 @@ const Hero = () => {
         display: inline-block;
         width: 4px;
         height: 1.2em;
-        background: linear-gradient(180deg, #fff 0%, #00fff9 50%, #ff00de 100%);
+        background: linear-gradient(180deg, #f7f9ff 0%, #dfe6f3 60%, #b6c7ff 100%);
         margin-left: 4px;
         vertical-align: middle;
-        animation: blink 0.7s infinite;
-        box-shadow: 0 0 15px rgba(0, 255, 249, 0.8), 0 0 30px rgba(255, 0, 222, 0.6);
-        border-radius: 2px;
+        animation: blink 0.9s infinite;
+        box-shadow: 0 0 10px rgba(214, 225, 255, 0.35);
+        border-radius: 999px;
       `;
       
       gsap.set(chars, { 
         opacity: 0, 
-        y: 30, 
-        scale: 0.8, 
-        rotateX: -90, 
+        y: 24, 
+        scale: 0.9, 
+        rotateX: -70, 
         transformOrigin: "50% 50%",
-        textShadow: "0 0 20px rgba(255,255,255,0.5)"
+        textShadow: "0 0 6px rgba(255,255,255,0.3)"
       });
       
       // Enter animation
@@ -84,29 +84,10 @@ const Hero = () => {
         scale: 1,
         rotateX: 0,
         duration: speed,
-        ease: "elastic.out(1, 0.5)",
+        ease: "power2.out",
         stagger: {
           each: speed,
-          from: "start",
-          onComplete: function() {
-            if (Math.random() > 0.7) {
-              const char = this.targets()[0];
-              gsap.to(char, {
-                duration: 0.1,
-                x: () => gsap.utils.random(-3, 3),
-                y: () => gsap.utils.random(-2, 2),
-                color: () => gsap.utils.random([
-                  "#00fff9", "#ff00de", "#ff6b00", "#9d00ff"
-                ]),
-                repeat: 2,
-                yoyo: true,
-                ease: "none",
-                onComplete: function() {
-                  gsap.to(char, { x: 0, y: 0, color: "#ffffff", duration: 0.1 });
-                }
-              });
-            }
-          }
+          from: "start"
         },
         onStart: function() {
           const namaEl = document.getElementById('nama');
@@ -124,28 +105,9 @@ const Hero = () => {
           }
         }
       })
-      // Glitch effect
+      // Bounce effect (soft)
       .to(chars, {
-        duration: 0.1,
-        textShadow: "3px 0 #ff00de, -3px 0 #00fff9",
-        x: 3,
-        ease: "none"
-      })
-      .to(chars, {
-        duration: 0.1,
-        textShadow: "-3px 0 #ff00de, 3px 0 #00fff9",
-        x: -3,
-        ease: "none"
-      })
-      .to(chars, {
-        duration: 0.1,
-        textShadow: "0 0 20px rgba(255,255,255,0.8)",
-        x: 0,
-        ease: "none"
-      })
-      // Bounce effect
-      .to(chars, {
-        y: -8,
+        y: -6,
         duration: 0.4,
         ease: "sine.inOut",
         stagger: {
@@ -155,34 +117,15 @@ const Hero = () => {
           repeat: 1
         }
       })
-      .to({}, { duration: 1.2 })
-      // Final glitch before exit
-      .to(chars, {
-        duration: 0.15,
-        textShadow: "4px 0 #ff00de, -4px 0 #00fff9, 0 0 30px #ff00de",
-        x: 4,
-        ease: "none"
-      })
-      .to(chars, {
-        duration: 0.15,
-        textShadow: "-4px 0 #ff00de, 4px 0 #00fff9, 0 0 30px #00fff9",
-        x: -4,
-        ease: "none"
-      })
-      .to(chars, {
-        duration: 0.15,
-        textShadow: "0 0 20px rgba(255,255,255,0.5)",
-        x: 0,
-        ease: "none"
-      })
+      .to({}, { duration: 1.5 })
       // Exit animation
       .to(chars, {
         opacity: 0,
         y: -25,
         scale: 0.7,
-        rotateX: 90,
-        duration: speed * 0.4,
-        ease: "power3.in",
+        rotateX: 70,
+        duration: speed * 0.35,
+        ease: "power2.in",
         stagger: {
           each: speed * 0.4,
           from: "end"
@@ -282,16 +225,16 @@ const Hero = () => {
       delay: 3
     });
 
-    // Floating particles animation
+    // Floating particles animation (softened)
     gsap.to(".floating-particle", {
-      y: -20,
-      x: () => gsap.utils.random(-10, 10),
-      rotation: () => gsap.utils.random(-180, 180),
-      duration: () => gsap.utils.random(3, 6),
+      y: -12,
+      x: () => gsap.utils.random(-6, 6),
+      rotation: () => gsap.utils.random(-60, 60),
+      duration: () => gsap.utils.random(4, 7),
       ease: "sine.inOut",
       yoyo: true,
       repeat: -1,
-      stagger: 0.1
+      stagger: 0.12
     });
 
   }, []);
@@ -310,10 +253,10 @@ const Hero = () => {
       ref={sectionRef}
       id="home"
       style={{ fontFamily: "Sora Variable" }}
-      className="font-sora flex flex-col items-center justify-center relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-cyan-900/10 pt-20" // Added pt-20 for header spacing
+      className="font-sora flex flex-col items-center justify-center relative min-h-screen overflow-hidden bg-gradient-to-br from-[#050607] via-[#0b0f15] to-[#0c1118] pt-20"
     >
       {/* Animated Grid Background */}
-      <div className="absolute inset-0 opacity-[0.03] z-0">
+      <div className="absolute inset-0 opacity-[0.015] z-0">
         <div className="absolute inset-0" style={{
           backgroundImage: `
             linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
@@ -332,34 +275,34 @@ const Hero = () => {
       >
         <div className="relative">
           {/* Glow Effect */}
-          <div className="absolute -inset-3 bg-gradient-to-r from-purple-600/50 to-cyan-600/50 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute -inset-3 bg-white/5 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
           {/* Button Container */}
-          <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-purple-500/30 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-purple-500/60 shadow-xl">
+          <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#0c1118]/95 to-[#0c0f14]/95 backdrop-blur-xl border border-white/10 flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:border-white/20 shadow-lg">
             {/* Animated Ring */}
             <div className={`absolute inset-0 rounded-full border-2 ${
-              isPlaying ? 'border-cyan-400/50 animate-ping' : 'border-purple-400/30'
+              isPlaying ? 'border-white/30 animate-ping' : 'border-white/15'
             }`} style={{ animationDuration: '2s' }} />
             
             {/* Secondary Ring when playing */}
             {isPlaying && (
-              <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-spin" style={{ animationDuration: '8s' }} />
+              <div className="absolute inset-0 rounded-full border border-white/15 animate-spin" style={{ animationDuration: '10s' }} />
             )}
             
             {/* Icon */}
             {isPlaying ? (
               <div className="relative z-10 flex items-center justify-center gap-1">
-                <div className="w-1 h-5 bg-gradient-to-b from-cyan-300 to-cyan-500 rounded-full shadow-lg shadow-cyan-500/50 animate-pulse" style={{ animationDuration: '1s' }} />
-                <div className="w-1 h-5 bg-gradient-to-b from-cyan-300 to-cyan-500 rounded-full shadow-lg shadow-cyan-500/50 animate-pulse" style={{ animationDuration: '1s', animationDelay: '0.15s' }} />
+                <div className="w-1 h-5 bg-white/80 rounded-full shadow-lg shadow-white/30 animate-pulse" style={{ animationDuration: '1.2s' }} />
+                <div className="w-1 h-5 bg-white/80 rounded-full shadow-lg shadow-white/30 animate-pulse" style={{ animationDuration: '1.2s', animationDelay: '0.15s' }} />
               </div>
             ) : (
               <div className="relative z-10 ml-0.5">
-                <svg className="w-5 h-5 text-purple-400 drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-white/80 drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5.14v14l11-7-11-7z" />
                 </svg>
                 {/* Play Icon Glow */}
                 <div className="absolute inset-0 blur-md">
-                  <svg className="w-5 h-5 text-purple-400/50" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-white/40" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5.14v14l11-7-11-7z" />
                   </svg>
                 </div>
@@ -368,7 +311,7 @@ const Hero = () => {
             
             {/* Pulse Effect when playing */}
             {isPlaying && (
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 animate-pulse" />
+              <div className="absolute inset-0 rounded-full bg-white/8 animate-pulse" />
             )}
           </div>
           
@@ -517,7 +460,7 @@ const Hero = () => {
       <div ref={containerRef} className="relative z-20 w-full max-w-6xl mx-auto px-6 mt-10"> {/* Added mt-10 */}
         {/* Konten */}
         <div className="text-center">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl hero-subtitle bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent font-light mb-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl hero-subtitle bg-gradient-to-r from-white via-slate-200 to-amber-100 bg-clip-text text-transparent font-semibold tracking-[0.08em] uppercase mb-4">
             Hi, I'm
           </h1>
           <h2
@@ -532,20 +475,20 @@ const Hero = () => {
           
           {/* Role */}
           <div className="relative mt-6">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent leading-relaxed font-semibold">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl bg-gradient-to-r from-white via-slate-200 to-amber-100 bg-clip-text text-transparent leading-relaxed font-semibold tracking-[0.12em] uppercase">
               Front-end Developer • UI/UX Designer • Artist
             </p>
           </div>
           
           {/* Hobby */}
           <div className="relative mt-2">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl bg-gradient-to-r from-purple-200 via-pink-200 to-orange-200 bg-clip-text text-transparent leading-relaxed font-semibold">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl bg-gradient-to-r from-white via-slate-300 to-amber-100 bg-clip-text text-transparent leading-relaxed font-medium tracking-[0.08em]">
               Photography Enthusiast
             </p>
           </div>
           
-          <p className="text-base sm:text-lg text-gray-400 mt-6 max-w-2xl mx-auto">
-             "Permata tidak dapat mengkilap tanpa digesekkan, demikian juga seseorang tidak akan sukses tanpa adanya tantangan."
+           <p className="text-base sm:text-lg text-white/70 mt-6 max-w-2xl mx-auto italic">
+             “Permata tidak dapat mengkilap tanpa digesekkan, demikian juga seseorang tidak akan sukses tanpa adanya tantangan.”
           </p>
         </div>
 
