@@ -6,7 +6,7 @@ const Opening = ({ onComplete }) => {
   const [stage, setStage] = useState('loading'); // loading, entering, complete
   const [typedText, setTypedText] = useState('');
   
-  const fullText = "Welcome to My Portfolio";
+  const fullText = "Have a nice day.";
 
   useEffect(() => {
     // Typing animation
@@ -98,7 +98,7 @@ const Opening = ({ onComplete }) => {
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <h1 className="text-3xl md:text-4xl font-light text-white mb-2 tracking-wide">
-            Hi!
+            Hao!
           </h1>
           <div className="text-white/80 text-lg md:text-xl font-semibold tracking-[0.35em] uppercase h-8 flex items-center justify-center bg-gradient-to-r from-white via-slate-100 to-white/70 bg-clip-text text-transparent drop-shadow-[0_4px_24px_rgba(255,255,255,0.35)]">
             <span>{typedText}</span>
