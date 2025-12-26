@@ -82,7 +82,7 @@ const About = () => {
       <div className="absolute inset-0 opacity-12 pointer-events-none">
         <div className="flex flex-col gap-10 rotate-2 transform scale-[1.02] mt-6">
           {/* Multiple Marquee Rows (trimmed for lighter perf) */}
-          {[28, 32, 30, 34].map((speed, rowIndex) => (
+          {[28, 32, 30, 34, 26].map((speed, rowIndex) => (
             <Marquee 
               key={`row-${rowIndex}`}
               speed={speed} 
