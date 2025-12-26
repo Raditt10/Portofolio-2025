@@ -185,15 +185,11 @@ const Gallery = () => {
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
-              background: Math.random() > 0.5 
-                ? 'linear-gradient(45deg, #8b5cf6, #00fff9)'
-                : 'linear-gradient(45deg, #ff00de, #8b5cf6)',
-              boxShadow: `0 0 ${Math.random() * 10 + 5}px ${
-                Math.random() > 0.5 ? 'rgba(139, 92, 246, 0.8)' : 'rgba(0, 255, 249, 0.8)'
-              }`,
-              filter: 'blur(1px)'
+              width: `${Math.random() * 2 + 1.5}px`,
+              height: `${Math.random() * 2 + 1.5}px`,
+              background: 'linear-gradient(45deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3))',
+              boxShadow: '0 0 6px rgba(255,255,255,0.35)',
+              opacity: 0.6
             }}
           />
         ))}
@@ -201,12 +197,12 @@ const Gallery = () => {
 
       <h1
         ref={titleRef}
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent font-bold text-center relative z-30 overflow-hidden mt-4 mb-8 md:mb-20 drop-shadow-2xl"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-white via-slate-200 to-amber-100 bg-clip-text text-transparent font-semibold text-center relative z-30 overflow-hidden mt-4 mb-8 md:mb-20"
         style={{
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
-          textShadow: '0 0 80px rgba(139, 92, 246, 0.5)',
+          textShadow: '0 0 24px rgba(255,255,255,0.25)',
           letterSpacing: '0.05em'
         }}
       >

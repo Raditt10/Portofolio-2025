@@ -204,12 +204,12 @@ const TechStack = () => {
       <div className="relative z-20 px-4">
         <h1 
           ref={titleRef}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent font-bold text-center relative z-30 overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-20"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-slate-200 to-amber-100 bg-clip-text text-transparent font-semibold text-center relative z-30 overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-20"
           style={{
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            textShadow: '0 0 80px rgba(139, 92, 246, 0.5)',
+            textShadow: '0 0 24px rgba(255,255,255,0.25)',
             letterSpacing: '0.05em'
           }}
         >
@@ -236,8 +236,8 @@ const TechStack = () => {
             <div 
               className="absolute inset-0 tech-glow opacity-0 transition-all duration-300 rounded-2xl"
               style={{
-                background: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)',
-                filter: 'blur(20px)',
+                background: 'radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, transparent 70%)',
+                filter: 'blur(10px)',
                 transform: 'scale(1)'
               }}
             />

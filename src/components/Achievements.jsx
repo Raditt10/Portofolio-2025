@@ -175,47 +175,29 @@ const Achievements = () => {
       {/* Enhanced Floating Particles with 3D Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
         {[...Array(50)].map((_, i) => {
-          const size = Math.random() * 6 + 2;
-          const isSpecial = i % 7 === 0;
+          const size = Math.random() * 2 + 1.5;
           return (
             <div
               key={i}
-              className={`absolute rounded-full ${isSpecial ? 'animate-float-special' : 'animate-float'}`}
+              className='absolute rounded-full animate-float'
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 width: `${size}px`,
                 height: `${size}px`,
-                background: isSpecial 
-                  ? 'radial-gradient(circle, #fff, #8b5cf6)'
-                  : Math.random() > 0.5 
-                    ? 'linear-gradient(135deg, #8b5cf6, #00fff9)'
-                    : 'linear-gradient(135deg, #ff00de, #8b5cf6)',
-                boxShadow: `0 0 ${Math.random() * 20 + 10}px ${
-                  isSpecial ? 'rgba(255, 255, 255, 0.9)' :
-                  Math.random() > 0.5 ? 'rgba(139, 92, 246, 0.8)' : 'rgba(0, 255, 249, 0.8)'
-                }`,
-                filter: 'blur(1px)',
-                animationDelay: `${Math.random() * 10}s`,
-                animationDuration: `${15 + Math.random() * 15}s`,
-                opacity: isSpecial ? 1 : 0.7
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3))',
+                boxShadow: '0 0 6px rgba(255,255,255,0.35)',
+                filter: 'blur(0px)',
+                animationDelay: `${Math.random() * 8}s`,
+                animationDuration: `${12 + Math.random() * 8}s`,
+                opacity: 0.6
               }}
             />
           );
         })}
       </div>
 
-      {/* Scanning Lines Effect */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
-        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent animate-scan-horizontal" 
-             style={{ top: '20%', animationDelay: '0s' }} />
-        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent animate-scan-horizontal" 
-             style={{ top: '60%', animationDelay: '3s' }} />
-        <div className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-pink-400/50 to-transparent animate-scan-vertical" 
-             style={{ left: '30%', animationDelay: '1.5s' }} />
-        <div className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent animate-scan-vertical" 
-             style={{ left: '70%', animationDelay: '4.5s' }} />
-      </div>
+
 
       <div className="max-w-7xl mx-auto relative z-20">
         {/* Enhanced Main Title with Glitch Effect */}

@@ -292,12 +292,12 @@ const Footer = () => {
         style={{ fontFamily: "Sora Variable" }}
       >
       {/* Animated Background Grid */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-[0.015]">
         <div 
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px),
+              linear-gradient(rgba(139, 92, 246, 0.08) 1px, transparent 1px),
               linear-gradient(90deg, rgba(139, 92, 246, 0.3) 1px, transparent 1px)
             `,
             backgroundSize: '50px 50px',

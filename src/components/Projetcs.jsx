@@ -155,11 +155,11 @@ const Projects = () => {
     <section 
       id="projects" 
       ref={sectionRef} 
-      className="relative min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-cyan-900/10 touch-manipulation"
+      className="relative min-h-screen py-14 sm:py-18 md:py-22 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden bg-gradient-to-br from-[#050607] via-[#0b0f15] to-[#0c1118] touch-manipulation"
       style={{ fontFamily: "Sora Variable" }}
     >
       {/* Animated Grid Background */}
-      <div className="absolute inset-0 opacity-[0.03] z-0">
+      <div className="absolute inset-0 opacity-[0.015] z-0">
         <div className="absolute inset-0" style={{
           backgroundImage: `
             linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
@@ -171,29 +171,25 @@ const Projects = () => {
       </div>
 
       {/* Pulsing Orb Effect */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] z-0">
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600/10 to-cyan-600/10 animate-pulse-slow" 
-             style={{ filter: 'blur(60px)' }} />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] z-0">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/8 to-white/4 animate-pulse-slow" 
+             style={{ filter: 'blur(28px)' }} />
       </div>
 
-      {/* Enhanced Floating Particles */}
+      {/* Floating Particles (reduced for mobile) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
-        {[...Array(30)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
             className="floating-particle absolute rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
-              background: Math.random() > 0.5 
-                ? 'linear-gradient(45deg, #8b5cf6, #00fff9)'
-                : 'linear-gradient(45deg, #ff00de, #8b5cf6)',
-              boxShadow: `0 0 ${Math.random() * 10 + 5}px ${
-                Math.random() > 0.5 ? 'rgba(139, 92, 246, 0.8)' : 'rgba(0, 255, 249, 0.8)'
-              }`,
-              filter: 'blur(1px)'
+              width: `${Math.random() * 2 + 1.5}px`,
+              height: `${Math.random() * 2 + 1.5}px`,
+              background: 'linear-gradient(45deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3))',
+              boxShadow: '0 0 6px rgba(255,255,255,0.35)',
+              opacity: 0.6
             }}
           />
         ))}
@@ -209,12 +205,12 @@ const Projects = () => {
         <motion.h1 
           ref={titleRef}
           variants={titleVariants}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent font-bold text-center relative z-30 overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-slate-200 to-amber-100 bg-clip-text text-transparent font-semibold text-center relative z-30 overflow-hidden mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4"
           style={{
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            textShadow: '0 0 60px rgba(139, 92, 246, 0.5)',
+            textShadow: '0 0 24px rgba(255,255,255,0.25)',
             letterSpacing: '0.02em'
           }}
         >
@@ -275,10 +271,10 @@ const Projects = () => {
                   key={index}
                   variants={cardVariants}
                   whileHover={{ 
-                    y: -12,
-                    scale: 1.03,
-                    rotateY: 2,
-                    transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] } 
+                    y: -6,
+                    scale: 1.015,
+                    rotateY: 0,
+                    transition: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] } 
                   }}
                   className="relative group w-[320px] sm:w-[380px] md:w-[420px] lg:w-[450px] flex-shrink-0"
                   style={{
@@ -288,37 +284,27 @@ const Projects = () => {
                 >
               {/* Cyberpunk Glow Effect */}
               <div 
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
+                className="absolute inset-0 opacity-0 group-hover:opacity-80 transition-all duration-300 rounded-xl"
                 style={{
-                  background: 'radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, transparent 70%)',
-                  filter: 'blur(20px)',
-                  transform: 'scale(1.1)'
+                  background: 'radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, transparent 70%)',
+                  filter: 'blur(10px)',
+                  transform: 'scale(1.02)'
                 }}
               />
               
               {/* Animated Border */}
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-600 overflow-hidden">
-                {/* Grid Pattern */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-90 transition-all duration-400 overflow-hidden hidden md:block">
                 <div 
-                  className="absolute inset-[-2px] rounded-xl opacity-70"
+                  className="absolute inset-[-2px] rounded-xl opacity-50"
                   style={{
                     backgroundImage: `
-                      linear-gradient(90deg, transparent 95%, #8b5cf6 100%),
-                      linear-gradient(180deg, transparent 95%, #06b6d4 100%)
+                      linear-gradient(90deg, transparent 94%, rgba(255,255,255,0.3) 100%),
+                      linear-gradient(180deg, transparent 94%, rgba(255,255,255,0.25) 100%)
                     `,
-                    backgroundSize: '20px 20px',
-                    animation: 'gridMove 2s linear infinite'
+                    backgroundSize: '22px 22px',
+                    animation: 'gridMove 3s linear infinite'
                   }}
                 />
-                
-                {/* Scanning Line */}
-                <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scan rounded-full" />
-                
-                {/* Pulsing Corner Brackets */}
-                <div className="absolute top-2 left-2 w-3 h-3 border-l-2 border-t-2 border-cyan-400 animate-pulse" />
-                <div className="absolute top-2 right-2 w-3 h-3 border-r-2 border-t-2 border-purple-400 animate-pulse" style={{animationDelay: '0.3s'}} />
-                <div className="absolute bottom-2 left-2 w-3 h-3 border-l-2 border-b-2 border-purple-400 animate-pulse" style={{animationDelay: '0.6s'}} />
-                <div className="absolute bottom-2 right-2 w-3 h-3 border-r-2 border-b-2 border-cyan-400 animate-pulse" style={{animationDelay: '0.9s'}} />
               </div>
 
               {/* Original ProjectCard dengan wrapper untuk efek tambahan */}
@@ -334,7 +320,7 @@ const Projects = () => {
                 />
                 
                 {/* Hover Shine Effect Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl" />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-xl" />
               </div>
             </motion.div>
           ))}
@@ -348,14 +334,14 @@ const Projects = () => {
           <div className="w-full max-w-2xl">
             <div className="relative h-1.5 bg-white/5 rounded-full overflow-hidden backdrop-blur-sm border border-white/10">
               <div
-                className="h-full bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 rounded-full transition-all duration-300 ease-out relative"
+                className="h-full bg-gradient-to-r from-white/50 via-white/30 to-white/20 rounded-full transition-all duration-300 ease-out relative"
                 style={{ 
                   width: `${scrollProgress}%`,
-                  boxShadow: '0 0 20px rgba(139, 92, 246, 0.6)'
+                  boxShadow: '0 0 10px rgba(255,255,255,0.25)'
                 }}
               >
                 {/* Animated glow at the end of progress bar */}
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full animate-pulse shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
               </div>
             </div>
             

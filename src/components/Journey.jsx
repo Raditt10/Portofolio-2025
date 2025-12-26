@@ -110,11 +110,11 @@ const Journey = () => {
     <section
       id="journey"
       ref={sectionRef}
-      className="relative min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-cyan-900/10"
+      className="relative min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden bg-gradient-to-br from-[#050607] via-[#0b0f15] to-[#0c1118]"
       style={{ fontFamily: "Sora Variable" }}
     >
       {/* Animated Grid Background */}
-      <div className="absolute inset-0 opacity-[0.03] z-0">
+      <div className="absolute inset-0 opacity-[0.015] z-0">
         <div
           className="absolute inset-0"
           style={{
@@ -129,36 +129,29 @@ const Journey = () => {
       </div>
 
       {/* Pulsing Orb Effect */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] z-0">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] z-0">
         <div
-          className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600/10 to-cyan-600/10 animate-pulse-slow"
-          style={{ filter: "blur(60px)" }}
+          className="absolute inset-0 rounded-full bg-gradient-to-r from-white/8 to-white/4 animate-pulse-slow"
+          style={{ filter: "blur(28px)" }}
         />
       </div>
 
-      {/* Floating Particles */}
+      {/* Floating Particles (reduced) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
             className="floating-particle absolute rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
-              background:
-                Math.random() > 0.5
-                  ? "linear-gradient(45deg, #8b5cf6, #00fff9)"
-                  : "linear-gradient(45deg, #ff00de, #8b5cf6)",
-              boxShadow: `0 0 ${Math.random() * 10 + 5}px ${
-                Math.random() > 0.5
-                  ? "rgba(139, 92, 246, 0.8)"
-                  : "rgba(0, 255, 249, 0.8)"
-              }`,
-              filter: "blur(1px)",
-              animation: `float ${Math.random() * 10 + 10}s linear infinite`,
-              animationDelay: `${Math.random() * 5}s`,
+              width: `${Math.random() * 2 + 1.5}px`,
+              height: `${Math.random() * 2 + 1.5}px`,
+              background: "linear-gradient(45deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3))",
+              boxShadow: "0 0 6px rgba(255,255,255,0.35)",
+              opacity: 0.6,
+              animation: `float ${Math.random() * 8 + 10}s ease-in-out infinite`,
+              animationDelay: `${Math.random() * 4}s`,
             }}
           />
         ))}
@@ -168,12 +161,12 @@ const Journey = () => {
         {/* Title */}
         <motion.h1
           ref={titleRef}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent font-bold text-center relative z-30 overflow-hidden mb-12 sm:mb-16 md:mb-20 lg:mb-24 px-4"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-slate-200 to-amber-100 bg-clip-text text-transparent font-semibold text-center relative z-30 overflow-hidden mb-12 sm:mb-16 md:mb-20 lg:mb-24 px-4"
           style={{
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: "0 0 60px rgba(139, 92, 246, 0.5)",
+            textShadow: "0 0 24px rgba(255,255,255,0.25)",
             letterSpacing: "0.02em",
           }}
         >
@@ -244,7 +237,7 @@ const Journey = () => {
                           {/* School Logo - Left */}
                           {item.logo && (
                             <div className="absolute -left-20 top-1/2 -translate-y-1/2 hidden md:block z-30">
-                              <motion.div className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-xl overflow-hidden bg-white/10 backdrop-blur-xl border-2 border-white/30 p-2 shadow-[0_0_30px_rgba(139,92,246,0.4)] group-hover:border-white/50 group-hover:shadow-[0_0_40px_rgba(139,92,246,0.6)] transition-all duration-500" whileHover={{ scale: 1.1, rotate: 5 }}>
+                              <motion.div className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-xl overflow-hidden bg-white/10 backdrop-blur-xl border-2 border-white/30 p-2 shadow-[0_0_24px_rgba(255,255,255,0.25)] group-hover:border-white/45 group-hover:shadow-[0_0_28px_rgba(255,255,255,0.35)] transition-all duration-400" whileHover={{ scale: 1.05, rotate: 3 }}>
                                 <img src={item.logo} alt={`${item.title} logo`} className="w-full h-full object-contain" />
                               </motion.div>
                             </div>
@@ -252,7 +245,7 @@ const Journey = () => {
                           {/* Glow Effect */}
                           <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl bg-gradient-to-br ${item.color} blur-xl`} />
                           {/* Card */}
-                          <div className={`relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border rounded-2xl p-6 md:p-8 transition-all duration-500 ${isActive ? 'border-white/30 shadow-[0_0_30px_rgba(139,92,246,0.3)]' : 'border-white/10'}`}>
+                          <div className={`relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border rounded-2xl p-6 md:p-8 transition-all duration-400 ${isActive ? 'border-white/25 shadow-[0_0_18px_rgba(255,255,255,0.18)]' : 'border-white/10'}`}>
                             {/* Year Badge */}
                             <div className={`inline-block px-4 py-2 rounded-full bg-gradient-to-r ${item.color} text-white font-bold text-sm mb-4 shadow-lg`}>
                               {item.year}
@@ -372,9 +365,9 @@ const Journey = () => {
                   </div>
                   {/* Middle Timeline Dot */}
                   <motion.div
-                    className={`absolute left-8 md:left-1/2 w-8 h-8 rounded-full border-4 border-black z-20 flex items-center justify-center text-lg transform -translate-x-1/2 transition-all duration-500 ${isActive ? `bg-gradient-to-br ${item.color} shadow-[0_0_30px_rgba(139,92,246,0.8)] scale-110` : 'bg-gray-800 shadow-none scale-100'}`}
-                    animate={{ scale: isActive ? [1, 1.2, 1] : 1 }}
-                    transition={{ duration: 2, repeat: item.current ? Infinity : 0, ease: 'easeInOut' }}
+                    className={`absolute left-8 md:left-1/2 w-8 h-8 rounded-full border-4 border-black z-20 flex items-center justify-center text-lg transform -translate-x-1/2 transition-all duration-500 ${isActive ? `bg-gradient-to-br ${item.color} shadow-[0_0_16px_rgba(255,255,255,0.35)] scale-105` : 'bg-gray-800 shadow-none scale-100'}`}
+                    animate={{ scale: isActive ? [1, 1.12, 1] : 1 }}
+                    transition={{ duration: 2.4, repeat: item.current ? Infinity : 0, ease: 'easeInOut' }}
                   >
                     <span className="text-sm">{item.icon}</span>
                   </motion.div>
