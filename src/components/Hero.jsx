@@ -423,7 +423,7 @@ const Hero = () => {
           </div>
           
            <p className="text-base sm:text-lg text-white/70 mt-6 max-w-2xl mx-auto italic">
-             “Permata tidak dapat mengkilap tanpa digesekkan, demikian juga seseorang tidak akan sukses tanpa adanya tantangan.”
+             “Bǎoshí bù jīng móliàn jiù bù huì fāguāng, rén bù jīngguò tiǎozhàn jiù bù huì chénggōng.”
           </p>
         </div>
 

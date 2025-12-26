@@ -6,7 +6,7 @@ const Opening = ({ onComplete }) => {
   const [stage, setStage] = useState('loading'); // loading, entering, complete
   const [typedText, setTypedText] = useState('');
   
-  const fullText = "Have a nice day.";
+  const fullText = "自豪地呈现";
 
   useEffect(() => {
     // Typing animation
