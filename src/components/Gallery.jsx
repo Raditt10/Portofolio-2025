@@ -336,8 +336,7 @@ const Gallery = () => {
             <div className="absolute bottom-0 left-0 right-0 bg-black/65 backdrop-blur-sm p-4 sm:p-6 rounded-b-lg border-t border-white/10">
               <h3 className="text-white text-xl sm:text-2xl font-semibold mb-2 drop-shadow-sm">{imageInfo.title}</h3>
               <p className="text-gray-200 text-sm sm:text-base drop-shadow-sm">{imageInfo.description}</p>
-              <div className="mt-3 text-gray-200 text-xs sm:text-sm font-medium flex items-center gap-2">
-                <div className="w-2 h-2 bg-amber-300 rounded-full" />
+              <div className="mt-3 text-gray-200 text-xs sm:text-sm font-medium">
                 {selectedImage + 1} / {images.length}
               </div>
             </div>

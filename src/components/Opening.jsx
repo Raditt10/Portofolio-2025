@@ -18,7 +18,7 @@ const Opening = ({ onComplete }) => {
       } else {
         clearInterval(typingTimer);
       }
-    }, 100);
+    }, 80);
 
     return () => clearInterval(typingTimer);
   }, []);
@@ -38,9 +38,9 @@ const Opening = ({ onComplete }) => {
           }, 1000);
           return 100;
         }
-        return prev + 2;
+        return prev + 1;
       });
-    }, 40);
+    }, 25);
 
     return () => clearInterval(progressTimer);
   }, [onComplete]);
@@ -50,7 +50,7 @@ const Opening = ({ onComplete }) => {
       className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#030303] via-[#050608] to-[#0b0d11] pointer-events-auto text-white"
       initial={{ opacity: 1 }}
       animate={{ opacity: stage === 'complete' ? 0 : 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 1.1, ease: "easeInOut" }}
       style={{ pointerEvents: stage === 'complete' ? 'none' : 'auto' }}
     >
       {/* Luxurious static backdrop */}
@@ -67,12 +67,12 @@ const Opening = ({ onComplete }) => {
         {/* Planet Logo */}
         <motion.div
           className="relative"
-          initial={{ scale: 0, rotate: -180 }}
+          initial={{ scale: 0.85, rotate: -90 }}
           animate={{ 
-            scale: stage === 'entering' ? 1.2 : 1,
-            rotate: stage === 'entering' ? 360 : 0,
+            scale: stage === 'entering' ? 1.08 : 1,
+            rotate: stage === 'entering' ? 180 : 0,
           }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
         >
           {/* Planet Core */}
           <div className="relative w-32 h-32 md:w-40 md:h-40">
@@ -129,7 +129,7 @@ const Opening = ({ onComplete }) => {
             <motion.div
               className="absolute inset-y-0 left-0 bg-gradient-to-r from-white/50 via-white/35 to-white/20 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.3)]"
               style={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
             />
           </div>
 
