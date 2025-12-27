@@ -31,7 +31,8 @@ const TechStack = () => {
 
     gsap.set(items, { 
       opacity: 0,
-      y: 8
+      y: 8,
+      x: (i) => (i % 2 === 0 ? 12 : -12)
     });
 
     // Create timeline
@@ -61,8 +62,9 @@ const TechStack = () => {
     .to(items, {
       opacity: 1,
       y: 0,
-      duration: 0.4,
-      stagger: 0.01,
+      x: 0,
+      duration: 0.8,
+      stagger: 0.04,
       ease: "power1.out"
     }, "-=0.2");
 
@@ -93,7 +95,7 @@ const TechStack = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen px-3 sm:px-4 md:px-6 lg:px-12 xl:px-16 py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden bg-gradient-to-br from-[#040507] via-[#0a0d12] to-[#050608]"
+      className="relative min-h-screen px-3 sm:px-5 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-20 md:py-24 lg:py-28 overflow-hidden bg-gradient-to-br from-[#040507] via-[#0a0d12] to-[#050608]"
       style={{ fontFamily: "Sora Variable" }}
     >
       {/* Elegant Static Background */}
@@ -128,7 +130,7 @@ const TechStack = () => {
       {/* Tech Grid */}
       <div 
         ref={gridRef}
-        className="relative z-20 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-9 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 mt-8 sm:mt-12 md:mt-16 lg:mt-20 items-center justify-items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-8"
+        className="relative z-20 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-9 gap-2.5 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 mt-8 sm:mt-12 md:mt-16 lg:mt-20 items-center justify-items-center max-w-7xl mx-auto px-2 sm:px-4 md:px-6"
       >
         {techstack.map((tech, index) => (
           <div
@@ -137,14 +139,14 @@ const TechStack = () => {
             className="relative group cursor-pointer w-full"
           >
             {/* Card Container - Mobile Optimized */}
-            <div className="relative flex items-center justify-center aspect-square p-2.5 sm:p-3 md:p-4 lg:p-5 bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm rounded-lg sm:rounded-xl border border-gray-700/50 transition-all duration-200 overflow-hidden touch-manipulation active:scale-95">
+            <div className="relative flex items-center justify-center aspect-square p-2 sm:p-3 md:p-4 lg:p-5 bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-[2px] rounded-lg sm:rounded-xl border border-gray-700/40 transition-all duration-200 overflow-hidden touch-manipulation active:scale-95">
               
               {/* Tech Icon - Responsive sizing */}
               <div className="relative z-10 w-full h-full flex items-center justify-center">
                 <img 
                   src={"/img/" + tech.src} 
                   alt={`${tech.name || 'Tech'} Stack`}
-                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain transition-all duration-300"
+                  className="w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain transition-all duration-300"
                   style={{
                     filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))'
                   }}
@@ -158,10 +160,11 @@ const TechStack = () => {
                 <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900/90 border-t border-l border-purple-500/30 rotate-45" />
               </div>
               
-              {/* Mobile Label - Visible only on touch devices */}
-              <div className="sm:hidden absolute -bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-active:opacity-100 transition-opacity duration-200 pointer-events-none z-30">
-                <p className="text-white text-[10px] font-medium whitespace-nowrap bg-gray-900/80 px-2 py-0.5 rounded border border-purple-500/30 backdrop-blur-sm">{tech.name}</p>
-              </div>
+            </div>
+
+            {/* Mobile Label - static below card */}
+            <div className="sm:hidden mt-2 text-center text-white/80 text-[11px] font-medium tracking-tight leading-tight">
+              {tech.name}
             </div>
           </div>
         ))}

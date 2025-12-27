@@ -78,6 +78,27 @@ const Gallery = () => {
     }
   }, [selectedImage]);
 
+  // Keyboard shortcuts for lightbox: Esc to close, arrows to navigate
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (selectedImage === null) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeLightbox();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        nextImage();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prevImage();
+      }
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [selectedImage]);
+
   const addToRefs = (el) => {
     if (el && !itemsRef.current.includes(el)) {
       itemsRef.current.push(el);
@@ -152,45 +173,17 @@ const Gallery = () => {
    <section 
       id="gallery" 
       ref={sectionRef} 
-      className="relative min-h-screen mt-12 px-4 md:px-8 overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-cyan-900/10" 
+      className="relative min-h-screen mt-12 px-4 md:px-8 overflow-hidden bg-[#050607]"
       style={{ fontFamily: "Sora Variable" }} 
     >
-      {/* Animated Grid Background - Desktop Only */}
-      <div className="hidden md:block absolute inset-0 opacity-[0.015] z-0">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-          backgroundPosition: 'center center'
-        }} />
-      </div>
-
-      {/* Pulsing Orb Effect */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] z-0">
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600/10 to-cyan-600/10 animate-pulse-slow" 
-             style={{ filter: 'blur(60px)' }} />
-      </div>
-
-      {/* Enhanced Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="floating-particle absolute rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 2 + 1.5}px`,
-              height: `${Math.random() * 2 + 1.5}px`,
-              background: 'linear-gradient(45deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3))',
-              boxShadow: '0 0 6px rgba(255,255,255,0.35)',
-              opacity: 0.6
-            }}
-          />
-        ))}
-      </div>
+      {/* Static luxe vignette background */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: `radial-gradient(circle at 50% 28%, rgba(255,255,255,0.08) 0%, rgba(248,236,214,0.06) 22%, rgba(5,6,7,0) 55%),
+            radial-gradient(circle at 50% 80%, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0) 60%)`
+        }}
+      />
 
       <h1
         ref={titleRef}
@@ -229,30 +222,16 @@ const Gallery = () => {
               >
                 <div
                   ref={addToRefs}
-                  className="h-full bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 md:hover:border-white/50 transition-all duration-200 overflow-hidden relative flex flex-col justify-between p-3 md:hover:bg-white/5 md:group hover:scale-[1.02] transform active:scale-95"
+                  className="h-full rounded-xl border border-gray-700/60 bg-gray-900/75 backdrop-blur-sm transition-all duration-300 overflow-hidden relative flex flex-col justify-between p-3 shadow-[0_0_0_rgba(255,255,255,0)] hover:shadow-[0_0_28px_rgba(255,255,255,0.16)] active:scale-95"
                 >
-                  <div className="hidden md:block absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 overflow-hidden">
-                    <div
-                      className="absolute inset-[-2px] rounded-xl opacity-50"
-                      style={{
-                        backgroundImage: `
-                          linear-gradient(90deg, transparent 95%, #8b5cf6 100%),
-                          linear-gradient(180deg, transparent 95%, #06b6d4 100%)
-                        `,
-                        backgroundSize: '20px 20px',
-                        animation: 'gridMove 2s linear infinite'
-                      }}
-                    />
-                  </div>
-
                   <div className="text-start relative z-10">
-                    <h2 className="text-xl font-bold text-cyan-400 mb-1 tracking-tight">MORE</h2>
+                    <h2 className="text-xl font-bold text-amber-200 mb-1 tracking-tight">MORE</h2>
                     <div className="text-xl font-bold text-white mb-2 tracking-tight flex items-center">
                       ON
                       <img src="/img/instagram.png" className="w-5 h-5 ml-1" alt="Instagram" />
                     </div>
                   </div>
-                  <div className="text-xs text-gray-400 group-hover:text-cyan-400 transition-colors relative z-10">@radittt_xxyu</div>
+                  <div className="text-xs text-gray-300 relative z-10">@radittt_xxyu</div>
                 </div>
               </a>
             </div>
@@ -276,30 +255,16 @@ const Gallery = () => {
             >
               <div
                 ref={addToRefs}
-                className="h-full bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-purple-500/70 transition-all duration-300 overflow-hidden relative flex flex-col justify-between p-4 hover:bg-gray-50/10 group hover:scale-105 transform"
+                className="h-full rounded-xl border border-gray-700/60 bg-gray-900/75 backdrop-blur-sm transition-all duration-300 overflow-hidden relative flex flex-col justify-between p-4 shadow-[0_0_0_rgba(255,255,255,0)] hover:shadow-[0_0_36px_rgba(255,255,255,0.2)] hover:border-white/30 hover:bg-white/5"
               >
-                <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-600 overflow-hidden">
-                  <div
-                    className="absolute inset-[-2px] rounded-xl opacity-50"
-                    style={{
-                      backgroundImage: `
-                        linear-gradient(90deg, transparent 95%, #8b5cf6 100%),
-                        linear-gradient(180deg, transparent 95%, #06b6d4 100%)
-                      `,
-                      backgroundSize: '20px 20px',
-                      animation: 'gridMove 2s linear infinite'
-                    }}
-                  />
-                </div>
-
                 <div className="text-start relative z-10">
-                  <h2 className="text-3xl xl:text-4xl font-bold text-cyan-400 mb-1 tracking-tight">MORE</h2>
+                  <h2 className="text-3xl xl:text-4xl font-bold text-amber-200 mb-1 tracking-tight">MORE</h2>
                   <div className="text-3xl xl:text-4xl font-bold text-white mb-2 tracking-tight flex items-center">
                     ON
                     <img src="/img/instagram.png" className="w-7 h-7 xl:w-8 xl:h-8 ml-2" alt="Instagram" loading="lazy" />
                   </div>
                 </div>
-                <div className="text-sm text-gray-400 group-hover:text-cyan-400 transition-colors relative z-10">@radittt_xxyu</div>
+                <div className="text-sm text-gray-300 relative z-10">@radittt_xxyu</div>
               </div>
             </a>
           </div>
@@ -310,15 +275,17 @@ const Gallery = () => {
 
       {selectedImage !== null && imageInfo && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-white/92 backdrop-blur-sm"
           onClick={closeLightbox}
         >
           <button
-            onClick={closeLightbox}
-            className="absolute top-4 right-4 z-50 text-cyan-400 hover:text-white transition-all duration-300 group hover:scale-110"
+            type="button"
+            onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+            className="absolute top-4 right-4 z-50 text-slate-700 hover:text-black transition-all duration-250 group hover:scale-105"
+            aria-label="Close"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-cyan-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+              <div className="absolute inset-0 bg-white/50 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
               <svg className="w-10 h-10 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -327,10 +294,12 @@ const Gallery = () => {
 
           <button
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-4 z-50 text-cyan-400 hover:text-white transition-all duration-300 group hover:scale-110"
+            type="button"
+            className="absolute left-4 z-50 text-slate-700 hover:text-black transition-all duration-250 group hover:scale-105"
+            aria-label="Previous"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-cyan-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+              <div className="absolute inset-0 bg-white/50 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
               <svg className="w-12 h-12 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
@@ -339,10 +308,12 @@ const Gallery = () => {
 
           <button
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-4 z-50 text-cyan-400 hover:text-white transition-all duration-300 group hover:scale-110"
+            type="button"
+            className="absolute right-4 z-50 text-slate-700 hover:text-black transition-all duration-250 group hover:scale-105"
+            aria-label="Next"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-cyan-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+              <div className="absolute inset-0 bg-white/50 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
               <svg className="w-12 h-12 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -358,15 +329,15 @@ const Gallery = () => {
               alt={imageInfo.title}
               className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
               style={{
-                boxShadow: '0 0 80px rgba(0, 200, 255, 0.6), 0 0 160px rgba(139, 92, 246, 0.4), inset 0 0 50px rgba(0, 200, 255, 0.2)'
+                boxShadow: '0 0 90px rgba(255, 255, 255, 0.45), 0 0 140px rgba(248, 236, 214, 0.35), inset 0 0 50px rgba(255, 255, 255, 0.2)'
               }}
             />
 
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-6 rounded-b-lg border-t border-cyan-400/20">
-              <h3 className="text-cyan-400 text-2xl font-bold mb-2 drop-shadow-lg">{imageInfo.title}</h3>
-              <p className="text-gray-300 text-base drop-shadow-lg">{imageInfo.description}</p>
-              <div className="mt-3 text-cyan-400 text-sm font-semibold flex items-center gap-2">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white/96 via-white/90 to-transparent p-6 rounded-b-lg border-t border-white/50">
+              <h3 className="text-slate-800 text-2xl font-semibold mb-2">{imageInfo.title}</h3>
+              <p className="text-slate-700 text-base">{imageInfo.description}</p>
+              <div className="mt-3 text-slate-600 text-sm font-medium flex items-center gap-2">
+                <div className="w-2 h-2 bg-amber-300 rounded-full" />
                 {selectedImage + 1} / {images.length}
               </div>
             </div>
@@ -387,51 +358,7 @@ const Gallery = () => {
         </div>
       )}
 
-      <style jsx>{`
-        @keyframes gridMove {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(50px); }
-        }
-
-        @keyframes float {
-          0%, 100% { 
-            transform: translateY(0) translateX(0) rotate(0deg); 
-            opacity: 0; 
-          }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { 
-            transform: translateY(-100vh) translateX(100px) rotate(180deg); 
-            opacity: 0; 
-          }
-        }
-
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 0.8; }
-        }
-
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(400%); }
-        }
-
-        .animate-float {
-          animation: float 15s infinite linear;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-
-        .animate-scan {
-          animation: scan 3s linear infinite;
-        }
-
-        .floating-particle {
-          animation: float 15s infinite linear;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </section>
   );
 };
