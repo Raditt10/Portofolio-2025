@@ -223,15 +223,15 @@ const Projects = () => {
 
         {/* Projects Container */}
         <div className="relative">
-          {/* Navigation Buttons - Desktop Only */}
+          {/* Navigation Buttons */}
           <button
             onClick={() => scrollTo('left')}
             disabled={!canScrollLeft}
-            className={`hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-30 w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 items-center justify-center transition-all duration-300 hover:scale-110 hover:border-white/50 hover:bg-white/15 ${
+            className={`absolute left-0 top-1/2 -translate-y-1/2 sm:-translate-x-10 lg:-translate-x-16 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-white/50 hover:bg-white/15 ${
               !canScrollLeft ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -239,11 +239,11 @@ const Projects = () => {
           <button
             onClick={() => scrollTo('right')}
             disabled={!canScrollRight}
-            className={`hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-30 w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 items-center justify-center transition-all duration-300 hover:scale-110 hover:border-white/50 hover:bg-white/15 ${
+            className={`absolute right-0 top-1/2 -translate-y-1/2 sm:translate-x-10 lg:translate-x-16 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-white/50 hover:bg-white/15 ${
               !canScrollRight ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
             </svg>
           </button>
