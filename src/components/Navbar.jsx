@@ -178,7 +178,7 @@ const Navbar = () => {
       <button
         type="button"
         onClick={toggleThemeMode}
-        className="relative z-10 p-2 rounded-xl transition-all duration-300 backdrop-blur-md active:scale-95 mr-2"
+        className="relative z-10 p-2 rounded-xl transition-all duration-300 backdrop-blur-md active:scale-95 mr-3"
         style={{
           backgroundColor: isLight ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.08)',
           borderColor: isLight ? 'rgb(226, 232, 240)' : 'rgba(255, 255, 255, 0.2)',
@@ -199,7 +199,7 @@ const Navbar = () => {
       
       <button
         onClick={toggleSidebar}
-        className={`relative z-10 p-2 rounded-xl transition-all duration-300 backdrop-blur-md active:scale-95 ${
+        className={`relative z-10 p-2 rounded-xl transition-all duration-300 backdrop-blur-md active:scale-95 ml-1 ${
           isLight
             ? 'text-slate-800 bg-white/90 border border-slate-200 hover:border-amber-300/70 hover:shadow-lg hover:shadow-amber-200/30'
             : 'text-white bg-gradient-to-r from-white/10 via-white/5 to-white/10 border border-white/20 hover:border-amber-200/40 hover:from-white/15 hover:via-amber-50/10 hover:to-white/15 hover:shadow-lg hover:shadow-amber-200/20'
