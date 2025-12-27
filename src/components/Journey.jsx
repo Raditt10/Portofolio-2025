@@ -87,12 +87,12 @@ const Journey = () => {
       style={{ fontFamily: "Sora Variable, system-ui, sans-serif" }}
     >
       {/* Optimized background - hanya 2 gradien */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(circle at 30% 20%, rgba(139,92,246,0.15) 0%, transparent 50%),
-              radial-gradient(circle at 70% 80%, rgba(6,182,212,0.12) 0%, transparent 50%)`
+            background: `radial-gradient(circle at 50% 28%, rgba(255,255,255,0.08) 0%, rgba(248,236,214,0.06) 22%, rgba(5,6,7,0) 55%),
+              radial-gradient(circle at 50% 80%, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0) 60%)`
           }}
         />
       </div>
@@ -121,11 +121,12 @@ const Journey = () => {
           <motion.div
             className="absolute z-20 transition-all duration-500 ease-out"
             style={{
-              left: 'calc(1.25rem - 2px)',
+              left: 'calc(50% + 12px)',
               top: `${(activeIndex + 1) / timelineData.length * 100}%`,
+              transform: 'translateY(-50%)'
             }}
           >
-            <span className="bg-black/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-bold text-cyan-300 shadow-lg border border-cyan-400/50 block md:ml-4">
+            <span className="bg-black/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-lg border border-white/20 block whitespace-nowrap">
               {Math.round(((activeIndex + 1) / timelineData.length) * 100)}%
             </span>
           </motion.div>
