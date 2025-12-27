@@ -1,65 +1,52 @@
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import Marquee from "react-fast-marquee";
 import ProfileCard from "./assets/ProfileCard";
 
 const About = () => {
   const sectionRef = useRef(null);
 
-  const techStack = [
-    {
-      name: "React",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-      name: "JavaScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-    },
-    {
-      name: "TypeScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-    },
-    {
-      name: "Next.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    },
-    {
-      name: "Tailwind CSS",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
-    },
-    {
-      name: "HTML5",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-    },
-    {
-      name: "CSS3",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-    },
-    {
-      name: "Git",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-    },
-    {
-      name: "GitHub",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-    },
-    {
-      name: "VS Code",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-    },
-    {
-      name: "Figma",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-    },
-    {
-      name: "Node.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-    },
-  ];
+  // Tech stack dengan CDN - SVG ringan dari simpleicons
+  const techStack = useMemo(() => [
+    { name: "React", logo: "https://cdn.simpleicons.org/react/61DAFB" },
+    { name: "JavaScript", logo: "https://cdn.simpleicons.org/javascript/F7DF1E" },
+    { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript/3178C6" },
+    { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/000000" },
+    { name: "Tailwind", logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+    { name: "HTML5", logo: "https://cdn.simpleicons.org/html5/E34F26" },
+    { name: "CSS3", logo: "https://cdn.simpleicons.org/css3/1572B6" },
+    { name: "Git", logo: "https://cdn.simpleicons.org/git/F05032" },
+    { name: "GitHub", logo: "https://cdn.simpleicons.org/github/181717" },
+    { name: "VS Code", logo: "https://cdn.simpleicons.org/visualstudiocode/007ACC" },
+    { name: "Figma", logo: "https://cdn.simpleicons.org/figma/F24E1E" },
+    { name: "Node.js", logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
+  ], []);
+
+  // Konfigurasi marquee row di-memoize
+  const marqueeRows = useMemo(() => [
+    { speed: 28, direction: "left" },
+    { speed: 32, direction: "right" },
+    { speed: 30, direction: "left" },
+    { speed: 34, direction: "right" },
+    { speed: 26, direction: "left" },
+  ], []);
+
+  // Warna gradient di-memoize
+  const glowColors = useMemo(() => [
+    "rgba(139, 92, 246, 0.8)",
+    "rgba(59, 130, 246, 0.8)", 
+    "rgba(0, 255, 249, 0.8)",
+    "rgba(255, 0, 222, 0.8)",
+    "rgba(0, 255, 136, 0.8)",
+  ], []);
 
   return (
-    <section ref={sectionRef} id="about" className="min-h-screen relative overflow-hidden bg-[#050607]">
-      {/* Top Gradient */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none z-10"></div>
+    <section 
+      ref={sectionRef} 
+      id="about" 
+      className="min-h-screen relative overflow-hidden bg-[#050607]"
+    >
+      {/* Top Gradient - simplified */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/90 via-black/40 to-transparent z-10"></div>
       
       {/* Profile Card */}
       <div className="flex justify-center items-center pt-32 pb-20 relative z-20">
@@ -78,51 +65,47 @@ const About = () => {
         />
       </div>
 
-      {/* Tech Stack Marquee Background */}
-      <div className="absolute inset-0 opacity-12 pointer-events-none">
-        <div className="flex flex-col gap-10 rotate-2 transform scale-[1.02] mt-6">
-          {/* Multiple Marquee Rows (trimmed for lighter perf) */}
-          {[28, 32, 30, 34, 26].map((speed, rowIndex) => (
+      {/* Tech Stack Marquee - optimasi performa */}
+      <div className="absolute inset-0 opacity-12 pointer-events-none overflow-hidden">
+        {marqueeRows.map((row, rowIndex) => (
+          <div 
+            key={`row-${rowIndex}`} 
+            className={`my-8 ${rowIndex % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}
+          >
             <Marquee 
-              key={`row-${rowIndex}`}
-              speed={speed} 
-              direction={rowIndex % 2 === 0 ? "left" : "right"} 
+              speed={row.speed}
+              direction={row.direction}
               gradient={false}
+              pauseOnHover={false}
             >
-              {techStack.map((tech, index) => {
-                const colors = [
-                  "rgba(139, 92, 246, 0.8)",
-                  "rgba(59, 130, 246, 0.8)", 
-                  "rgba(0, 255, 249, 0.8)",
-                  "rgba(255, 0, 222, 0.8)",
-                  "rgba(0, 255, 136, 0.8)",
-                  "rgba(139, 92, 246, 0.8)"
-                ];
-                
-                return (
-                  <div key={`row${rowIndex}-${index}`} className="mx-8 flex flex-col items-center gap-2">
+              {techStack.map((tech, index) => (
+                <div key={`${rowIndex}-${index}`} className="mx-6 flex flex-col items-center">
+                  <div className="relative w-14 h-14 sm:w-18 sm:h-18">
                     <img
                       src={tech.logo}
                       alt={tech.name}
+                      width={56}
+                      height={56}
                       loading="lazy"
-                      className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-md filter brightness-110 transition-transform duration-300 hover:scale-105"
+                      decoding="async"
+                      className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
                       style={{
-                        filter: `drop-shadow(0 0 12px ${colors[rowIndex]})`,
+                        filter: `drop-shadow(0 0 10px ${glowColors[rowIndex % glowColors.length]})`,
                       }}
                     />
-                    <span className="text-white font-semibold text-lg tracking-wide drop-shadow">
-                      {tech.name}
-                    </span>
                   </div>
-                );
-              })}
+                  <span className="text-white font-medium text-sm mt-2 tracking-wide">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
             </Marquee>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
-      {/* Bottom Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-10"></div>
+      {/* Bottom Gradient - simplified */}
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
     </section>
   );
 };
