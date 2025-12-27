@@ -110,7 +110,7 @@ const Journey = () => {
     <section
       id="journey"
       ref={sectionRef}
-      className="relative min-h-screen py-14 sm:py-20 md:py-24 px-3 sm:px-6 md:px-8 lg:px-12 overflow-hidden bg-[#050607]"
+      className="relative min-h-screen py-12 sm:py-20 md:py-24 px-3 sm:px-6 md:px-8 lg:px-12 overflow-hidden bg-[#050607]"
       style={{ fontFamily: "Sora Variable" }}
     >
       {/* Static luxe background */}
@@ -129,7 +129,7 @@ const Journey = () => {
         {/* Title */}
         <motion.h1
           ref={titleRef}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-slate-200 to-amber-100 bg-clip-text text-transparent font-semibold text-center relative z-30 overflow-hidden mb-12 sm:mb-16 md:mb-20 lg:mb-24 px-4"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl bg-gradient-to-r from-white via-slate-200 to-amber-100 bg-clip-text text-transparent font-semibold text-center relative z-30 overflow-hidden mb-10 sm:mb-14 md:mb-18 lg:mb-22 px-4"
           style={{
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
@@ -183,7 +183,7 @@ const Journey = () => {
           </div>
 
           {/* Timeline Items */}
-          <div className="space-y-12 md:space-y-24 relative">
+          <div className="space-y-10 sm:space-y-14 md:space-y-20 relative">
             {timelineData.map((item, index) => {
               const isLeft = index % 2 === 0;
               const isActive = index <= activeIndex;
@@ -205,7 +205,7 @@ const Journey = () => {
                           {/* School Logo - Left */}
                           {item.logo && (
                             <div className="absolute -left-20 top-1/2 -translate-y-1/2 hidden md:block z-30">
-                              <motion.div className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-xl overflow-hidden bg-white/10 backdrop-blur-xl border-2 border-white/30 p-2 shadow-[0_0_24px_rgba(255,255,255,0.25)] group-hover:border-white/45 group-hover:shadow-[0_0_28px_rgba(255,255,255,0.35)] transition-all duration-400" whileHover={{ scale: 1.05, rotate: 3 }}>
+                              <motion.div className="relative w-14 h-14 lg:w-18 lg:h-18 rounded-xl overflow-hidden bg-white/10 backdrop-blur-xl border-2 border-white/30 p-2 shadow-[0_0_20px_rgba(255,255,255,0.22)] group-hover:border-white/45 group-hover:shadow-[0_0_26px_rgba(255,255,255,0.32)] transition-all duration-400" whileHover={{ scale: 1.05, rotate: 3 }}>
                                 <img src={item.logo} alt={`${item.title} logo`} className="w-full h-full object-contain" />
                               </motion.div>
                             </div>
@@ -213,7 +213,7 @@ const Journey = () => {
                           {/* Glow Effect */}
                           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.28),rgba(255,255,255,0)),radial-gradient(circle_at_70%_70%,rgba(248,236,214,0.26),rgba(248,236,214,0))] blur-xl" />
                           {/* Card */}
-                          <div className={`relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border rounded-2xl p-6 md:p-8 transition-all duration-400 ${isActive ? 'border-white/25 shadow-[0_0_18px_rgba(255,255,255,0.18)]' : 'border-white/10'}`}>
+                          <div className={`relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border rounded-2xl p-4 md:p-6 transition-all duration-400 ${isActive ? 'border-white/25 shadow-[0_0_16px_rgba(255,255,255,0.16)]' : 'border-white/10'}`}>
                             {/* Year Badge */}
                             <div className="inline-block px-4 py-2 rounded-full bg-[radial-gradient(circle_at_25%_25%,rgba(255,255,255,0.45),rgba(255,255,255,0.2)),radial-gradient(circle_at_75%_75%,rgba(248,236,214,0.38),rgba(248,236,214,0.16))] text-white font-semibold text-sm mb-4 shadow-[0_0_18px_rgba(255,255,255,0.28)]">
                               {item.year}
@@ -222,7 +222,7 @@ const Journey = () => {
                             {/* Title with Logo (mobile) */}
                             <div className="flex items-start gap-4 mb-4">
                               {item.logo && (
-                                <div className="md:hidden relative w-16 h-16 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 p-2 flex-shrink-0 group-hover:border-white/60 transition-all duration-300">
+                                <div className="md:hidden relative w-14 h-14 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 p-2 flex-shrink-0 group-hover:border-white/60 transition-all duration-300">
                                   <img src={item.logo} alt={`${item.title} logo`} className="w-full h-full object-contain" />
                                 </div>
                               )}
@@ -354,7 +354,7 @@ const Journey = () => {
                           {/* School Logo - Right */}
                           {item.logo && (
                             <div className="absolute -right-20 top-1/2 -translate-y-1/2 hidden md:block z-30">
-                              <motion.div className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-xl overflow-hidden bg-white/10 backdrop-blur-xl border-2 border-white/30 p-2 shadow-[0_0_30px_rgba(139,92,246,0.4)] group-hover:border-white/50 group-hover:shadow-[0_0_40px_rgba(139,92,246,0.6)] transition-all duration-500" whileHover={{ scale: 1.1, rotate: 5 }}>
+                              <motion.div className="relative w-14 h-14 lg:w-18 lg:h-18 rounded-xl overflow-hidden bg-white/10 backdrop-blur-xl border-2 border-white/30 p-2 shadow-[0_0_22px_rgba(255,255,255,0.22)] group-hover:border-white/50 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.34)] transition-all duration-500" whileHover={{ scale: 1.08, rotate: 4 }}>
                                 <img src={item.logo} alt={`${item.title} logo`} className="w-full h-full object-contain" />
                               </motion.div>
                             </div>
@@ -362,7 +362,7 @@ const Journey = () => {
                           {/* Glow Effect */}
                           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.28),rgba(255,255,255,0)),radial-gradient(circle_at_70%_70%,rgba(248,236,214,0.26),rgba(248,236,214,0))] blur-xl" />
                           {/* Card */}
-                          <div className={`relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border rounded-2xl p-6 md:p-8 transition-all duration-500 ${isActive ? 'border-white/30 shadow-[0_0_30px_rgba(139,92,246,0.3)]' : 'border-white/10'}`}>
+                          <div className={`relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl border rounded-2xl p-4 md:p-6 transition-all duration-500 ${isActive ? 'border-white/25 shadow-[0_0_20px_rgba(255,255,255,0.22)]' : 'border-white/10'}`}>
                             {/* Year Badge */}
                             <div className="inline-block px-4 py-2 rounded-full bg-[radial-gradient(circle_at_25%_25%,rgba(255,255,255,0.45),rgba(255,255,255,0.2)),radial-gradient(circle_at_75%_75%,rgba(248,236,214,0.38),rgba(248,236,214,0.16))] text-white font-semibold text-sm mb-4 shadow-[0_0_18px_rgba(255,255,255,0.28)]">
                               {item.year}
