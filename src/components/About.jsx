@@ -16,7 +16,7 @@ const About = () => {
     { name: "Dart", logo: "https://cdn.simpleicons.org/dart?viewbox=auto&size=20" },
     { name: "Git", logo: "https://cdn.simpleicons.org/git/F05032" },
     { name: "GitHub", logo: "https://cdn.simpleicons.org/github/181717" },
-    { name: "VS Code", logo: "https://cdn.simpleicons.org/visualstudiocode/007ACC" },
+    { name: "Clojure", logo: "https://cdn.simpleicons.org/clojure?viewbox=auto&size=20" },
     { name: "Figma", logo: "https://cdn.simpleicons.org/figma/F24E1E" },
     { name: "Node.js", logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
   ], []);
