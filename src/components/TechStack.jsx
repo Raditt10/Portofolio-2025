@@ -19,6 +19,17 @@ const TechStack = () => {
     const grid = gridRef.current;
     const items = itemsRef.current;
 
+    // Gentle floating animation (paused by default, controlled by ScrollTrigger)
+    const floatTween = gsap.to(items, {
+      y: (i) => (i % 2 === 0 ? 3 : -3),
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      stagger: 0.08,
+      paused: true
+    });
+
     // Set initial states
     gsap.set(title, { 
       opacity: 0, 
@@ -68,6 +79,17 @@ const TechStack = () => {
       ease: "power1.out"
     }, "-=0.2");
 
+    // Play/pause floating based on scroll visibility
+    const floatControl = ScrollTrigger.create({
+      trigger: section,
+      start: "top 80%",
+      end: "bottom 10%",
+      onEnter: () => floatTween.play(),
+      onEnterBack: () => floatTween.play(),
+      onLeave: () => floatTween.pause(),
+      onLeaveBack: () => floatTween.pause()
+    });
+
     // Parallax effect (disabled for performance)
     // gsap.to(items, {
     //   scrollTrigger: {
@@ -81,6 +103,8 @@ const TechStack = () => {
     // });
 
     return () => {
+      floatTween.kill();
+      floatControl.kill();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
