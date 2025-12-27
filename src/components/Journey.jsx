@@ -83,7 +83,7 @@ const Journey = () => {
     <section
       id="journey"
       ref={sectionRef}
-      className="relative min-h-screen py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 overflow-hidden bg-[#050607]"
+      className="relative min-h-screen pt-8 sm:pt-12 md:pt-16 lg:pt-20 pb-4 sm:pb-6 md:pb-8 px-4 sm:px-6 md:px-8 overflow-hidden bg-[#050607]"
       style={{ fontFamily: "Sora Variable, system-ui, sans-serif" }}
     >
       {/* Elegant Static Background - sama dengan Hero */}

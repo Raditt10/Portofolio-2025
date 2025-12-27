@@ -195,7 +195,7 @@ const Projects = () => {
     <section 
       id="projects" 
       ref={sectionRef} 
-      className="relative min-h-screen py-20 sm:py-24 md:py-32 px-4 sm:px-6 overflow-hidden bg-gradient-to-br from-[#040507] via-[#0a0d12] to-[#050608] mt-32 sm:mt-40 md:mt-48"
+      className="relative min-h-screen py-12 sm:py-16 md:py-20 px-4 sm:px-6 overflow-hidden bg-gradient-to-br from-[#040507] via-[#0a0d12] to-[#050608]"
       style={{ 
         fontFamily: "Sora Variable, system-ui, sans-serif",
         backgroundImage: `radial-gradient(circle at 32% 24%,rgba(255,255,255,0.26) 0%,rgba(255,255,255,0.12) 16%,rgba(255,255,255,0) 42%),
