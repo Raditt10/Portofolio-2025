@@ -275,13 +275,13 @@ const Gallery = () => {
 
       {selectedImage !== null && imageInfo && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-white/92 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md"
           onClick={closeLightbox}
         >
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
-            className="absolute top-4 right-4 z-50 text-slate-700 hover:text-black transition-all duration-250 group hover:scale-105"
+            className="absolute top-4 right-4 z-50 text-white hover:text-amber-100 transition-all duration-250 group hover:scale-105"
             aria-label="Close"
           >
             <div className="relative">
@@ -295,7 +295,7 @@ const Gallery = () => {
           <button
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
             type="button"
-            className="absolute left-4 z-50 text-slate-700 hover:text-black transition-all duration-250 group hover:scale-105"
+            className="absolute left-4 z-50 text-white hover:text-amber-100 transition-all duration-250 group hover:scale-105"
             aria-label="Previous"
           >
             <div className="relative">
@@ -309,7 +309,7 @@ const Gallery = () => {
           <button
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
             type="button"
-            className="absolute right-4 z-50 text-slate-700 hover:text-black transition-all duration-250 group hover:scale-105"
+            className="absolute right-4 z-50 text-white hover:text-amber-100 transition-all duration-250 group hover:scale-105"
             aria-label="Next"
           >
             <div className="relative">
