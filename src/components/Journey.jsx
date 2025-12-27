@@ -10,12 +10,6 @@ const Journey = () => {
     offset: ["start center", "end center"],
   });
 
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   const timelineData = [
     {
       year: "2008",
@@ -166,12 +160,9 @@ const Journey = () => {
                         {/* School Logo - desktop only, lebih kecil */}
                         {item.logo && (
                           <div className={`absolute top-1/2 -translate-y-1/2 hidden lg:block z-20 ${isLeft ? '-left-16 xl:-left-20' : '-right-16 xl:-right-20'}`}>
-                            <motion.div 
-                              className="relative w-12 h-12 xl:w-14 xl:h-14 rounded-lg overflow-hidden bg-white/5 backdrop-blur-sm border border-white/20 p-1.5"
-                              whileHover={{ scale: 1.1, rotate: 5, transition: { duration: 0.2 } }}
-                            >
+                            <div className="relative w-12 h-12 xl:w-14 xl:h-14 rounded-lg overflow-hidden bg-white/5 backdrop-blur-sm border border-white/20 p-1.5">
                               <img src={item.logo} alt={item.title} className="w-full h-full object-contain" />
-                            </motion.div>
+                            </div>
                           </div>
                         )}
 
@@ -200,28 +191,24 @@ const Journey = () => {
                               {item.childhoodPhotos && (
                                 <div className="relative mt-4 h-16 sm:h-20 md:h-24">
                                   {item.childhoodPhotos.map((photo, i) => (
-                                    <motion.div
+                                    <div
                                       key={i}
-                                      className="absolute group/photo"
-                                      initial={{ opacity: 0, scale: 0 }}
-                                      whileInView={{ opacity: 1, scale: 1 }}
-                                      transition={{ delay: i * 0.1, duration: 0.3 }}
-                                      viewport={{ once: true }}
+                                      className="absolute"
                                       style={{
                                         left: `${i * 35}px`,
                                         top: `${i * 8}px`,
-                                        rotate: `${(i - 1) * 8}deg`,
+                                        transform: `rotate(${(i - 1) * 8}deg)`,
                                         zIndex: 10 + i,
                                       }}
                                     >
-                                      <div className="rounded-lg overflow-hidden shadow-xl border-2 border-white/30 bg-gradient-to-br from-white/10 to-white/5 transition-transform duration-300 hover:scale-150 hover:z-50 hover:rotate-0">
+                                      <div className="rounded-lg overflow-hidden shadow-xl border-2 border-white/30 bg-gradient-to-br from-white/10 to-white/5">
                                         <img
                                           src={photo}
                                           alt={`Bocil ${i + 1}`}
                                           className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-cover"
                                         />
                                       </div>
-                                    </motion.div>
+                                    </div>
                                   ))}
                                 </div>
                               )}
@@ -234,19 +221,11 @@ const Journey = () => {
                               <h4 className="text-xs font-semibold text-white/70 mb-2">Organisasi & Ekstrakurikuler:</h4>
                               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                                 {item.organizations.map((org, orgIndex) => (
-                                  <motion.div
-                                    key={orgIndex}
-                                    initial={{ opacity: 0, scale: 0 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: orgIndex * 0.05, duration: 0.2 }}
-                                    viewport={{ once: true }}
-                                    whileHover={{ scale: 1.05 }}
-                                    className="relative group/org"
-                                  >
+                                  <div key={orgIndex} className="relative">
                                     <div className="px-2.5 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-md hover:bg-white/15 hover:border-white/40 transition-all duration-200">
                                       <span className="text-xs font-medium text-white">{org.name}</span>
                                     </div>
-                                  </motion.div>
+                                  </div>
                                 ))}
                               </div>
                             </div>
@@ -261,14 +240,12 @@ const Journey = () => {
                   </div>
 
                   {/* Timeline Dot - dengan Minecraft ladakan effect */}
-                  <motion.div
+                  <div
                     className={`absolute left-[18px] md:left-1/2 w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 sm:border-3 border-black z-30 transform -translate-x-1/2 transition-all duration-300 md:order-1 ${
                       isActive 
                         ? `bg-gradient-to-br from-white to-amber-100 shadow-[0_0_20px_rgba(255,255,255,0.6)]` 
-                        : 'bg-gray-700 scale-100'
+                        : 'bg-gray-700'
                     }`}
-                    animate={isActive ? { scale: [1, 1.3, 0.9, 1.2, 1], opacity: [1, 0.8, 1, 0.9, 1] } : {}}
-                    transition={{ duration: 0.6, repeat: isActive ? 2 : 0 }}
                   />
 
 

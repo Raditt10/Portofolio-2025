@@ -51,22 +51,22 @@ const Opening = ({ onComplete }) => {
       <div className="relative z-10 flex flex-col items-center gap-8 sm:gap-12 px-4">
         <motion.div
           className="relative"
-          initial={{ scale: 0.5, opacity: 0, y: 40, rotate: 12, filter: "blur(10px)" }}
+          initial={{ scale: 0.85, opacity: 0, y: 30, rotate: 8, filter: "blur(8px)" }}
           animate={
             stage === "complete"
               ? { scale: 0.92, opacity: 0, y: -20, rotate: -5, filter: "blur(3px)" }
               : {
-                  scale: [0.5, 1.08, 0.98, 1],
-                  opacity: [0, 1, 1, 1],
-                  y: [40, -10, 5, 0],
-                  rotate: [12, -3, 2, 0],
-                  filter: ["blur(10px)", "blur(3px)", "blur(1px)", "blur(0px)"],
+                  scale: [0.85, 1.03, 1],
+                  opacity: [0, 1, 1],
+                  y: [30, -6, 0],
+                  rotate: [8, -2, 0],
+                  filter: ["blur(8px)", "blur(2px)", "blur(0px)"],
                 }
           }
           transition={{ 
-            duration: 1.4, 
-            ease: [0.34, 1.56, 0.64, 1], 
-            times: [0, 0.5, 0.75, 1]
+            duration: 1.5, 
+            ease: [0.25, 0.75, 0.35, 1], 
+            times: [0, 0.6, 1]
           }}
         >
           <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
@@ -118,13 +118,39 @@ const Opening = ({ onComplete }) => {
             </span>
           </div>
 
-          <div className="relative h-5 sm:h-6 bg-white/15 rounded-full overflow-hidden border border-white/25 shadow-md">
+          <div className="relative h-5 sm:h-6 bg-white/10 rounded-full overflow-hidden border border-white/30 shadow-lg backdrop-blur-sm">
+            {/* Animated background shimmer */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-[shimmer_2s_ease-in-out_infinite]" 
+                 style={{ 
+                   backgroundSize: '200% 100%',
+                   animation: 'shimmer 2s ease-in-out infinite'
+                 }} 
+            />
+            
             <motion.div
-              className="absolute inset-y-0 left-0 bg-white rounded-full"
-              style={{ width: `${progress}%` }}
-              transition={{ duration: 0.2, ease: "linear" }}
+              className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gray-50 via-stone-100 to-gray-50"
+              style={{ 
+                width: `${progress}%`,
+                boxShadow: '0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(250, 250, 249, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7)'
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <div className="absolute inset-0 bg-white/60" />
+              {/* Top glossy shine */}
+              <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/10 to-transparent rounded-full" />
+              
+              {/* Animated glowing particles */}
+              <motion.div
+                className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-full"
+                animate={{
+                  x: [-32, 0],
+                  opacity: [0.3, 0.8, 0.3]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
             </motion.div>
           </div>
         </motion.div>
@@ -134,3 +160,10 @@ const Opening = ({ onComplete }) => {
 };
 
 export default Opening;
+
+<style jsx>{`
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+`}</style>
