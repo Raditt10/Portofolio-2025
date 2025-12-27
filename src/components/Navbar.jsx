@@ -69,10 +69,10 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Header */}
-      <header className={`md:hidden flex justify-between items-center h-20 transition-all duration-500 fixed z-50 w-full px-6 ${
+      <header className={`md:hidden flex justify-between items-center h-16 transition-all duration-500 fixed z-50 w-full px-6 ${
         scrolled 
-          ? 'bg-gradient-to-b from-black/95 to-black/90 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/50' 
-          : 'bg-transparent'
+          ? 'bg-black/30 backdrop-blur-lg border-b border-white/5' 
+          : 'bg-black/20 backdrop-blur-md'
       }`}>
         <div className="relative z-10">
           <h1 className='text-xl font-semibold text-white logo-minecraft drop-shadow-[0_0_8px_rgba(248,236,222,0.4)]'>
