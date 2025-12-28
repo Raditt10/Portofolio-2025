@@ -576,8 +576,8 @@ const Footer = () => {
               WebkitBackgroundClip: 'text'
             }}
         >
-          Ra'e • 2025
-        </h1>
+          © Ra'e. All rights reserved.
+        </h1> 
       </div>
 
       <style jsx>{`
