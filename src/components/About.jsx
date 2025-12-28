@@ -34,7 +34,8 @@ const About = () => {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     return () => observer.disconnect();
   }, []);
-
+  
+  // Daftar tech stack di-memoize untuk optimasi performa
   const techStack = useMemo(() => [
   ], []);
 
