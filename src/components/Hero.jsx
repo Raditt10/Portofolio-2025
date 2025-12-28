@@ -314,10 +314,10 @@ const Hero = () => {
           </div>
           
           {/* Enhanced Tooltip with Song Info */}
-          <div className="absolute top-full left-0 mt-3 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none transform group-hover:translate-y-0 translate-y-2">
+          <div className="absolute top-full right-0 mt-3 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none transform group-hover:translate-y-0 translate-y-2">
             <div className="relative">
               {/* Arrow */}
-              <div className="absolute -top-2 left-6 w-4 h-4 bg-white/95 backdrop-blur-sm border-l border-t border-amber-200/30 transform rotate-45" />
+              <div className="absolute -top-2 right-6 w-4 h-4 bg-white/95 backdrop-blur-sm border-l border-t border-amber-200/30 transform rotate-45" />
               
               {/* Card */}
               <div className="relative bg-gradient-to-br from-white/95 to-amber-50/95 backdrop-blur-xl rounded-xl border border-white/40 shadow-2xl w-64 overflow-hidden">
