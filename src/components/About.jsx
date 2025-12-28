@@ -256,7 +256,7 @@ const About = () => {
                   href="/file/Rafaditya Syahputra_CV.pdf"
                   download
                   className={`
-                    relative flex items-center justify-center px-6 py-3 backdrop-blur-sm rounded-xl border transition-all duration-200 font-medium text-lg
+                    relative flex items-center justify-center px-4 py-2 backdrop-blur-sm rounded-lg border transition-all duration-200 font-medium text-base
                     ${isLight 
                       ? 'bg-white/70 border-amber-200/50 hover:bg-white/80 hover:border-amber-300/60 text-slate-800' 
                       : 'bg-gray-900/40 border-gray-700/30 hover:bg-gray-800/50 hover:border-purple-500/30 text-white'
