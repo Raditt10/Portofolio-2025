@@ -1,27 +1,111 @@
-import React, { useRef, useMemo, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Marquee from "react-fast-marquee";
-import ProfileCard from "./assets/ProfileCard";
+
+// Register GSAP plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const About = () => {
   const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const contentRef = useRef(null);
+  const photoRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'dark';
-    // Check localStorage first (primary source), then data-theme attribute
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) return savedTheme;
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
     return document.documentElement.dataset.theme || 'dark';
   });
   const isLight = theme === 'light';
 
-  // Sync with global theme
+  // Deteksi mobile dengan useEffect
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Tech stack data untuk marquee background
+  const techStack = useMemo(() => [
+    { name: "React", logo: "https://cdn.simpleicons.org/react/61DAFB" },
+    { name: "JavaScript", logo: "https://cdn.simpleicons.org/javascript/F7DF1E" },
+    { name: "TypeScript", logo: "https://cdn.simpleicons.org/typescript/3178C6" },
+    { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/000000" },
+    { name: "Tailwind", logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+    { name: "Python", logo: "https://cdn.simpleicons.org/python" },
+    { name: "Node.js", logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
+    { name: "Git", logo: "https://cdn.simpleicons.org/git/F05032" },
+  ], []);
+
+  const marqueeRows = useMemo(() => [
+    { speed: 25, direction: "left" },
+    { speed: 30, direction: "right" },
+    { speed: 28, direction: "left" },
+  ], []);
+
+  const glowColors = useMemo(() => [
+    "rgba(139, 92, 246, 0.6)",
+    "rgba(59, 130, 246, 0.6)", 
+    "rgba(0, 255, 249, 0.6)",
+  ], []);
+
+  // GSAP animation setup
+  useEffect(() => {
+    if (!sectionRef.current || !titleRef.current || !contentRef.current || !photoRef.current) return;
+
+    const section = sectionRef.current;
+    const title = titleRef.current;
+    const content = contentRef.current;
+    const photo = photoRef.current;
+
+    // Cancel animations jika sudah ada
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+    // Set initial states
+    gsap.set(title, { y: -20 });
+    gsap.set(content, { x: isMobile ? 0 : -30, opacity: 0.8 });
+    gsap.set(photo, { x: isMobile ? 0 : 30, scale: 0.95 });
+
+    // Timeline animation
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+        markers: false
+      },
+      defaults: {
+        ease: "power2.out",
+        duration: 0.5
+      }
+    });
+
+    // Animasi sequence
+    tl.to(title, { y: 0 })
+      .to(content, { x: 0, opacity: 1 }, "-=0.3")
+      .to(photo, { x: 0, scale: 1 }, "-=0.4");
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      tl.kill();
+    };
+  }, [isMobile]);
+
+  // Sync theme from attribute/localStorage
   useEffect(() => {
     if (typeof document === 'undefined') return;
-    
-    // Set initial theme from localStorage on mount
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
     
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((m) => {
@@ -35,73 +119,30 @@ const About = () => {
     return () => observer.disconnect();
   }, []);
 
-  const techStack = useMemo(() => [
-    { name: "", logo: "https://cdn.simpleicons.org/react/61DAFB" },
-    { name: "", logo: "https://cdn.simpleicons.org/javascript/F7DF1E" },
-    { name: "", logo: "https://cdn.simpleicons.org/typescript/3178C6" },
-    { name: "", logo: "https://cdn.simpleicons.org/nextdotjs/000000" },
-    { name: "", logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
-    { name: "", logo: "https://cdn.simpleicons.org/python?viewbox=auto&size=20" },
-    { name: "", logo: "https://cdn.simpleicons.org/dart?viewbox=auto&size=20" },
-    { name: "", logo: "https://cdn.simpleicons.org/git/F05032" },
-    { name: "", logo: "https://cdn.simpleicons.org/github/181717" },
-    { name: "", logo: "https://cdn.simpleicons.org/clojure?viewbox=auto&size=20" },
-    { name: "", logo: "https://cdn.simpleicons.org/figma/F24E1E" },
-    { name: "", logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
-  ], []);
-
-  // Konfigurasi marquee row di-memoize
-  const marqueeRows = useMemo(() => [
-    { speed: 28, direction: "left" },
-    { speed: 32, direction: "right" },
-    { speed: 30, direction: "left" },
-    { speed: 34, direction: "right" },
-    { speed: 26, direction: "left" },
-    { speed: 29, direction: "right" },
-  ], []);
-
-  // Warna gradient di-memoize
-  const glowColors = useMemo(() => [
-    "rgba(139, 92, 246, 0.8)",
-    "rgba(59, 130, 246, 0.8)", 
-    "rgba(0, 255, 249, 0.8)",
-    "rgba(255, 0, 222, 0.8)",
-    "rgba(0, 255, 136, 0.8)",
-  ], []);
-
   return (
     <section 
-      ref={sectionRef} 
+      ref={sectionRef}
       id="about" 
-      className={`min-h-screen relative overflow-hidden ${isLight ? 'bg-slate-50' : 'bg-[#050607]'}`}
+      className="relative min-h-screen px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 overflow-hidden"
+      style={{ fontFamily: "Sora Variable" }}
     >
-      {/* Top Gradient - simplified */}
-      <div className={`absolute top-0 inset-x-0 h-32 bg-gradient-to-b ${isLight ? 'from-white/80 via-white/40 to-transparent' : 'from-black/90 via-black/40 to-transparent'} z-10`}></div>
-      
-      {/* Profile Card */}
-      <div className="flex justify-center items-center pt-32 pb-20 relative z-20">
-        <ProfileCard
-          name="Rafaditya Syahputra"
-          title="Full Stack Developer"
-          handle="rafaa_ndl"
-          status="Online"
-          contactText="Contact Me"
-          avatarUrl="/img/avatar2.jpg"
-          miniAvatarUrl="/img/meow.jpg"
-          showUserInfo={true}
-          enableTilt={false}
-          enableMobileTilt={false}
-          themeMode={theme}
-          onContactClick={() => console.log("Contact clicked")}
-        />
-      </div>
+      {/* Background gradient - sama seperti TechStack */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          background: isLight
+            ? 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 50%)'
+            : 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 50%)'
+        }}
+      />
 
-      {/* Tech Stack Marquee - optimasi performa */}
-      <div className="absolute inset-0 opacity-12 pointer-events-none overflow-hidden">
+      {/* Background Tech Stack Marquee */}
+      <div className="absolute inset-0 opacity-8 pointer-events-none overflow-hidden">
         {marqueeRows.map((row, rowIndex) => (
           <div 
             key={`row-${rowIndex}`} 
-            className={`my-8 ${rowIndex % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}
+            className={`my-12 ${rowIndex % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}
+            style={{ top: `${20 + rowIndex * 25}%` }}
           >
             <Marquee 
               speed={row.speed}
@@ -110,24 +151,20 @@ const About = () => {
               pauseOnHover={false}
             >
               {techStack.map((tech, index) => (
-                <div key={`${rowIndex}-${index}`} className="mx-6 flex flex-col items-center">
-                  <div className="relative w-14 h-14 sm:w-18 sm:h-18">
+                <div key={`${rowIndex}-${index}`} className="mx-8">
+                  <div className="relative w-12 h-12">
                     <img
                       src={tech.logo}
                       alt={tech.name}
-                      width={56}
-                      height={56}
+                      width={48}
+                      height={48}
                       loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
+                      className="w-full h-full object-contain"
                       style={{
-                        filter: `drop-shadow(0 0 10px ${glowColors[rowIndex % glowColors.length]})`,
+                        filter: `drop-shadow(0 0 8px ${glowColors[rowIndex % glowColors.length]})`,
                       }}
                     />
                   </div>
-                  <span className={`${isLight ? 'text-slate-800' : 'text-white'} font-medium text-sm mt-2 tracking-wide`}>
-                    {tech.name}
-                  </span>
                 </div>
               ))}
             </Marquee>
@@ -135,8 +172,119 @@ const About = () => {
         ))}
       </div>
 
-      {/* Bottom Gradient - simplified */}
-      <div className={`absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t ${isLight ? 'from-white/80 via-white/40 to-transparent' : 'from-black/90 via-black/40 to-transparent'} z-10`}></div>
+      {/* Title Section - sama seperti TechStack */}
+      <div className="relative z-10 px-4 mb-8 sm:mb-12 md:mb-16">
+        <h1 
+          ref={titleRef}
+          className="text-3xl sm:text-4xl md:text-5xl bg-clip-text text-transparent font-semibold text-center"
+          style={{
+            backgroundImage: isLight
+              ? 'linear-gradient(135deg, #1f2937 0%, #334155 50%, #b45309 100%)'
+              : 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #fef3c7 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+          }}
+        >
+          About Me
+        </h1>
+      </div>
+
+      {/* Main Content Grid */}
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Content - About Text */}
+          <div ref={contentRef} className="space-y-6">
+            
+            {/* Name & Title */}
+            <div className="space-y-3">
+              <h2 className={`text-2xl lg:text-3xl font-bold ${isLight ? 'text-slate-900' : 'text-white'} leading-tight`}>
+                Rafaditya Syahputra
+              </h2>
+              <p className={`text-lg ${isLight ? 'text-amber-600' : 'text-yellow-400'} font-medium`}>
+                Full Stack Developer
+              </p>
+              <div className={`w-16 h-1 ${isLight ? 'bg-amber-600' : 'bg-yellow-400'} rounded-full`}></div>
+            </div>
+
+            {/* Description */}
+            <div className={`space-y-4 text-base lg:text-lg ${isLight ? 'text-slate-700' : 'text-slate-300'} leading-relaxed`}>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </p>
+              <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+                culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+              <p>
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
+                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore 
+                veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+              </p>
+            </div>
+
+            {/* Call to Action - dengan styling card seperti TechStack */}
+            <div className="pt-4">
+              <button className={`
+                relative flex items-center justify-center px-6 py-3 backdrop-blur-sm rounded-xl border transition-all duration-200 font-medium text-lg
+                ${isLight 
+                  ? 'bg-white/70 border-amber-200/50 hover:bg-white/80 hover:border-amber-300/60 text-slate-800' 
+                  : 'bg-gray-900/40 border-gray-700/30 hover:bg-gray-800/50 hover:border-purple-500/30 text-white'
+                } transform hover:-translate-y-1 hover:scale-105
+              `}>
+                Get In Touch
+              </button>
+            </div>
+          </div>
+
+          {/* Right Content - Photo dengan styling card */}
+          <div ref={photoRef} className="flex justify-center lg:justify-end">
+            <div className="relative">
+              {/* Main Photo Card - menggunakan style card seperti TechStack */}
+              <div className={`
+                relative w-80 h-80 lg:w-96 lg:h-96 backdrop-blur-sm rounded-xl border transition-all duration-200 overflow-hidden
+                ${isLight 
+                  ? 'bg-white/70 border-amber-200/50 hover:bg-white/80 hover:border-amber-300/60' 
+                  : 'bg-gray-900/40 border-gray-700/30 hover:bg-gray-800/50 hover:border-purple-500/30'
+                }
+              `}>
+                <img
+                  src="/img/avatar2.jpg"
+                  alt="Rafaditya Syahputra"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              
+              {/* Decorative elements - subtle glow */}
+              <div className={`
+                absolute -top-4 -right-4 w-20 h-20 rounded-full blur-xl
+                ${isLight ? 'bg-amber-100' : 'bg-purple-500/20'}
+              `}></div>
+              <div className={`
+                absolute -bottom-4 -left-4 w-16 h-16 rounded-full blur-xl
+                ${isLight ? 'bg-orange-100' : 'bg-blue-500/20'}
+              `}></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Inline CSS untuk reduced motion - sama seperti TechStack */}
+      <style jsx>{`
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };
