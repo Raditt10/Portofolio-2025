@@ -252,15 +252,19 @@ const About = () => {
               </div>
               {/* Call to Action */}
               <div className="pt-4 flex justify-center">
-                <button className={`
-                  relative flex items-center justify-center px-6 py-3 backdrop-blur-sm rounded-xl border transition-all duration-200 font-medium text-lg
-                  ${isLight 
-                    ? 'bg-white/70 border-amber-200/50 hover:bg-white/80 hover:border-amber-300/60 text-slate-800' 
-                    : 'bg-gray-900/40 border-gray-700/30 hover:bg-gray-800/50 hover:border-purple-500/30 text-white'
-                  } transform hover:-translate-y-1 hover:scale-105
-                `}>
+                <a
+                  href="/file/Rafaditya Syahputra_CV.pdf"
+                  download
+                  className={`
+                    relative flex items-center justify-center px-6 py-3 backdrop-blur-sm rounded-xl border transition-all duration-200 font-medium text-lg
+                    ${isLight 
+                      ? 'bg-white/70 border-amber-200/50 hover:bg-white/80 hover:border-amber-300/60 text-slate-800' 
+                      : 'bg-gray-900/40 border-gray-700/30 hover:bg-gray-800/50 hover:border-purple-500/30 text-white'
+                    } transform hover:-translate-y-1 hover:scale-105
+                  `}
+                >
                   Download CV
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -295,15 +299,19 @@ const About = () => {
               </div>
               {/* Call to Action - dengan styling card seperti TechStack */}
               <div className="pt-4">
-                <button className={`
-                  relative flex items-center justify-center px-6 py-3 backdrop-blur-sm rounded-xl border transition-all duration-200 font-medium text-lg
-                  ${isLight 
-                    ? 'bg-white/70 border-amber-200/50 hover:bg-white/80 hover:border-amber-300/60 text-slate-800' 
-                    : 'bg-gray-900/40 border-gray-700/30 hover:bg-gray-800/50 hover:border-purple-500/30 text-white'
-                  } transform hover:-translate-y-1 hover:scale-105
-                `}>
+                <a
+                  href="/file/Rafaditya Syahputra_CV.pdf"
+                  download
+                  className={`
+                    relative flex items-center justify-center px-6 py-3 backdrop-blur-sm rounded-xl border transition-all duration-200 font-medium text-lg
+                    ${isLight 
+                      ? 'bg-white/70 border-amber-200/50 hover:bg-white/80 hover:border-amber-300/60 text-slate-800' 
+                      : 'bg-gray-900/40 border-gray-700/30 hover:bg-gray-800/50 hover:border-purple-500/30 text-white'
+                    } transform hover:-translate-y-1 hover:scale-105
+                  `}
+                >
                   Download CV
-                </button>
+                </a>
               </div>
             </div>
             {/* Right Content - Photo dengan styling card */}
