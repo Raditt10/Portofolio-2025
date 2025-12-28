@@ -236,7 +236,6 @@ const Footer = () => {
             <div className={`absolute inset-0 rounded-md sm:rounded-xl blur-xl opacity-30 ${
               toast.type === 'success' ? 'bg-amber-300/40' : 'bg-red-500/30'
             }`} />
-            
             {/* Content */}
             <div className="relative flex items-start gap-1.5 sm:gap-4">
               {/* Icon */}
@@ -253,7 +252,6 @@ const Footer = () => {
                   </svg>
                 )}
               </div>
-              
               {/* Message */}
               <div className="flex-1">
                 <h4 className={`font-bold text-xs sm:text-base mb-0.5 sm:mb-1 ${
@@ -267,7 +265,6 @@ const Footer = () => {
                   {toast.message}
                 </p>
               </div>
-              
               {/* Close Button */}
               <button
                 onClick={() => setToast({ show: false, message: '', type: '' })}
@@ -282,7 +279,6 @@ const Footer = () => {
                 </svg>
               </button>
             </div>
-            
             {/* Progress Bar */}
             <div className={`absolute bottom-0 left-0 h-0.5 sm:h-1 rounded-b-md sm:rounded-b-xl ${
               toast.type === 'success' ? 'bg-gradient-to-r from-amber-400 to-amber-500' : 'bg-red-500'
@@ -293,7 +289,6 @@ const Footer = () => {
           </div>
         </div>
       )}
-
       <footer
         id="contact"
         ref={footerRef}

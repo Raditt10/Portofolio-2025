@@ -251,9 +251,10 @@ const Hero = () => {
   };
 
   return (
-    <section
+    <header
       ref={sectionRef}
       id="home"
+      role="banner"
       style={{ 
         fontFamily: "Sora Variable",
         color: themeStyles[theme].accent
@@ -423,8 +424,16 @@ const Hero = () => {
         {/* Konten */}
         <div className="text-center">
           <h1
-            className="text-2xl sm:text-3xl lg:text-4xl hero-subtitle font-semibold tracking-[0.08em] uppercase mb-4"
+            className="text-2xl sm:text-5xl md:text-6xl lg:text-[70px] xl:text-[80px] font-bold leading-tight mb-6 tracking-tight px-4"
+            id="nama"
+            style={{
+              color: themeStyles[theme].accent,
+              textShadow: theme === 'dark' ? '0 0 30px rgba(255,255,255,0.3)' : '0 0 18px rgba(15,23,42,0.12)'
+            }}
           >
+            {renderNameWithSpans()}
+          </h1>
+          <p className="text-xl sm:text-2xl lg:text-3xl hero-subtitle font-semibold tracking-[0.08em] uppercase mb-4" aria-label="Hi, I'm">
             <span
               className="inline-block bg-clip-text text-transparent"
               style={{
@@ -436,21 +445,10 @@ const Hero = () => {
             >
               Hi, I'm
             </span>
-          </h1>
-          <h2
-            id="nama"
-            className="text-2xl sm:text-5xl md:text-6xl lg:text-[70px] xl:text-[80px] font-bold leading-tight mb-6 tracking-tight px-4"
-            style={{
-              color: themeStyles[theme].accent,
-              textShadow: theme === 'dark' ? '0 0 30px rgba(255,255,255,0.3)' : '0 0 18px rgba(15,23,42,0.12)'
-            }}
-          >
-            {renderNameWithSpans()}
-          </h2>
-          
+          </p>
           {/* Role */}
           <div className="relative mt-6">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed font-semibold tracking-[0.12em] uppercase">
+            <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed font-semibold tracking-[0.12em] uppercase">
               <span
                 className="inline-block bg-clip-text text-transparent"
                 style={{
@@ -460,9 +458,9 @@ const Hero = () => {
                   color: 'transparent'
                 }}
               >
-               Full Stack Developer • UI/UX Designer • Artist
+                Full Stack Developer & UI/UX Designer
               </span>
-            </p>
+            </h2>
           </div>
           
           {/* Hobby */}
@@ -679,7 +677,7 @@ const Hero = () => {
           opacity: 0.3;
         }
       `}</style>
-    </section>
+    </header>
   );
 };
 

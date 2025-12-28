@@ -79,7 +79,7 @@ const Navbar = () => {
 
   // Desktop navbar - TIDAK DIUBAH sama sekali
   const DesktopNavbar = () => (
-    <nav className={`hidden md:flex justify-center font-sora font-semibold items-center h-20 transition-all duration-500 fixed z-50 w-full px-8 bg-transparent`}>
+    <nav className={`hidden md:flex justify-center font-sora font-semibold items-center h-20 transition-all duration-500 fixed z-50 w-full px-8 bg-transparent`} role="navigation" aria-label="Main Navigation">
       <div className="relative group">
         <div className={`relative px-8 py-3.5 rounded-full backdrop-blur-md transition-all duration-500 group-hover:shadow-lg ${
           isLight
@@ -92,14 +92,19 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             {/* Logo */}
             <div className="relative px-4 py-2 group/logo">
-              <h1
-                className={`text-2xl logo-minecraft transition-all duration-300 group-hover/logo:scale-105 ${
-                  isLight ? 'text-slate-900' : 'text-white group-hover/logo:drop-shadow-[0_0_12px_rgba(248,236,222,0.6)]'
-                }`}
-                style={isLight ? { textShadow: 'none', WebkitTextStroke: '0px transparent' } : undefined}
-              >
-                Ra'e
-              </h1>
+              <span className="sr-only">Home</span>
+              <a href="#home" aria-label="Home" tabIndex={0}>
+                <span
+                  className={`text-2xl logo-minecraft transition-all duration-300 group-hover/logo:scale-105 ${
+                    isLight ? 'text-slate-900' : 'text-white group-hover/logo:drop-shadow-[0_0_12px_rgba(248,236,222,0.6)]'
+                  }`}
+                  style={isLight ? { textShadow: 'none', WebkitTextStroke: '0px transparent' } : undefined}
+                  role="heading"
+                  aria-level="1"
+                >
+                  Ra'e
+                </span>
+              </a>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-8 bg-gradient-to-b from-transparent via-white/30 to-transparent" />
             </div>
           
@@ -114,6 +119,8 @@ const Navbar = () => {
                       ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-100/90 hover:border hover:border-slate-200/80'
                       : 'text-white/80 hover:text-white hover:bg-gradient-to-r hover:from-amber-50/10 hover:via-white/10 hover:to-amber-50/10 hover:drop-shadow-[0_0_15px_rgba(248,236,222,0.4)]'
                   }`}
+                  tabIndex={0}
+                  aria-label={navlink.text}
                 >
                   {/* Elegant amber shine effect */}
                   <span className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-amber-100/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500" />
@@ -170,9 +177,9 @@ const Navbar = () => {
       }}
     >
       <div className="relative z-10">
-        <h1 className={`text-xl font-semibold logo-minecraft ${isLight ? 'text-slate-700 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]' : 'text-white drop-shadow-[0_0_8px_rgba(248,236,222,0.4)]'}`}>
-          Ra'e
-        </h1>
+        <a href="#home" aria-label="Home" tabIndex={0}>
+          <span className={`text-xl font-semibold logo-minecraft ${isLight ? 'text-slate-700 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]' : 'text-white drop-shadow-[0_0_8px_rgba(248,236,222,0.4)]'}`} role="heading" aria-level="1">Ra'e</span>
+        </a>
       </div>
 
       <div className="flex items-center gap-2 ml-auto mr-2">
