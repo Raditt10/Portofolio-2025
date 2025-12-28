@@ -34,9 +34,20 @@ const About = () => {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     return () => observer.disconnect();
   }, []);
-  
-  // Daftar tech stack di-memoize untuk optimasi performa
+
   const techStack = useMemo(() => [
+    { name: "", logo: "https://cdn.simpleicons.org/react/61DAFB" },
+    { name: "", logo: "https://cdn.simpleicons.org/javascript/F7DF1E" },
+    { name: "", logo: "https://cdn.simpleicons.org/typescript/3178C6" },
+    { name: "", logo: "https://cdn.simpleicons.org/nextdotjs/000000" },
+    { name: "", logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+    { name: "", logo: "https://cdn.simpleicons.org/python?viewbox=auto&size=20" },
+    { name: "", logo: "https://cdn.simpleicons.org/dart?viewbox=auto&size=20" },
+    { name: "", logo: "https://cdn.simpleicons.org/git/F05032" },
+    { name: "", logo: "https://cdn.simpleicons.org/github/181717" },
+    { name: "", logo: "https://cdn.simpleicons.org/clojure?viewbox=auto&size=20" },
+    { name: "", logo: "https://cdn.simpleicons.org/figma/F24E1E" },
+    { name: "", logo: "https://cdn.simpleicons.org/nodedotjs/339933" },
   ], []);
 
   // Konfigurasi marquee row di-memoize
