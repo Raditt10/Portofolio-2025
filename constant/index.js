@@ -223,7 +223,7 @@ const navlinks = [
 
   {
     id: 2,
-    "text" : "Card",
+    "text" : "About Me",
     "link" : "#about"
   },
 
@@ -381,7 +381,7 @@ const projectsData = [
 
   {
     id: 3,
-    gambar: "coming-soon.png",
+    gambar: "irmaverse.png",
     judul: "IrmaVerse",
     parag: "Coming soon",
     tech: ["Next.js", "Three.js", "Prisma", "Supabase"],
