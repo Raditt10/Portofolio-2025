@@ -91,7 +91,7 @@ const Opening = ({ onComplete }) => {
         >
           <div className="flex items-center justify-between gap-4 mb-4 text-base w-full">
             <span 
-              className="flex-1 text-left text-white/80 text-base sm:text-lg md:text-base font-semibold"
+              className="flex-1 text-left text-white/80 text-lg sm:text-xl md:text-lg font-semibold"
               style={{ fontFamily: 'Comic Sans MS, Comic Sans, cursive' }}
             >
               Tunggu bentar yaa..
