@@ -135,14 +135,17 @@ const Journey = () => {
           <div
             className="absolute left-4 sm:left-6 z-40 pointer-events-none transition-all duration-75 ease-linear"
             style={{
-              top: `calc(${scrollProgress * 100}% - 14px)`,
+              top: `calc(${scrollProgress * 100}%)`,
+              transform: 'translateY(-14px)',
             }}
           >
             <motion.div
+              style={{
+                x: -14,
+                y: -14,
+              }}
               animate={{
                 rotate: [0, -8, 8, -5, 5, 0],
-                x: [-50, -48, -52, -49, -51, -50],
-                y: [-50, -53, -47, -52, -48, -50],
               }}
               transition={{
                 duration: 3,
@@ -155,16 +158,16 @@ const Journey = () => {
               <motion.div
                 className="absolute left-0 top-1/2 -translate-y-1/2 -z-10"
                 style={{
-                  width: '50px',
+                  width: '40px',
                   height: '2px',
                   background: isLight 
-                    ? 'linear-gradient(to right, rgba(245, 158, 11, 0.5), transparent)' 
-                    : 'linear-gradient(to right, rgba(255, 255, 255, 0.4), transparent)',
+                    ? 'linear-gradient(to right, rgba(245, 158, 11, 0.6), transparent)' 
+                    : 'linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent)',
                   transformOrigin: 'left center',
                 }}
                 animate={{
                   scaleX: [0.6, 1.2, 0.6],
-                  opacity: [0.4, 0.7, 0.4],
+                  opacity: [0.5, 0.8, 0.5],
                 }}
                 transition={{
                   duration: 1.5,
@@ -177,22 +180,22 @@ const Journey = () => {
               {[...Array(3)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-1 h-1 rounded-full"
+                  className="absolute w-1.5 h-1.5 sm:w-1 sm:h-1 rounded-full"
                   style={{
-                    background: isLight ? 'rgba(245, 158, 11, 0.6)' : 'rgba(255, 255, 255, 0.5)',
-                    left: `-${10 + i * 8}px`,
+                    background: isLight ? 'rgba(245, 158, 11, 0.7)' : 'rgba(255, 255, 255, 0.6)',
+                    left: `-${8 + i * 6}px`,
                     top: '50%',
                   }}
                   animate={{
-                    x: [-5, -15],
-                    y: [0, (i - 1) * 3],
-                    opacity: [0.6, 0],
+                    x: [-5, -12],
+                    y: [0, (i - 1) * 2],
+                    opacity: [0.7, 0],
                     scale: [1, 0.3],
                   }}
                   transition={{
-                    duration: 0.8,
+                    duration: 0.7,
                     repeat: Infinity,
-                    delay: i * 0.15,
+                    delay: i * 0.12,
                     ease: "easeOut",
                   }}
                 />
@@ -206,8 +209,8 @@ const Journey = () => {
                 className={`drop-shadow-lg ${isLight ? 'text-amber-500' : 'text-white'}`}
                 style={{
                   filter: isLight 
-                    ? 'drop-shadow(0 0 14px rgba(245, 158, 11, 0.8))' 
-                    : 'drop-shadow(0 0 18px rgba(255, 255, 255, 0.9))',
+                    ? 'drop-shadow(0 0 16px rgba(245, 158, 11, 0.9))' 
+                    : 'drop-shadow(0 0 20px rgba(255, 255, 255, 1))',
                 }}
               >
                 <path 
