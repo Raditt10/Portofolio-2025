@@ -239,12 +239,12 @@ const navlinks = [
   },
   {
     id: 5,
-    text: "Projects",
+    text: "Featured Projects",
     link: "#projects"
   },
 
   {
-    id: 5,
+    id: 6,
     "text" : "Achievements",
     "link" : "#achievements"
   },
