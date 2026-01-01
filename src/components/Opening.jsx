@@ -98,7 +98,7 @@ const Opening = ({ onComplete }) => {
             </span>
             <span
               className="min-w-[64px] text-right text-white font-black text-2xl sm:text-3xl tracking-tighter tabular-nums"
-              style={{ fontWeight: 900 }}
+              style={{ fontFamily: 'Comic Sans MS, Comic Sans, cursive', fontWeight: 900 }}
             >
               {progress}%
             </span>
