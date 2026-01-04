@@ -59,7 +59,7 @@ const Opening = ({ onComplete }) => {
         >
           <h1
             className="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight drop-shadow-sm"
-            style={{ fontFamily: '"Space Grotesk", "Inter", system-ui, sans-serif', fontWeight: 800 }}
+            style={{ fontFamily: '"Orbitron", "Michroma", system-ui, sans-serif', fontWeight: 900, letterSpacing: '0.05em' }}
           >
             Hao!
           </h1>
