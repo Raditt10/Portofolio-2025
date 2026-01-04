@@ -231,7 +231,7 @@ const About = () => {
                   Rafaditya Syahputra
                 </h2>
                 <p className={`text-lg ${isLight ? 'text-amber-600' : 'text-yellow-400'} font-medium`}>
-                  Full Stack Developer
+                  Front end Developer
                 </p>
                 <div className={`mx-auto w-16 h-1 ${isLight ? 'bg-amber-600' : 'bg-yellow-400'} rounded-full`}></div>
               </div>
