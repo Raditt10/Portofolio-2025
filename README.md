@@ -1,145 +1,215 @@
-🛠 Built With
-Frontend Technologies
+# 🌟 Rafaditya Syahputra - Portfolio Website
 
-    React - Component-based UI library
+A modern, interactive portfolio website for Rafaditya Syahputra, a Full Stack Developer showcasing projects, skills, education, and technical expertise with smooth animations and responsive design.
 
-    GSAP - Professional-grade animations
+## 🛠 Built With
 
-    ScrollTrigger - Scroll-based animations
+**Frontend Technologies**
+- **React** - Component-based UI library
+- **Framer Motion** - Modern animation library
+- **GSAP** - Professional-grade animations
+- **Tailwind CSS** - Utility-first CSS framework
+- **Vite** - Fast build tool
+- **React Fast Marquee** - Smooth marquee animations
 
-    Tailwind CSS - Utility-first CSS framework
+**Animation & Effects**
+- GSAP Timeline - Sequential animations
+- Framer Motion - Smooth component transitions
+- Scroll Trigger - Scroll-based animations
+- CSS Transforms - 3D effects
+- Parallax Scrolling - Depth effects
 
-Animation & Effects
+**UI/UX Features**
+- Responsive Design - Mobile-first approach
+- Dark/Light Theme Toggle
+- Smooth Page Transitions
+- Interactive Components
+- Optimized Performance
 
-    GSAP Timeline - Sequential animations
+## 📁 Project Structure
 
-    3D Transforms - Perspective and rotation effects
-
-    CSS Keyframes - Custom animations
-
-    Mouse Tracking - Dynamic glow effects
-
-UI/UX Features
-
-    Responsive Design - Mobile-first approach
-
-    Interactive Lightbox - Full-screen image viewer
-
-    Hover Effects - One-time animated interactions
-
-    Cyberpunk Aesthetics - Glowing borders and particles
-
-📁 Project Structure
-text
-
+```
 src/
 ├── components/
-│   └── Gallery.jsx          # Main gallery component
-├── assets/
-│   └── images/              # Gallery images
-├── styles/                  # Custom animations
-└── hooks/                   # Custom React hooks
+│   ├── Hero.jsx              # Landing section with intro
+│   ├── Navbar.jsx            # Navigation bar
+│   ├── About.jsx             # About section with marquee background
+│   ├── Educations.jsx        # Education timeline
+│   ├── TechStack.jsx         # Technology skills display
+│   ├── Achievements.jsx      # Awards & certifications
+│   ├── Gallery.jsx           # Project gallery
+│   ├── Projects.jsx          # Featured projects
+│   ├── Footer.jsx            # Footer section
+│   └── assets/
+│       ├── Modal.jsx         # Reusable modal
+│       ├── CountUp.jsx       # Number counter animation
+│       ├── SplitText.jsx     # Text split animation
+│       └── ...
+├── App.jsx
+├── main.jsx
+└── index.css
+```
 
-🎯 Key Features
+## 🎯 Key Features
 
-    ✨ Smooth Animations - GSAP-powered entrance effects
+✨ **Smooth Animations** - GSAP & Framer Motion powered effects
+🎨 **Modern Design** - Clean, professional UI with gradients
+📱 **Fully Responsive** - Works on mobile, tablet, and desktop
+🌓 **Theme Toggle** - Dark and light mode support
+⚙️ **Optimized Performance** - Prefers-reduced-motion support
+🎭 **Interactive Elements** - Hover effects, modal dialogs
+📊 **Tech Stack Showcase** - 19+ technologies displayed
+🏆 **Achievements** - Certifications and competitions
+📚 **Education Timeline** - Interactive journey visualization
 
-    🎨 Cyberpunk Design - Glowing gradients and particles
+## 🚀 Getting Started
 
-    📱 Fully Responsive - Mobile to desktop layouts
+### Prerequisites
+- Node.js 16+
+- pnpm or npm
 
-    🔥 Interactive Lightbox - Keyboard-navigable viewer
+### Installation
 
-    ⚡ Performance Optimized - Efficient animations
+```bash
+# Clone the repository
+git clone https://github.com/Raditt10/Porto-React.git
+cd Porto-React
 
-    🎭 3D Transform Effects - Depth and perspective
+# Install dependencies
+pnpm install
 
-🖼️ Component Preview
+# Start development server
+pnpm run dev
 
-https://via.placeholder.com/800x400/1a1a1a/ffffff?text=React+GSAP+Gallery
-🚀 Getting Started
-Prerequisites
+# Build for production
+pnpm run build
+```
 
-    Node.js 16+
+## 📦 Scripts
 
-    npm or yarn
+```bash
+pnpm dev          # Start development server
+pnpm run build    # Build for production
+pnpm run preview  # Preview production build
+pnpm run lint     # Run ESLint
+```
 
-Installation
-bash
+## 🎨 Sections
 
+### 🎯 Hero
+- Dynamic role text cycling animation
+- Static name "Rafaditya Syahputra"
+- Scroll indicator
+- GitHub link
 
-git clone https://github.com/Raditt10/React-p0rt0.git
-cd https://github.com/Raditt10/React-p0rt0.git
-npm install
-npm start
+### 📖 About
+- Personal introduction
+- Background marquee with tech stack icons
+- Parallax scroll effect
+- CV download button
 
-📦 Scripts
-bash
+### 🎓 Educations
+- Timeline view of education history
+- Paper plane animation tracker
+- School logos
+- Organizations/clubs involved
 
-npm start          # Development server
-npm run build      # Production build
-npm test           # Run tests
-npm run deploy     # Deploy to production
+### 💻 Tech Stack
+- 19 technologies displayed
+- Category filtering
+- Monochrome design (grayscale)
+- Simpleicons CDN integration
+- Responsive grid layout
 
-🎨 Customization
+### 🏆 Achievements
+- Certifications display
+- Competitions & awards
+- Achievement cards
 
-Easily customize by modifying the images array:
-jsx
+### 🎭 Gallery & Projects
+- Interactive project showcase
+- Lightbox viewer
+- Responsive masonry layout
 
-const images = [
-  { 
-    src: "/img/your-image.jpg",
-    title: "Your Title", 
-    description: "Your description" 
-  }
+## 🎨 Customization
+
+### Change Theme Colors
+Edit Tailwind theme in `tailwind.config.js` or use CSS variables.
+
+### Update Tech Stack
+Edit `techstack` array in `TechStack.jsx`:
+
+```jsx
+const techstack = [
+  {
+    id: 1,
+    name: "React",
+    category: "Frontend",
+    level: "Advanced",
+    src: "https://cdn.simpleicons.org/react/61DAFB",
+  },
+  // Add more technologies...
 ];
+```
 
-📱 Responsive Design
-Device	Layout	Features
-Mobile	Single column	Touch-optimized
-Tablet	2-column grid	Enhanced interactions
-Desktop	4x4 masonry	Full animations
-🔧 Performance
+### Modify Education Timeline
+Edit `timelineData` array in `Educations.jsx` to add/remove education entries.
 
-    Optimized GSAP animations
+## 📱 Responsive Design
 
-    Efficient re-renders
+| Device | Layout | Features |
+|--------|--------|----------|
+| Mobile | Single column | Touch-optimized |
+| Tablet | 2-column | Enhanced interactions |
+| Desktop | Full layout | All animations |
 
-    Lazy loading ready
+## 🔧 Performance Optimizations
 
-    CSS will-change properties
+- Lazy loading for images
+- Optimized GSAP animations
+- Prefers-reduced-motion support
+- Efficient re-renders with React
+- Simpleicons CDN for reliable icon loading
+- Minimal background gradients
+- Removed heavy shadow effects
 
-🤝 Contributing
+## 🌐 Browser Support
 
-    Fork the project
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-    Create your feature branch (git checkout -b feature/AmazingFeature)
+## 🤝 Contributing
 
-    Commit your changes (git commit -m 'Add some AmazingFeature')
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-    Push to the branch (git push origin feature/AmazingFeature)
-
-    Open a Pull Request
-
-📄 License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-📞 Contact
 
-iniakuraditt@gmail.com
+## 📞 Contact
 
-https://github.com/Raditt10/React-p0rt0.git
+- Email: iniakuraditt@gmail.com
+- GitHub: [Raditt10](https://github.com/Raditt10)
+- Portfolio: [Porto-React](https://github.com/Raditt10/Porto-React)
 
-🙏 Acknowledgments
+## 🙏 Acknowledgments
 
-    GSAP team for amazing animation library
+- GSAP team for amazing animation library
+- Framer Motion for modern animations
+- Tailwind CSS for utility-first approach
+- React community for inspiration
+- Simpleicons for icon library
 
-    Tailwind CSS for utility-first approach
-
-    React community for continuous inspiration
+---
 
 <div align="center">
 ⭐ Don't forget to star this repo if you found it helpful!
 
-Xealuyaa . 2025
-
+Made with ❤️ by Rafaditya Syahputra • 2025 - 2026
+</div>
