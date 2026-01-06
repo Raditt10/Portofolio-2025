@@ -256,7 +256,7 @@ const Hero = () => {
       id="home"
       role="banner"
       style={{ 
-        fontFamily: "Baloo 2, Comic Sans MS, cursive",
+        fontFamily: "Balsamiq Sans, Comic Sans MS, cursive",
         color: themeStyles[theme].accent
       }}
       className={`font-sora flex flex-col items-center justify-center relative min-h-screen overflow-hidden pt-20 theme-${theme}`}

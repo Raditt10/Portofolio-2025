@@ -124,7 +124,7 @@ const About = () => {
       ref={sectionRef}
       id="about" 
       className="relative min-h-screen px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 overflow-hidden"
-      style={{ fontFamily: "Baloo 2, Comic Sans MS, cursive" }}
+      style={{ fontFamily: "Balsamiq Sans, Comic Sans MS, cursive" }}
     >
       {/* Background gradient - sama seperti TechStack */}
       <div 

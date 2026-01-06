@@ -112,7 +112,7 @@ const Educations = () => {
       id="educations"
       ref={sectionRef}
       className="relative min-h-screen pt-20 pb-20 px-4 sm:px-6 overflow-hidden"
-      style={{ fontFamily: "Baloo 2, Comic Sans MS, cursive" }}
+      style={{ fontFamily: "Balsamiq Sans, Comic Sans MS, cursive" }}
     >
       {/* Minimal background aligned with global theme */}
       <div className="absolute inset-0 -z-10 pointer-events-none">

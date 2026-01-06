@@ -54,7 +54,7 @@ const NotFound = () => {
   return (
     <div
       style={{ 
-        fontFamily: "Baloo 2, Comic Sans MS, cursive",
+        fontFamily: "Balsamiq Sans, Comic Sans MS, cursive",
         background: themeStyles[theme].bg,
         minHeight: "100vh",
       }}

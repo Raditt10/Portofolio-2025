@@ -199,7 +199,7 @@ const Gallery = () => {
     id="gallery" 
     ref={sectionRef} 
     className="relative min-h-screen mt-16 md:mt-24 px-4 md:pt-20 pb-24 md:pb-28 md:px-8 scroll-mt-28"
-      style={{ fontFamily: "Baloo 2, Comic Sans MS, cursive" }} 
+      style={{ fontFamily: "Balsamiq Sans, Comic Sans MS, cursive" }} 
     >
       <h1
         ref={titleRef}

@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap');
 
 /* Minecraft Font */
 @font-face {
@@ -11,7 +11,7 @@
 }
 
 :root {
-  --font-sora: "Baloo 2", "Comic Sans MS", cursive, system-ui, sans-serif;
+  --font-sora: "Balsamiq Sans", "Comic Sans MS", cursive, system-ui, sans-serif;
   --font-minecraft: "Minecraft", monospace;
 }
 

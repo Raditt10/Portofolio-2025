@@ -308,7 +308,7 @@ const Projects = () => {
       ref={sectionRef} 
       className="relative min-h-screen py-20 sm:py-24 md:py-32 px-4 sm:px-6 overflow-hidden mt-16 sm:mt-20 md:mt-24"
       style={{ 
-        fontFamily: "Baloo 2, Comic Sans MS, cursive",
+        fontFamily: "Balsamiq Sans, Comic Sans MS, cursive",
       }}
     >
       <div className="max-w-7xl mx-auto relative z-10">

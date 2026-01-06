@@ -155,7 +155,7 @@
         <section 
           id='achievements'
           ref={sectionRef}
-          style={{ fontFamily: "Baloo 2, Comic Sans MS, cursive" }}
+          style={{ fontFamily: "Balsamiq Sans, Comic Sans MS, cursive" }}
           className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-28 overflow-hidden"
         >
           <div className="max-w-7xl mx-auto relative z-20">
