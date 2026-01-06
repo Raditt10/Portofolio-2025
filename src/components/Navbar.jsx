@@ -96,6 +96,8 @@ const Navbar = () => {
                 <img
                   src="/img/logo2.png"
                   alt="Logo"
+                  width="612"
+                  height="408"
                   className="h-20 w-20 object-contain drop-shadow-lg transition-all duration-300 group-hover/logo:scale-110"
                   style={{ maxHeight: '5rem', filter: 'drop-shadow(0 2px 16px rgba(0,0,0,0.22))', marginTop: '-0.5rem', marginBottom: '-0.5rem' }}
                 />
@@ -176,6 +178,8 @@ const Navbar = () => {
           <img
             src="/img/logo2.png"
             alt="Logo"
+            width="612"
+            height="408"
               className="h-14 w-14 object-contain drop-shadow-lg"
               style={{ maxHeight: '3.5rem', filter: 'drop-shadow(0 2px 14px rgba(0,0,0,0.20))' }}
           />

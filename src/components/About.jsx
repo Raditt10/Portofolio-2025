@@ -208,6 +208,8 @@ const About = () => {
                     src="/img/avatar2.png"
                     alt="Rafaditya Syahputra"
                     className="w-full h-full object-cover"
+                    width="2481"
+                    height="2479"
                     loading="lazy"
                     decoding="async"
                   />
@@ -329,6 +331,8 @@ const About = () => {
                     src="/img/avatar2.png"
                     alt="Rafaditya Syahputra"
                     className="w-full h-full object-cover"
+                    width="2481"
+                    height="2479"
                     loading="lazy"
                     decoding="async"
                   />

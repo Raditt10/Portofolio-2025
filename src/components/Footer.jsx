@@ -242,7 +242,7 @@ const Footer = () => {
                     backgroundImage: isLight ? 'linear-gradient(135deg, #1f2937 0%, #334155 50%, #b45309 100%)' : 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #fef3c7 100%)',
                     backgroundClip: 'text', WebkitBackgroundClip: 'text'
                   }}>
-                <img src="/img/logo2.png" alt="Logo" className="inline-block h-14 sm:h-16 md:h-20 w-auto object-contain align-middle" style={{ maxHeight: '5rem' }} />
+                <img src="/img/logo2.png" alt="Logo" width="612" height="408" className="inline-block h-14 sm:h-16 md:h-20 w-auto object-contain align-middle" style={{ maxHeight: '5rem' }} />
               </h3>
               <div className={`absolute -top-2 -right-2 w-4 h-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isLight ? 'bg-amber-200' : 'bg-white/30'}`}></div>
               <div className={`absolute -bottom-2 -left-2 w-3 h-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isLight ? 'bg-amber-100' : 'bg-white/20'}`}></div>
