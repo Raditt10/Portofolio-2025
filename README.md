@@ -195,8 +195,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Contact
 
 - Email: iniakuraditt@gmail.com
-- GitHub: [Raditt10](https://github.com/Raditt10)
-- Portfolio: [Porto-React](https://github.com/Raditt10/Porto-React)
 
 ## 🙏 Acknowledgments
 
@@ -211,5 +209,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 <div align="center">
 ⭐ Don't forget to star this repo if you found it helpful!
 
-Made with ❤️ by Rafaditya Syahputra • 2025 - 2026
+Made with ❤️ by Rafaditya Syahputra • 2025
 </div>
