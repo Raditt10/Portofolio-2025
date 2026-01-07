@@ -214,7 +214,7 @@ const TechStack = () => {
   return (
     <section
       className="relative min-h-screen px-4 sm:px-6 py-20 sm:py-28 overflow-hidden"
-        style={{ fontFamily: "Sora, Inter, system-ui, sans-serif" }}
+        style={{ fontFamily: "Poppins, system-ui, -apple-system, 'Segoe UI', sans-serif" }}
       ref={containerRef}
     >
       {/* Background aligned with About - radial gradient only */}

@@ -256,7 +256,7 @@ const Hero = () => {
       id="home"
       role="banner"
       style={{ 
-        fontFamily: "Sora, Inter, system-ui, sans-serif",
+        fontFamily: "Poppins, system-ui, -apple-system, 'Segoe UI', sans-serif",
         color: themeStyles[theme].accent
       }}
       className={`font-sora flex flex-col items-center justify-center relative min-h-screen overflow-hidden pt-20 theme-${theme}`}

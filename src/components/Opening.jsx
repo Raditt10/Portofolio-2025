@@ -5,7 +5,7 @@ const Opening = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [stage, setStage] = useState("loading");
   const [typedText, setTypedText] = useState("");
-  const fullText = "自豪地呈现";
+  const fullText = "Welcome to my Portfolio";
 
   useEffect(() => {
     let currentIndex = 0;
@@ -92,13 +92,13 @@ const Opening = ({ onComplete }) => {
           <div className="flex items-center justify-between gap-4 mb-4 text-base w-full">
             <span 
               className="flex-1 text-left text-white/80 text-lg sm:text-xl md:text-lg font-semibold"
-              style={{ fontFamily: 'Sora, Inter, system-ui, sans-serif' }}
+              style={{ fontFamily: "Poppins, system-ui, -apple-system, 'Segoe UI', sans-serif" }}
             >
               Tunggu bentar yaa..
             </span>
             <span
               className="min-w-[64px] text-right text-white font-black text-2xl sm:text-3xl tracking-tighter tabular-nums"
-              style={{ fontFamily: 'Sora, Inter, system-ui, sans-serif', fontWeight: 900 }}
+              style={{ fontFamily: "Poppins, system-ui, -apple-system, 'Segoe UI', sans-serif", fontWeight: 900 }}
             >
               {progress}%
             </span>
