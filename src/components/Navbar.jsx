@@ -6,14 +6,24 @@ const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [themeMode, setThemeMode] = useState("dark");
+  
+  // FIX: Initialize state correctly
+  const [themeMode, setThemeMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || document.documentElement.getAttribute("data-theme") || "dark";
+    }
+    return "dark";
+  });
+  
   const isLight = themeMode === 'light';
 
   // --- THEME SYNC ---
   useEffect(() => {
     const updateTheme = () => {
-        setThemeMode(document.documentElement.getAttribute("data-theme") || "dark");
+        const current = document.documentElement.getAttribute("data-theme") || "dark";
+        setThemeMode(current);
     };
+    // Sync on mount
     updateTheme();
     const observer = new MutationObserver(updateTheme);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
@@ -65,8 +75,6 @@ const Navbar = () => {
             <img 
                 src="/img/logo2.png" 
                 alt="Logo" 
-                // PERBAIKAN: Logo default saat Dark Mode (tidak ada filter). 
-                // Saat Light Mode, kita invert agar menjadi hitam (jika logo aslinya putih).
                 className={`h-10 w-auto object-contain transition-all duration-300 hover:scale-110 ${isLight ? 'invert' : ''}`} 
             />
         </a>
@@ -125,7 +133,6 @@ const Navbar = () => {
             <img 
                 src="/img/logo2.png" 
                 alt="Logo" 
-                // PERBAIKAN: Sama seperti desktop, hanya invert saat light mode
                 className={`h-8 w-auto object-contain ${isLight ? 'invert' : ''}`} 
             />
         </a>
@@ -244,4 +251,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Navbar;
