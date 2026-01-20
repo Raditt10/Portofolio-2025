@@ -268,15 +268,15 @@ const Projects = () => {
                 />
             </div>
 
-            {/* Navigation Buttons (Desktop) */}
+            {/* Navigation Buttons (Desktop) - FIXED VISIBILITY */}
             <div className="hidden md:flex gap-3">
                 <button
                     onClick={() => scrollTo('left')}
                     disabled={!canScrollLeft}
                     className={`p-4 rounded-full border transition-all duration-300 ${
                         isLight 
-                            ? "border-black/10 hover:bg-black hover:text-white disabled:opacity-30" 
-                            : "border-white/10 hover:bg-white hover:text-black disabled:opacity-30"
+                            ? "border-black/20 text-black hover:bg-black hover:text-white disabled:opacity-30" 
+                            : "border-white/20 text-white hover:bg-white hover:text-black disabled:opacity-30"
                     }`}
                 >
                     <ArrowRight className="rotate-180" size={24} />
@@ -286,8 +286,8 @@ const Projects = () => {
                     disabled={!canScrollRight}
                     className={`p-4 rounded-full border transition-all duration-300 ${
                         isLight 
-                            ? "border-black/10 hover:bg-black hover:text-white disabled:opacity-30" 
-                            : "border-white/10 hover:bg-white hover:text-black disabled:opacity-30"
+                            ? "border-black/20 text-black hover:bg-black hover:text-white disabled:opacity-30" 
+                            : "border-white/20 text-white hover:bg-white hover:text-black disabled:opacity-30"
                     }`}
                 >
                     <ArrowRight size={24} />
@@ -333,12 +333,12 @@ const Projects = () => {
                 </div>
             </div>
 
-            {/* Mobile Nav Buttons (Overlay) */}
+            {/* Mobile Nav Buttons (Overlay) - FIXED VISIBILITY */}
             <div className="md:hidden flex justify-center gap-4 mt-4">
-                 <button onClick={() => scrollTo('left')} disabled={!canScrollLeft} className={`p-3 rounded-full border ${isLight ? 'border-black/20 disabled:opacity-30' : 'border-white/20 disabled:opacity-30'}`}>
+                 <button onClick={() => scrollTo('left')} disabled={!canScrollLeft} className={`p-3 rounded-full border ${isLight ? 'border-black/20 text-black disabled:opacity-30' : 'border-white/20 text-white disabled:opacity-30'}`}>
                     <ArrowRight className="rotate-180" size={20} />
                  </button>
-                 <button onClick={() => scrollTo('right')} disabled={!canScrollRight} className={`p-3 rounded-full border ${isLight ? 'border-black/20 disabled:opacity-30' : 'border-white/20 disabled:opacity-30'}`}>
+                 <button onClick={() => scrollTo('right')} disabled={!canScrollRight} className={`p-3 rounded-full border ${isLight ? 'border-black/20 text-black disabled:opacity-30' : 'border-white/20 text-white disabled:opacity-30'}`}>
                     <ArrowRight size={20} />
                  </button>
             </div>
@@ -353,7 +353,7 @@ const Projects = () => {
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
             </div>
-            <div className="flex justify-between mt-2 text-xs font-mono uppercase tracking-widest opacity-50">
+            <div className={`flex justify-between mt-2 text-xs font-mono uppercase tracking-widest opacity-50 ${isLight ? 'text-black' : 'text-white'}`}>
                 <span>01</span>
                 <span>0{projectsData.length}</span>
             </div>
