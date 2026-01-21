@@ -461,7 +461,7 @@ const Hero = () => {
                   color: 'transparent'
                 }}
               >
-                Front End Developer - Dev Ops Engineer - UI/UX & Graphic Designer - Artist  
+                Front End Developer - DevOps Engineer - UI/UX & Graphic Designer - Artist  
               </span>
             </h2>
           </div>
