@@ -227,9 +227,6 @@ const Navbar = () => {
                     transition={{ delay: 0.5 }}
                     className="absolute bottom-10 left-0 right-0 text-center"
                 >
-                    <p className={`text-xs uppercase tracking-widest ${isLight ? 'text-gray-400' : 'text-gray-600'}`}>
-                        © 2024 Rafaditya Syahputra
-                    </p>
                 </motion.div>
             </motion.div>
         )}
